@@ -1,0 +1,14 @@
+{
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "extends": [
+      "config:base", "schedule:nonOfficeHours"
+    ],
+    "constraints": {
+      "go": "1.21"
+    },
+    "timezone": "Europe/London",
+    "vulnerabilityAlerts": {
+      "labels": ["security"],
+      "assignees": ["@ramirezj"]
+    }
+  }
