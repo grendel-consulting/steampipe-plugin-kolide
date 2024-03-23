@@ -1,6 +1,6 @@
 # Table: kolide_k2_device
 
-Lists the devices that have been enrolled in your Kolide fleet
+Lists the devices that have been enrolled in Kolide.
 
 ## Examples
 

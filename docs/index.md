@@ -4,7 +4,7 @@ category: ["asset management"]
 brand_color: "#7450F6"
 display_name: Kolide K2
 name: kolide
-description: Kolide gives you accurate, valueable and complete fleet visibility across Mac, Windows and Linux endpoints
+description: Kolide gives you accurate, valuable and complete fleet visibility across Mac, Windows and Linux endpoints
 og_description: Query Kolide with SQL! Open source CLI. No DB required.
 og_image: "/images/plugins/grendel-consulting/kolide-social-graphic.png"
 icon_url: "/images/plugins/grendel-consulting/kolide.svg"
@@ -18,7 +18,7 @@ icon_url: "/images/plugins/grendel-consulting/kolide.svg"
 
 This is an unofficial plugin, leveraging the public [Kolide K2 API](https://www.kolide.com/docs/developers/api) through the Steampipe engine. Prospective users are encouraged to undergo their usual due diligence in using third-party software.
 
-List all devices in your Kolide fleet
+List all devices monitored by Kolide
 
 ```sql
 select
@@ -38,7 +38,7 @@ from
 
 ## Documentation
 
-- [Table Definitions and Examples]()
+- [Table Definitions and Examples](/plugins/grendel-consulting/kolide/tables)
 
 ## Get Started
 
@@ -59,7 +59,7 @@ steampipe plugin install grendel-consulting/kolide
 | Radius      | Each connection represents a single Kolide account. You will need to manage token rotation and revocation, as Kolide API tokens have no in-built expiry.                      |
 | Resolution  | 1. Credentials explicitly set in a steampipe config file (`~/.steampipe/config/kolide.spc`)<br />2. Credentials specified in environment variables, e.g., `KOLIDE_API_TOKEN`. |
 
-### Configuraion
+### Configuration
 
 Installing the latest Kolide plugin will create a config file (`~/.steampipe/config/kolide.spc`) with a single connection named `kolide`:
 
