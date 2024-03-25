@@ -8,6 +8,8 @@ import (
 	"github.com/turbot/steampipe-plugin-sdk/v5/plugin/transform"
 )
 
+//// TABLE DEFINITION
+
 func tableKolideK2Device(_ context.Context) *plugin.Table {
 	return &plugin.Table{
 		Name:        "kolide_k2_device",
@@ -50,8 +52,14 @@ func tableKolideK2Device(_ context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			Hydrate: listDevices,
 		},
+		Get: &plugin.GetConfig{
+			KeyColumns: plugin.SingleColumn("id"),
+			Hydrate:    getDevice,
+		},
 	}
 }
+
+//// LIST FUNCTION
 
 func listDevices(ctx context.Context, d *plugin.QueryData, h *plugin.HydrateData) (interface{}, error) {
 	client, err := connect(ctx, d)
@@ -69,4 +77,27 @@ func listDevices(ctx context.Context, d *plugin.QueryData, h *plugin.HydrateData
 		d.StreamListItem(ctx, user)
 	}
 	return nil, nil
+}
+
+//// GET FUNCTION
+
+func getDevice(ctx context.Context, d *plugin.QueryData, h *plugin.HydrateData) (interface{}, error) {
+	id := d.EqualsQualString("id")
+
+	if id == "" {
+		return nil, nil
+	}
+
+	client, err := connect(ctx, d)
+
+	if err != nil {
+		plugin.Logger(ctx).Error("kolide_k2_device.getDevice", "connection_error", err)
+		return nil, err
+	}
+
+	result, err := client.GetDeviceById(id)
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
 }
