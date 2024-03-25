@@ -19,7 +19,8 @@ func Plugin(ctx context.Context) *plugin.Plugin {
 			ShouldIgnoreErrorFunc: shouldIgnoreErrors([]string{"404"}),
 		},
 		TableMap: map[string]*plugin.Table{
-			"kolide_k2_device": tableKolideK2Device(ctx),
+			"kolide_k2_admin_user": tableKolideK2AdminUser(ctx),
+			"kolide_k2_device":     tableKolideK2Device(ctx),
 		},
 	}
 	return p
