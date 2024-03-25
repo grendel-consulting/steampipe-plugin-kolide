@@ -44,3 +44,23 @@ func (c *Client) GetDevices() (*DeviceListResponse, error) {
 
 	return &response, nil
 }
+
+func (c *Client) GetDeviceById(id string) (*Device, error) {
+	res, err := c.r().SetPathParam("deviceId", id).Get("/devices/{deviceId}")
+
+	if err != nil {
+		return nil, fmt.Errorf("error retrieving devices: %q", err)
+	}
+
+	if !res.IsSuccessState() {
+		return nil, fmt.Errorf("error retrieving devices: %q", res.Status)
+	}
+	var response Device
+
+	err = res.UnmarshalJson(&response)
+	if err != nil {
+		return nil, fmt.Errorf("error unmarshalling JSON: %q", err)
+	}
+
+	return &response, nil
+}
