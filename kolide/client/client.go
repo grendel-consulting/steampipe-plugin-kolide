@@ -59,7 +59,7 @@ func WithAuth(apiToken string) ClientOption {
 }
 
 func serializeSearches(searches []Search) string {
-	var serializedStrings []string
+	var builder strings.Builder
 
 	if len(searches) == 0 {
 		return ""
@@ -67,10 +67,11 @@ func serializeSearches(searches []Search) string {
 
 	for _, s := range searches {
 		serialized := fmt.Sprintf("%s%s%s", s.Field, string(s.Operator), s.Value)
-		serializedStrings = append(serializedStrings, serialized)
+		if builder.Len() > 0 {
+			builder.WriteString(" AND ")
+		}
+		builder.WriteString(serialized)
 	}
 
-	result := strings.Join(serializedStrings, " AND ")
-
-	return result
+	return builder.String()
 }
