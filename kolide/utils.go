@@ -3,6 +3,7 @@ package kolide
 import (
 	"context"
 	"errors"
+	"fmt"
 	"os"
 
 	kolide "github.com/grendel-consulting/steampipe-plugin-kolide/kolide/client"
@@ -61,5 +62,4 @@ func mapToSearch(field string, qualifier string, value string) (kolide.Search, e
 		Operator: operatorMapping[qualifier],
 		Value:    value,
 	}, nil
-}
 }

@@ -85,7 +85,13 @@ func listDevices(ctx context.Context, d *plugin.QueryData, h *plugin.HydrateData
 	if len(d.Quals) > 0 {
 		for _, item := range d.Quals {
 			for _, q := range d.Quals[item.Name].Quals {
-				search := mapToSearch(item.Name, q.Operator, q.Value.GetStringValue())
+				search, err := mapToSearch(item.Name, q.Operator, q.Value.GetStringValue())
+
+				if err != nil {
+					plugin.Logger(ctx).Error("kolide_k2_device.listDevices", "qualifier_operator_error", err)
+					return nil, err
+				}
+
 				searches = append(searches, search)
 			}
 		}
