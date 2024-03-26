@@ -3,10 +3,12 @@ package kolide
 import (
 	"context"
 	"errors"
+	"fmt"
 	"os"
 
 	kolide "github.com/grendel-consulting/steampipe-plugin-kolide/kolide/client"
 	"github.com/turbot/steampipe-plugin-sdk/v5/plugin"
+	quals "github.com/turbot/steampipe-plugin-sdk/v5/plugin/quals"
 )
 
 func connect(ctx context.Context, d *plugin.QueryData) (*kolide.Client, error) {
@@ -34,4 +36,48 @@ func connect(ctx context.Context, d *plugin.QueryData) (*kolide.Client, error) {
 	d.ConnectionManager.Cache.Set(cacheKey, c)
 
 	return c, nil
+}
+
+func query(ctx context.Context, d *plugin.QueryData) ([]kolide.Search, error) {
+	// Create a slice to hold search queries
+	searches := make([]kolide.Search, 0)
+
+	// Extract search queries from qualifiers
+	for _, item := range d.Quals {
+		for _, q := range item.Quals {
+			search, err := mapToSearch(item.Name, q.Operator, q.Value.GetStringValue())
+			if err != nil {
+				return nil, err
+			}
+			searches = append(searches, search)
+		}
+	}
+
+	return searches, nil
+}
+
+// Operators supported by Kolide K2 API are:
+//
+// - Exact match, ":"
+// - Substring match, "~", treated as Like
+// - Greater than (for datetime fields only), ">"
+// - Less than (for datetime fields only), "<"
+//
+// See: https://www.kolide.com/docs/developers/api#search
+var operatorMapping = map[string]kolide.OperatorType{
+	quals.QualOperatorEqual:   kolide.Equals,
+	quals.QualOperatorLike:    kolide.SubstringMatch,
+	quals.QualOperatorGreater: kolide.GreaterThan,
+	quals.QualOperatorLess:    kolide.LessThan,
+}
+
+func mapToSearch(field string, qualifier string, value string) (kolide.Search, error) {
+	if _, ok := operatorMapping[qualifier]; !ok {
+		return kolide.Search{}, fmt.Errorf("unsupported qualifier: %s", qualifier)
+	}
+	return kolide.Search{
+		Field:    field,
+		Operator: operatorMapping[qualifier],
+		Value:    value,
+	}, nil
 }

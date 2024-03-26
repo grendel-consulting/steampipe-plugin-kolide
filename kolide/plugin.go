@@ -18,6 +18,8 @@ func Plugin(ctx context.Context) *plugin.Plugin {
 		DefaultIgnoreConfig: &plugin.IgnoreConfig{
 			ShouldIgnoreErrorFunc: shouldIgnoreErrors([]string{"404"}),
 		},
+		DefaultRetryConfig: &plugin.RetryConfig{ShouldRetryErrorFunc: shouldRetryError([]string{"429"})},
+
 		TableMap: map[string]*plugin.Table{
 			"kolide_k2_admin_user": tableKolideK2AdminUser(ctx),
 			"kolide_k2_device":     tableKolideK2Device(ctx),

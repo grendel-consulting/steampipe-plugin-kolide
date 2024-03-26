@@ -7,11 +7,22 @@ import (
 	"github.com/turbot/steampipe-plugin-sdk/v5/plugin"
 )
 
-// shouldIgnoreErrors:: function which returns an ErrorPredicate for Kolide K2 API calls
-func shouldIgnoreErrors(notFoundErrors []string) plugin.ErrorPredicateWithContext {
+func shouldIgnoreErrors(ignorableErros []string) plugin.ErrorPredicateWithContext {
 	return func(ctx context.Context, d *plugin.QueryData, h *plugin.HydrateData, err error) bool {
-		for _, pattern := range notFoundErrors {
+		for _, pattern := range ignorableErros {
 			if strings.Contains(err.Error(), pattern) {
+				return true
+			}
+		}
+		return false
+	}
+}
+
+func shouldRetryError(retryErrors []string) plugin.ErrorPredicateWithContext {
+	return func(ctx context.Context, d *plugin.QueryData, h *plugin.HydrateData, err error) bool {
+		for _, pattern := range retryErrors {
+			if strings.Contains(err.Error(), pattern) {
+				plugin.Logger(ctx).Debug("kolide_errors.shouldRetryError", "rate_limit_error", err)
 				return true
 			}
 		}

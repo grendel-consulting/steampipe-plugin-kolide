@@ -6,27 +6,36 @@ import (
 )
 
 type DeviceListResponse struct {
-	Devices []Device `json:"data"`
+	Devices    []Device   `json:"data"`
+	Pagination Pagination `json:"pagination"`
 }
 type Device struct {
 	Id                  string    `json:"id"`
 	Name                string    `json:"name"`
-	RegisteredAt        time.Time `json:"registered_at"`
-	LastAuthenticatedAt time.Time `json:"last_authenticated_at"`
+	RegisteredAt        time.Time `json:"registered_at,omitempty"`
+	LastAuthenticatedAt time.Time `json:"last_authenticated_at,omitempty"`
 	OperatingSystem     string    `json:"operating_system"`
 	HardwareModel       string    `json:"hardware_model"`
-	Serial              string    `json:"serial"`
-	HardwareUuid        string    `json:"hardware_uuid"`
-	Note                string    `json:"note"`
+	Serial              string    `json:"serial,omitempty"`
+	HardwareUuid        string    `json:"hardware_uuid,omitempty"`
+	Note                string    `json:"note,omitempty"`
 	AuthState           string    `json:"auth_state"`
-	WillBlockAt         time.Time `json:"will_block_at"`
+	WillBlockAt         time.Time `json:"will_block_at,omitempty"`
 	ProductImageUrl     string    `json:"product_image_url"`
 	DeviceType          string    `json:"device_type"`
 	FormFactor          string    `json:"form_factor"`
 }
 
-func (c *Client) GetDevices() (*DeviceListResponse, error) {
-	res, err := c.r().Get("/devices/")
+func (c *Client) GetDevices(cursor string, searches ...Search) (*DeviceListResponse, error) {
+	params := make(map[string]string)
+	params["query"] = serializeSearches(searches)
+
+	if cursor != "" {
+		params["per_page"] = string(MaxPaging)
+		params["cursor"] = cursor
+	}
+
+	res, err := c.r().SetQueryParams(params).Get("/devices/")
 
 	if err != nil {
 		return nil, fmt.Errorf("error retrieving devices: %q", err)
