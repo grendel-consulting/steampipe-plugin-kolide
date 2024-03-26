@@ -52,10 +52,14 @@ var operatorMapping = map[string]kolide.OperatorType{
 	quals.QualOperatorLess:    kolide.LessThan,
 }
 
-func mapToSearch(field string, qualifier string, value string) kolide.Search {
+func mapToSearch(field string, qualifier string, value string) (kolide.Search, error) {
+	if _, ok := operatorMapping[qualifier]; !ok {
+		return kolide.Search{}, fmt.Errorf("unsupported qualifier: %s", qualifier)
+	}
 	return kolide.Search{
 		Field:    field,
 		Operator: operatorMapping[qualifier],
 		Value:    value,
-	}
+	}, nil
+}
 }
