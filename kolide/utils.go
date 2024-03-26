@@ -38,6 +38,24 @@ func connect(ctx context.Context, d *plugin.QueryData) (*kolide.Client, error) {
 	return c, nil
 }
 
+func query(ctx context.Context, d *plugin.QueryData) ([]kolide.Search, error) {
+	// Create a slice to hold search queries
+	searches := make([]kolide.Search, 0)
+
+	// Extract search queries from qualifiers
+	for _, item := range d.Quals {
+		for _, q := range item.Quals {
+			search, err := mapToSearch(item.Name, q.Operator, q.Value.GetStringValue())
+			if err != nil {
+				return nil, err
+			}
+			searches = append(searches, search)
+		}
+	}
+
+	return searches, nil
+}
+
 // Operators supported by Kolide K2 API are:
 //
 // - Exact match, ":"

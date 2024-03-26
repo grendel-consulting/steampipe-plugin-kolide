@@ -3,7 +3,6 @@ package kolide
 import (
 	"context"
 
-	kolide "github.com/grendel-consulting/steampipe-plugin-kolide/kolide/client"
 	"github.com/turbot/steampipe-plugin-sdk/v5/grpc/proto"
 	"github.com/turbot/steampipe-plugin-sdk/v5/plugin"
 	"github.com/turbot/steampipe-plugin-sdk/v5/plugin/transform"
@@ -36,18 +35,6 @@ func tableKolideK2Device(_ context.Context) *plugin.Table {
 			{Name: "form_factor", Description: "Form factor of the device, one of Computer, Tablet or Phone.", Type: proto.ColumnType_STRING},
 			// Steampipe standard columns
 			{Name: "title", Description: "Display name for this resource.", Type: proto.ColumnType_STRING, Transform: transform.FromField("Name")},
-			// {
-			// 	Name:        "akas",
-			// 	Description: "Array of also-known-as identifiers that uniquely and immutably identify this resource.",
-			// 	Type:        proto.ColumnType_JSON,
-			// 	Transform:   ...
-			// },
-			// {
-			// 	Name:        "tags",
-			// 	Description: "Any tags or labels on this resource.",
-			// 	Type:        proto.ColumnType_JSON,
-			// 	Transform:   ...
-			// },
 		},
 		List: &plugin.ListConfig{
 			KeyColumns: []*plugin.KeyColumn{
@@ -60,8 +47,6 @@ func tableKolideK2Device(_ context.Context) *plugin.Table {
 				{Name: "hardware_uuid", Require: plugin.Optional, Operators: []string{"=", "~~"}},
 				{Name: "device_type", Require: plugin.Optional, Operators: []string{"=", "~~"}},
 				{Name: "will_block_at", Require: plugin.Optional, Operators: []string{"=", ">", "<"}},
-				// Using Kolide K2 API path, uniquely filters
-				{Name: "id", Require: plugin.Optional, Operators: []string{"="}},
 			},
 			Hydrate: listDevices,
 		},
@@ -75,65 +60,74 @@ func tableKolideK2Device(_ context.Context) *plugin.Table {
 //// LIST FUNCTION
 
 func listDevices(ctx context.Context, d *plugin.QueryData, h *plugin.HydrateData) (interface{}, error) {
-	if d.Quals["id"] != nil {
-		plugin.Logger(ctx).Debug("kolide_k2_device.listDevices", "short-circuit by id")
-		return getDevice(ctx, d, h)
+	// Create a slice to hold search queries
+	searches, err := query(ctx, d)
+	if err != nil {
+		plugin.Logger(ctx).Error("kolide_k2_device.listDevices", "qualifier_operator_error", err)
+		return nil, err
 	}
 
-	var searches []kolide.Search
-
-	if len(d.Quals) > 0 {
-		for _, item := range d.Quals {
-			for _, q := range d.Quals[item.Name].Quals {
-				search, err := mapToSearch(item.Name, q.Operator, q.Value.GetStringValue())
-
-				if err != nil {
-					plugin.Logger(ctx).Error("kolide_k2_device.listDevices", "qualifier_operator_error", err)
-					return nil, err
-				}
-
-				searches = append(searches, search)
-			}
-		}
-	}
-
+	// Establish connection to Kolide client
 	client, err := connect(ctx, d)
-
 	if err != nil {
 		plugin.Logger(ctx).Error("kolide_k2_device.listDevices", "connection_error", err)
 		return nil, err
 	}
 
-	res, err := client.GetDevices(searches...)
-	if err != nil {
-		plugin.Logger(ctx).Error("kolide_k2_device.listDevices", err)
-		return nil, err
+	// Iterate through pagination cursors
+	cursor := ""
+
+	for {
+		// Respect rate limiting
+		d.WaitForListRateLimit(ctx)
+
+		res, err := client.GetDevices(cursor, searches...)
+		if err != nil {
+			plugin.Logger(ctx).Error("kolide_k2_device.listDevices", err)
+			return nil, err
+		}
+
+		// Stream retrieved devices
+		for _, device := range res.Devices {
+			d.StreamListItem(ctx, device)
+
+			// Context can be cancelled due to manual cancellation or the limit has been hit
+			if d.RowsRemaining(ctx) == 0 {
+				return nil, nil
+			}
+		}
+
+		cursor = res.Pagination.NextCursor
+
+		if cursor == "" {
+			break
+		}
 	}
-	for _, user := range res.Devices {
-		d.StreamListItem(ctx, user)
-	}
+
 	return nil, nil
 }
 
 //// GET FUNCTION
 
 func getDevice(ctx context.Context, d *plugin.QueryData, h *plugin.HydrateData) (interface{}, error) {
+	// Fail early if "id" is not present
 	id := d.EqualsQualString("id")
-
 	if id == "" {
 		return nil, nil
 	}
 
+	// Establish connection to Kolide client
 	client, err := connect(ctx, d)
-
 	if err != nil {
 		plugin.Logger(ctx).Error("kolide_k2_device.getDevice", "connection_error", err)
 		return nil, err
 	}
 
-	result, err := client.GetDeviceById(id)
+	// Retrieve device based on id
+	res, err := client.GetDeviceById(id)
 	if err != nil {
 		return nil, err
 	}
-	return result, nil
+
+	return res, nil
 }
