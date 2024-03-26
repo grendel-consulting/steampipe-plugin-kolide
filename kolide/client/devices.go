@@ -6,7 +6,8 @@ import (
 )
 
 type DeviceListResponse struct {
-	Devices []Device `json:"data"`
+	Devices    []Device   `json:"data"`
+	Pagination Pagination `json:"pagination"`
 }
 type Device struct {
 	Id                  string    `json:"id"`
@@ -25,10 +26,16 @@ type Device struct {
 	FormFactor          string    `json:"form_factor"`
 }
 
-func (c *Client) GetDevices(searches ...Search) (*DeviceListResponse, error) {
-	query := serializeSearches(searches)
+func (c *Client) GetDevices(cursor string, searches ...Search) (*DeviceListResponse, error) {
+	params := make(map[string]string)
+	params["query"] = serializeSearches(searches)
 
-	res, err := c.r().SetQueryParam("query", query).Get("/devices/")
+	if cursor != "" {
+		params["per_page"] = string(MaxPaging)
+		params["cursor"] = cursor
+	}
+
+	res, err := c.r().SetQueryParams(params).Get("/devices/")
 
 	if err != nil {
 		return nil, fmt.Errorf("error retrieving devices: %q", err)
