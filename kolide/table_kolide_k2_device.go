@@ -3,6 +3,7 @@ package kolide
 import (
 	"context"
 
+	kolide "github.com/grendel-consulting/steampipe-plugin-kolide/kolide/client"
 	"github.com/turbot/steampipe-plugin-sdk/v5/grpc/proto"
 	"github.com/turbot/steampipe-plugin-sdk/v5/plugin"
 	"github.com/turbot/steampipe-plugin-sdk/v5/plugin/transform"
@@ -60,74 +61,19 @@ func tableKolideK2Device(_ context.Context) *plugin.Table {
 //// LIST FUNCTION
 
 func listDevices(ctx context.Context, d *plugin.QueryData, h *plugin.HydrateData) (interface{}, error) {
-	// Create a slice to hold search queries
-	searches, err := query(ctx, d)
-	if err != nil {
-		plugin.Logger(ctx).Error("kolide_k2_device.listDevices", "qualifier_operator_error", err)
-		return nil, err
+	var visitor ListPredicate = func(client *kolide.Client, cursor string, limit int32, searches ...kolide.Search) (interface{}, error) {
+		return client.GetDevices(cursor, limit, searches...)
 	}
 
-	// Establish connection to Kolide client
-	client, err := connect(ctx, d)
-	if err != nil {
-		plugin.Logger(ctx).Error("kolide_k2_device.listDevices", "connection_error", err)
-		return nil, err
-	}
-
-	// Iterate through pagination cursors
-	cursor := ""
-
-	for {
-		// Respect rate limiting
-		d.WaitForListRateLimit(ctx)
-
-		res, err := client.GetDevices(cursor, searches...)
-		if err != nil {
-			plugin.Logger(ctx).Error("kolide_k2_device.listDevices", err)
-			return nil, err
-		}
-
-		// Stream retrieved devices
-		for _, device := range res.Devices {
-			d.StreamListItem(ctx, device)
-
-			// Context can be cancelled due to manual cancellation or the limit has been hit
-			if d.RowsRemaining(ctx) == 0 {
-				return nil, nil
-			}
-		}
-
-		cursor = res.Pagination.NextCursor
-
-		if cursor == "" {
-			break
-		}
-	}
-
-	return nil, nil
+	return listAnything(ctx, d, h, "kolide_k2_device.listDevices", visitor, "Devices")
 }
 
 //// GET FUNCTION
 
 func getDevice(ctx context.Context, d *plugin.QueryData, h *plugin.HydrateData) (interface{}, error) {
-	// Fail early if "id" is not present
-	id := d.EqualsQualString("id")
-	if id == "" {
-		return nil, nil
+	var visitor GetPredicate = func(client *kolide.Client, id string) (interface{}, error) {
+		return client.GetDeviceById(id)
 	}
 
-	// Establish connection to Kolide client
-	client, err := connect(ctx, d)
-	if err != nil {
-		plugin.Logger(ctx).Error("kolide_k2_device.getDevice", "connection_error", err)
-		return nil, err
-	}
-
-	// Retrieve device based on id
-	res, err := client.GetDeviceById(id)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return getAnything(ctx, d, h, "kolide_k2_device.getDevice", "id", visitor)
 }

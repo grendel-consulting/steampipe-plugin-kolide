@@ -2,6 +2,7 @@ package kolide_client
 
 import (
 	"fmt"
+	"strconv"
 	"time"
 )
 
@@ -26,12 +27,12 @@ type Device struct {
 	FormFactor          string    `json:"form_factor"`
 }
 
-func (c *Client) GetDevices(cursor string, searches ...Search) (*DeviceListResponse, error) {
+func (c *Client) GetDevices(cursor string, limit int32, searches ...Search) (interface{}, error) {
 	params := make(map[string]string)
 	params["query"] = serializeSearches(searches)
 
 	if cursor != "" {
-		params["per_page"] = string(MaxPaging)
+		params["per_page"] = strconv.Itoa(int(limit))
 		params["cursor"] = cursor
 	}
 

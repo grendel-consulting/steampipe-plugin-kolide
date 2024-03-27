@@ -18,11 +18,16 @@ func Plugin(ctx context.Context) *plugin.Plugin {
 		DefaultIgnoreConfig: &plugin.IgnoreConfig{
 			ShouldIgnoreErrorFunc: shouldIgnoreErrors([]string{"404"}),
 		},
-		DefaultRetryConfig: &plugin.RetryConfig{ShouldRetryErrorFunc: shouldRetryError([]string{"429"})},
+		DefaultRetryConfig: &plugin.RetryConfig{
+			// Preference would be to respect Retry-After header that Kolide K2 API supports
+			// For now, default to Fibonacci, ten retries starting at 100ms
+			ShouldRetryErrorFunc: shouldRetryError([]string{"429"}),
+		},
 
 		TableMap: map[string]*plugin.Table{
 			"kolide_k2_admin_user": tableKolideK2AdminUser(ctx),
-			"kolide_k2_device":     tableKolideK2Device(ctx),
+			"kolide_k2_deprovisioned_person": tableKolideK2DeprovisionedPerson(ctx),
+			"kolide_k2_device":               tableKolideK2Device(ctx),
 		},
 	}
 	return p
