@@ -23,7 +23,7 @@ func (c *Client) GetDeprovisionedPeople(cursor string, limit int32, searches ...
 	params["query"] = serializeSearches(searches)
 
 	if cursor != "" {
-		params["per_page"] = string(limit)
+		params["per_page"] = strconv.Itoa(int(limit))
 		params["cursor"] = cursor
 	}
 
