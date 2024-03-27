@@ -16,7 +16,7 @@ func (c *Client) fetchCollection(path string, cursor string, limit int32, search
 
 	res, err := c.r().SetQueryParams(params).Get(path)
 	if err != nil {
-		return nil, fmt.Errorf("error retrieving collection at %s: %q", path, err)
+		return nil, fmt.Errorf("error retrieving collection at %s with params %v: %q", path, params, err)
 	}
 
 	if !res.IsSuccessState() {
@@ -25,10 +25,11 @@ func (c *Client) fetchCollection(path string, cursor string, limit int32, search
 
 	err = res.UnmarshalJson(&target)
 	if err != nil {
-		return nil, fmt.Errorf("error unmarshalling JSON for collection at %s: %q", path, err)
+		return nil, fmt.Errorf("error unmarshalling JSON for collection at %s with response %s: %q", path, res.String(), err)
 	}
 
 	return target, nil
+}
 }
 
 func (c *Client) fetchResource(path string, resourceId string, target interface{}) (interface{}, error) {
