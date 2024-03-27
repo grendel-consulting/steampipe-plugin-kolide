@@ -1,8 +1,6 @@
 package kolide_client
 
 import (
-	"fmt"
-	"strconv"
 	"time"
 )
 
@@ -28,49 +26,9 @@ type Device struct {
 }
 
 func (c *Client) GetDevices(cursor string, limit int32, searches ...Search) (interface{}, error) {
-	params := make(map[string]string)
-	params["query"] = serializeSearches(searches)
-
-	if cursor != "" {
-		params["per_page"] = strconv.Itoa(int(limit))
-		params["cursor"] = cursor
-	}
-
-	res, err := c.r().SetQueryParams(params).Get("/devices/")
-
-	if err != nil {
-		return nil, fmt.Errorf("error retrieving devices: %q", err)
-	}
-
-	if !res.IsSuccessState() {
-		return nil, fmt.Errorf("error retrieving devices: %q", res.Status)
-	}
-	var response DeviceListResponse
-
-	err = res.UnmarshalJson(&response)
-	if err != nil {
-		return nil, fmt.Errorf("error unmarshalling JSON: %q", err)
-	}
-
-	return &response, nil
+	return c.fetchCollection("/devices/", cursor, limit, searches, new(DeviceListResponse))
 }
 
-func (c *Client) GetDeviceById(id string) (*Device, error) {
-	res, err := c.r().SetPathParam("deviceId", id).Get("/devices/{deviceId}")
-
-	if err != nil {
-		return nil, fmt.Errorf("error retrieving devices: %q", err)
-	}
-
-	if !res.IsSuccessState() {
-		return nil, fmt.Errorf("error retrieving devices: %q", res.Status)
-	}
-	var response Device
-
-	err = res.UnmarshalJson(&response)
-	if err != nil {
-		return nil, fmt.Errorf("error unmarshalling JSON: %q", err)
-	}
-
-	return &response, nil
+func (c *Client) GetDeviceById(id string) (interface{}, error) {
+	return c.fetchResource("/devices/", id, new(Device))
 }

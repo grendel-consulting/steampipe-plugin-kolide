@@ -1,8 +1,6 @@
 package kolide_client
 
 import (
-	"fmt"
-	"strconv"
 	"time"
 )
 
@@ -20,29 +18,5 @@ type DeprovisionedPerson struct {
 }
 
 func (c *Client) GetDeprovisionedPeople(cursor string, limit int32, searches ...Search) (interface{}, error) {
-	params := make(map[string]string)
-	params["query"] = serializeSearches(searches)
-
-	if cursor != "" {
-		params["per_page"] = strconv.Itoa(int(limit))
-		params["cursor"] = cursor
-	}
-
-	res, err := c.r().SetQueryParams(params).Get("/deprovisioned_people/")
-
-	if err != nil {
-		return nil, fmt.Errorf("error retrieving deprovisioned people: %q", err)
-	}
-
-	if !res.IsSuccessState() {
-		return nil, fmt.Errorf("error retrieving deprovisioned people: %q", res.Status)
-	}
-	var response DeprovisionedPeopleListResponse
-
-	err = res.UnmarshalJson(&response)
-	if err != nil {
-		return nil, fmt.Errorf("error unmarshalling JSON: %q", err)
-	}
-
-	return &response, nil
+	return c.fetchCollection("/deprovisioned_people/", cursor, limit, searches, new(DeprovisionedPeopleListResponse))
 }
