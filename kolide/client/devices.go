@@ -2,6 +2,7 @@ package kolide_client
 
 import (
 	"fmt"
+	"strconv"
 	"time"
 )
 

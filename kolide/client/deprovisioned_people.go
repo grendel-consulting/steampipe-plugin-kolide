@@ -2,8 +2,8 @@ package kolide_client
 
 import (
 	"fmt"
-	"time"
 	"strconv"
+	"time"
 )
 
 type DeprovisionedPeopleListResponse struct {
