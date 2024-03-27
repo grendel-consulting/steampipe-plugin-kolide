@@ -128,8 +128,6 @@ func getAnything(ctx context.Context, d *plugin.QueryData, h *plugin.HydrateData
 
 }
 
-//func getDevice(ctx context.Context, d *plugin.QueryData, h *plugin.HydrateData) (interface{}, error) {}
-
 func query(ctx context.Context, d *plugin.QueryData) ([]kolide.Search, error) {
 	// Create a slice to hold search queries
 	searches := make([]kolide.Search, 0)
