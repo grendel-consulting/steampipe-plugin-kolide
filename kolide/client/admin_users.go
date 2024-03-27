@@ -1,8 +1,6 @@
 package kolide_client
 
 import (
-	"fmt"
-	"strconv"
 	"time"
 )
 
@@ -20,49 +18,9 @@ type AdminUser struct {
 }
 
 func (c *Client) GetAdminUsers(cursor string, limit int32, searches ...Search) (interface{}, error) {
-	params := make(map[string]string)
-	params["query"] = serializeSearches(searches)
-
-	if cursor != "" {
-		params["per_page"] = strconv.Itoa(int(limit))
-		params["cursor"] = cursor
-	}
-
-	res, err := c.r().SetQueryParams(params).Get("/admin_users/")
-
-	if err != nil {
-		return nil, fmt.Errorf("error retrieving deprovisioned people: %q", err)
-	}
-
-	if !res.IsSuccessState() {
-		return nil, fmt.Errorf("error retrieving deprovisioned people: %q", res.Status)
-	}
-	var response AdminUserListResponse
-
-	err = res.UnmarshalJson(&response)
-	if err != nil {
-		return nil, fmt.Errorf("error unmarshalling JSON: %q", err)
-	}
-
-	return &response, nil
+	return c.fetchCollection("/admin_users/", cursor, limit, searches, new(AdminUserListResponse))
 }
 
-func (c *Client) GetAdminUserById(id string) (*AdminUser, error) {
-	res, err := c.r().SetPathParam("adminUserId", id).Get("/admin_users/{adminUserId}")
-
-	if err != nil {
-		return nil, fmt.Errorf("error retrieving admin users: %q", err)
-	}
-
-	if !res.IsSuccessState() {
-		return nil, fmt.Errorf("error retrieving admin user: %q", res.Status)
-	}
-	var response AdminUser
-
-	err = res.UnmarshalJson(&response)
-	if err != nil {
-		return nil, fmt.Errorf("error unmarshalling JSON: %q", err)
-	}
-
-	return &response, nil
+func (c *Client) GetAdminUserById(id string) (interface{}, error) {
+	return c.fetchResource("/admin_users/", id, new(AdminUser))
 }
