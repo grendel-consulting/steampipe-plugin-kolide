@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"os"
+	"reflect"
 
 	kolide "github.com/grendel-consulting/steampipe-plugin-kolide/kolide/client"
 	"github.com/turbot/steampipe-plugin-sdk/v5/plugin"
@@ -36,6 +37,95 @@ func connect(ctx context.Context, d *plugin.QueryData) (*kolide.Client, error) {
 	d.ConnectionManager.Cache.Set(cacheKey, c)
 
 	return c, nil
+}
+
+type ListPredicate func(client *kolide.Client, cursor string, limit int32, searches ...kolide.Search) (interface{}, error)
+type GetPredicate func(client *kolide.Client, id string) (interface{}, error)
+
+func listAnything(ctx context.Context, d *plugin.QueryData, h *plugin.HydrateData, callee string, visitor ListPredicate, target string) (interface{}, error) {
+	// Create a slice to hold search queries
+	searches, err := query(ctx, d)
+	if err != nil {
+		plugin.Logger(ctx).Error(callee, "qualifier_operator_error", err)
+		return nil, err
+	}
+
+	// Establish connection to Kolide client
+	client, err := connect(ctx, d)
+	if err != nil {
+		plugin.Logger(ctx).Error(callee, "connection_error", err)
+		return nil, err
+	}
+
+	// Iterate through pagination cursors, with smallest number of pages
+	var maxLimit int32 = kolide.MaxPaging
+	if d.QueryContext.Limit != nil {
+		limit := int32(*d.QueryContext.Limit)
+		if limit < maxLimit {
+			maxLimit = limit
+		}
+	}
+
+	cursor := ""
+
+	for {
+		// Respect rate limiting
+		d.WaitForListRateLimit(ctx)
+
+		res, err := visitor(client, cursor, maxLimit, searches...)
+		if err != nil {
+			plugin.Logger(ctx).Error(callee, err)
+			return nil, err
+		}
+
+		// Stream retrieved results
+		collection := reflect.ValueOf(res).Elem().FieldByName(target)
+		if collection.IsValid() {
+			for i := 0; i < collection.Len(); i++ {
+				d.StreamListItem(ctx, collection.Index(i).Interface())
+
+				// Context can be cancelled due to manual cancellation or the limit has been hit
+				if d.RowsRemaining(ctx) == 0 {
+					return nil, nil
+				}
+			}
+		}
+
+		next := reflect.ValueOf(res).Elem().FieldByName("Pagination").FieldByName("NextCursor")
+		if next.IsValid() {
+			cursor = next.Interface().(string)
+		}
+
+		if cursor == "" {
+			break
+		}
+	}
+
+	return nil, nil
+}
+
+func getAnything(ctx context.Context, d *plugin.QueryData, h *plugin.HydrateData, callee string, id string, visitor GetPredicate) (interface{}, error) {
+	// Fail early if unique identifier is not present
+	uid := d.EqualsQualString(id)
+	if uid == "" {
+		return nil, nil
+	}
+
+	// Establish connection to Kolide client
+	client, err := connect(ctx, d)
+	if err != nil {
+		plugin.Logger(ctx).Error(callee, "connection_error", err)
+		return nil, err
+	}
+
+	// Retrieve device based on id
+	res, err := visitor(client, uid)
+	if err != nil {
+		return nil, err
+	}
+
+	return res, nil
+
 }
 
 func query(ctx context.Context, d *plugin.QueryData) ([]kolide.Search, error) {
