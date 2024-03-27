@@ -82,6 +82,17 @@ Alternatively, and **only if the `api_token` is omitted** in the connections, yo
 export KOLIDE_K2_TOKEN=k2sk_v1_thisIsOurExampleKey
 ```
 
+### Rate Limiting
+
+Rate limiting is applied across the Kolide K2 API as a whole, with a **maximum of 270 requests per minute**. Retries and backoffs are handled within the plugin, however you may want to set a sensible concurrency limit for heavier usess. You can read up in more detail under [Limiters](https://steampipe.io/docs/guides/limiter)
+
+```hcl
+plugin "kolide" {
+  limiter "kolide_global_rate_limit" {
+    max_concurrency = 30 
+  }
+}
+
 ## Multiple Connections
 
 You may create multiple Kolide connecions to aggregate queries across multiple Kolide fleets if, for example, you're managing devices on multiple client organisations. You can read up in more detail under [Multi-Account Connections](https://steampipe.io/docs/managing/connections#using-aggregators)

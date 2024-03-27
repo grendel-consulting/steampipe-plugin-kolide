@@ -26,12 +26,12 @@ type Device struct {
 	FormFactor          string    `json:"form_factor"`
 }
 
-func (c *Client) GetDevices(cursor string, searches ...Search) (*DeviceListResponse, error) {
+func (c *Client) GetDevices(cursor string, limit int32, searches ...Search) (interface{}, error) {
 	params := make(map[string]string)
 	params["query"] = serializeSearches(searches)
 
 	if cursor != "" {
-		params["per_page"] = string(MaxPaging)
+		params["per_page"] = string(limit)
 		params["cursor"] = cursor
 	}
 
