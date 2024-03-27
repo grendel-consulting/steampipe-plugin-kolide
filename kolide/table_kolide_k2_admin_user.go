@@ -40,7 +40,7 @@ func tableKolideK2AdminUser(_ context.Context) *plugin.Table {
 		},
 		Get: &plugin.GetConfig{
 			KeyColumns: plugin.SingleColumn("id"),
-			Hydrate:    getDevice,
+			Hydrate:    getAdminUser,
 		},
 	}
 }
