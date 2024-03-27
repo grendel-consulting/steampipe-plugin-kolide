@@ -35,7 +35,7 @@ func (c *Client) fetchCollection(path string, cursor string, limit int32, search
 func (c *Client) fetchResource(path string, resourceId string, target interface{}) (interface{}, error) {
 	res, err := c.r().SetPathParam("id", resourceId).Get(path + "{id}")
 	if err != nil {
-		return nil, fmt.Errorf("failed to retrieve resource: %v", err)
+		return nil, fmt.Errorf("failed to retrieve resource at %s{id} with ID %s: %v", path, resourceId, err)
 	}
 
 	if !res.IsSuccessState() {
@@ -44,7 +44,7 @@ func (c *Client) fetchResource(path string, resourceId string, target interface{
 
 	err = res.UnmarshalJson(&target)
 	if err != nil {
-		return nil, fmt.Errorf("error unmarshalling JSON: %v", err)
+		return nil, fmt.Errorf("error unmarshalling JSON for resource at %s{id} with ID %s: %v", path, resourceId, err)
 	}
 
 	return &target, nil
