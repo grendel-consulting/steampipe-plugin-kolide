@@ -84,7 +84,7 @@ export KOLIDE_K2_TOKEN=k2sk_v1_thisIsOurExampleKey
 
 ### Rate Limiting
 
-Rate limiting is applied across the Kolide K2 API as a whole, with a **maximum of 270 requests per minute**. Retries and backoffs are handled within the plugin, however you may want to set a sensible concurrency limit for heavier usess. You can read up in more detail under [Limiters](https://steampipe.io/docs/guides/limiter)
+Rate limiting is applied across the Kolide K2 API as a whole, with a **maximum of 270 requests per minute**. Retries and backoffs are handled within the plugin; however, you may want to set a sensible concurrency limit for heavier uses. You can read up in more detail under [Limiters](https://steampipe.io/docs/guides/limiter)
 
 ```hcl
 plugin "kolide" {
