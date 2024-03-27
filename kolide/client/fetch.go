@@ -30,7 +30,6 @@ func (c *Client) fetchCollection(path string, cursor string, limit int32, search
 
 	return target, nil
 }
-}
 
 func (c *Client) fetchResource(path string, resourceId string, target interface{}) (interface{}, error) {
 	res, err := c.r().SetPathParam("id", resourceId).Get(path + "{id}")
