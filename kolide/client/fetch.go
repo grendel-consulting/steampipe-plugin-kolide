@@ -17,7 +17,7 @@ func (c *Client) fetchCollection(path string, cursor string, limit int32, search
 	err := c.c.Get(path).SetQueryParams(params).Do().Into(&target)
 
 	if err != nil {
-		return nil, fmt.Errorf("faled to retrieve collection at %s with response: %q", path, err)
+		return nil, fmt.Errorf("failed to retrieve collection at %s with response: %q", path, err)
 	}
 
 	return target, nil
