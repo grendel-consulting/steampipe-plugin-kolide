@@ -27,7 +27,7 @@ func (c *Client) fetchResource(path string, resourceId string, target interface{
 	err := c.c.Get(path+"{resourceId}").SetPathParam("resourceId", resourceId).Do().Into(&target)
 
 	if err != nil {
-		return nil, fmt.Errorf("failed to retrieve resource at %s{resouceId} with ID %s: %v", path, resourceId, err)
+		return nil, fmt.Errorf("failed to retrieve resource at %s{resourceId} with ID %s: %v", path, resourceId, err)
 	}
 
 	return target, nil
