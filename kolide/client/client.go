@@ -38,7 +38,7 @@ func New(options ...ClientOption) *Client {
 				return nil
 			}
 			if !res.IsSuccessState() {
-				res.Err = fmt.Errorf("bad resonse, raw content:\n%s", res.Dump())
+				res.Err = fmt.Errorf("bad response, raw content:\n%s", res.Dump())
 				return nil
 			}
 			return nil
