@@ -24,7 +24,7 @@ func tableKolideK2AdminUser(_ context.Context) *plugin.Table {
 			{Name: "created_at", Description: "When this admin user account was created.", Type: proto.ColumnType_TIMESTAMP},
 			// Other columns
 			{Name: "access", Description: "Access level granted to this admin user, one of full, limited or billing.", Type: proto.ColumnType_STRING},
-			// Restrictions {}
+			{Name: "restrictions", Description: "Feature restrictions applied to this user; this list will be empty unless the user has an access level of 'limited'.", Type: proto.ColumnType_JSON},
 			// Steampipe standard columns
 			{Name: "title", Description: "Display name for this admin user.", Type: proto.ColumnType_STRING, Transform: transform.FromField("Name")},
 		},
