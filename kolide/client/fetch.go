@@ -14,37 +14,21 @@ func (c *Client) fetchCollection(path string, cursor string, limit int32, search
 		params["cursor"] = cursor
 	}
 
-	res, err := c.r().SetQueryParams(params).Get(path)
-	if err != nil {
-		return nil, fmt.Errorf("error retrieving collection at %s with params %v: %q", path, params, err)
-	}
+	err := c.c.Get(path).SetQueryParams(params).Do().Into(&target)
 
-	if !res.IsSuccessState() {
-		return nil, fmt.Errorf("error retrieving collection at %s: %q", path, res.Status)
-	}
-
-	err = res.UnmarshalJson(&target)
 	if err != nil {
-		return nil, fmt.Errorf("error unmarshalling JSON for collection at %s with response %s: %q", path, res.String(), err)
+		return nil, fmt.Errorf("faled to retrieve collection at %s with response: %q", path, err)
 	}
 
 	return target, nil
 }
 
 func (c *Client) fetchResource(path string, resourceId string, target interface{}) (interface{}, error) {
-	res, err := c.r().SetPathParam("id", resourceId).Get(path + "{id}")
+	err := c.c.Get(path+"{resourceId}").SetPathParam("resourceId", resourceId).Do().Into(&target)
+
 	if err != nil {
-		return nil, fmt.Errorf("failed to retrieve resource at %s{id} with ID %s: %v", path, resourceId, err)
+		return nil, fmt.Errorf("failed to retrieve resource at %s{resouceId} with ID %s: %v", path, resourceId, err)
 	}
 
-	if !res.IsSuccessState() {
-		return nil, fmt.Errorf("error retrieving resource: %s", res.Status)
-	}
-
-	err = res.UnmarshalJson(&target)
-	if err != nil {
-		return nil, fmt.Errorf("error unmarshalling JSON for resource at %s{id} with ID %s: %v", path, resourceId, err)
-	}
-
-	return &target, nil
+	return target, nil
 }
