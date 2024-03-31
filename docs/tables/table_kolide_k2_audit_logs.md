@@ -14,3 +14,28 @@ select
 from
   kolide_k2_audit_logs;
 ```
+
+### List all events from the past day
+
+```sql
+select 
+  timestamp, 
+  description, 
+  actor_name
+from 
+  kolide_k2_audit_log 
+where 
+  timestamp > date_trunc('day', current_date) - interval '1 day'
+```
+
+### List all events performed by a specific user
+
+```sql
+select 
+  timestamp, 
+  description, 
+from 
+  kolide_k2_audit_log 
+where
+  actor_name = 'Dennis Nedry'
+```

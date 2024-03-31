@@ -16,3 +16,14 @@ select
 from
   kolide_k2_admin_user;
 ```
+
+### List all Kolide super admins
+
+```sql
+select 
+  email
+from
+  kolide_k2_admin_user
+where
+  access = 'full'
+```
