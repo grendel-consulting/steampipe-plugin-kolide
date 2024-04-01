@@ -28,32 +28,3 @@ where
   auth_state != 'Good'
 order by
   will_block_at asc
-```
-
-### Count the number of devices by hardware model
-
-For example, to monitor and drive hardware refresh and obselescence
-
-```sql
-select 
-  hardware_model, 
-  count(hardware_model) 
-from 
-  kolide_k2_device 
-group by 
-  hardware_model
-```
-
-### Count the number of devices by operating system
-
-For example, to monitor and drive patching
-
-```sql
-select 
-  operating_system, 
-  count(operating_system)
-from 
-  kolide_k2_device 
-group by 
-  operating_system
-```
