@@ -27,6 +27,7 @@ func Plugin(ctx context.Context) *plugin.Plugin {
 		TableMap: map[string]*plugin.Table{
 			"kolide_k2_admin_user":           tableKolideK2AdminUser(ctx),
 			"kolide_k2_audit_log":            tableKolideK2AuditLog(ctx),
+			"kolide_k2_check":                tableKolideK2Check(ctx),
 			"kolide_k2_deprovisioned_person": tableKolideK2DeprovisionedPerson(ctx),
 			"kolide_k2_device":               tableKolideK2Device(ctx),
 			"kolide_k2_package":              tableKolideK2Package(ctx),
