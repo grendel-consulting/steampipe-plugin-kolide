@@ -12,7 +12,7 @@ icon_url: "/images/plugins/grendel-consulting/kolide.svg"
 
 # Kolide + Steampipe
 
-[Kolide]() gives you accurate, valueable and complete fleet visibility across Mac, Windows and Linux endpoints.
+[Kolide](https://www.kolide.com) gives you accurate, valueable and complete fleet visibility across Mac, Windows and Linux endpoints.
 
 [Steampipe](https://steampipe.io) is an open-source zero-ETL engine to instantly query cloud APIs using SQL.
 
@@ -92,6 +92,7 @@ plugin "kolide" {
     max_concurrency = 30 
   }
 }
+```
 
 ## Multiple Connections
 

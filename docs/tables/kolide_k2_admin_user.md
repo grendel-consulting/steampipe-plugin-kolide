@@ -25,5 +25,5 @@ select
 from
   kolide_k2_admin_user
 where
-  access = 'full'
+  access = 'full';
 ```

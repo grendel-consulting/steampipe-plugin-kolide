@@ -6,6 +6,7 @@ Lists the published installation packages for the Kolide Launcher agent for each
 
 ### Basic info
 
+```sql
 select
   id,
   built_at,

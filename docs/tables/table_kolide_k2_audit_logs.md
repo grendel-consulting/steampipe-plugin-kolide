@@ -1,6 +1,6 @@
 # Table: kolide_k2_audit_logs
 
-Lists the tracked events occurring in the Kolide web console
+Lists the tracked events occurring in the Kolide web console.
 
 ## Examples
 
@@ -25,7 +25,7 @@ select
 from 
   kolide_k2_audit_log 
 where 
-  timestamp > date_trunc('day', current_date) - interval '1 day'
+  timestamp > date_trunc('day', current_date) - interval '1 day';
 ```
 
 ### List all events performed by a specific user
@@ -37,5 +37,5 @@ select
 from 
   kolide_k2_audit_log 
 where
-  actor_name = 'Dennis Nedry'
+  actor_name = 'Dennis Nedry';
 ```

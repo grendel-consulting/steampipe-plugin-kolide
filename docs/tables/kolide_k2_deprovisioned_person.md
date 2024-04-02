@@ -23,5 +23,5 @@ select
 from
   kolide_k2_deprovisioned_person
 where 
-  has_registered_device = 'true'
+  has_registered_device = 'true';
 ```
