@@ -19,7 +19,7 @@ from
   kolide_k2_check;
 ```
 
-### List all of the checks relating to a specific operating system
+### List all the checks relating to a specific operating system
 
 ```sql
 select
@@ -36,7 +36,7 @@ where
   compatible_platforms @> '["darwin"]';
 ```
 
-### List all of the topics that Kolide breaks checks down into
+### List all the topics that Kolide breaks checks down into
 
 ```sql
 select 
@@ -46,7 +46,7 @@ from
   jsonb_array_elements_text(topics) as topic;
 ```
 
-### List all of the checks relating to a specific topic
+### List all the checks relating to a specific topic
 
 ```sql
 select
