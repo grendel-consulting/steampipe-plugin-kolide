@@ -23,7 +23,6 @@ func tableKolideK2Check(_ context.Context) *plugin.Table {
 			{Name: "check_tags", Description: "List of Team-set tags associated with the check.", Type: proto.ColumnType_JSON},
 			// Other columns
 			{Name: "compatible_platforms", Description: "Array of device platforms this check can run on, taken from linux, windows or darwin.", Type: proto.ColumnType_JSON},
-			{Name: "description", Description: "Longer-form description of the check's purpose and operation.", Type: proto.ColumnType_STRING},
 			{Name: "topics", Description: "List of Kolide-set topics associated with the check.", Type: proto.ColumnType_JSON},
 			{Name: "blocking_enabled", Description: "Whether or not an issue for this check will block device trust authentication.", Type: proto.ColumnType_BOOL, Transform: transform.FromField("BlocksAuthConfiguration.BlockingEnabled")},
 			{Name: "grace_period_days", Description: "Number of days that a device is allowed to be failing the check before it will be blocked.", Type: proto.ColumnType_INT, Transform: transform.FromField("BlocksAuthConfiguration.GracePeriodDays")},
