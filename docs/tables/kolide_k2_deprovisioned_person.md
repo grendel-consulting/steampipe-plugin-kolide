@@ -42,7 +42,7 @@ where
 
 ### List all deprovisioned people who were never created
 
-Depending on which Kolide product you use, the deprovisioned people may in fact be regular Kolide K2 users who have been been used for zero-trust device authentication
+Depending on which Kolide product you use, the deprovisioned people may in fact be regular Kolide K2 users who have never been authenticated using zero-trust device authentication
 
 ```sql
 select

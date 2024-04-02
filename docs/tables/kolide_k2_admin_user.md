@@ -40,7 +40,7 @@ select
 from
   kolide_k2_admin_user
 where 
-  email not like '%@grendel-consulting.com'
+  email not like '%@grendel-consulting.com';
 ```
 
 ### List all admins created recently
@@ -55,5 +55,5 @@ select
 from
   kolide_k2_admin_user
 where 
-  created_at > > date_trunc('day', current_date) - interval '1 week';
+  created_at > date_trunc('day', current_date) - interval '1 week';
 ```
