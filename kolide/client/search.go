@@ -21,7 +21,7 @@ const (
 )
 
 // See: https://www.kolide.com/docs/developers/api#search
-func serializeSearches(searches []Search) string {
+func serializeSearches(searches []Search, friendlies ...map[string]string) string {
 	var builder strings.Builder
 
 	if len(searches) == 0 {
@@ -29,7 +29,16 @@ func serializeSearches(searches []Search) string {
 	}
 
 	for _, s := range searches {
-		serialized := fmt.Sprintf("%s%s%s", s.Field, string(s.Operator), s.Value)
+		field := s.Field
+
+		if len(friendlies) > 0 {
+			for _, m := range friendlies {
+				if value, ok := m[field]; ok {
+					field = value
+				}
+			}
+		}
+		serialized := fmt.Sprintf("%s%s%s", field, string(s.Operator), s.Value)
 		if builder.Len() > 0 {
 			builder.WriteString(" AND ")
 		}
