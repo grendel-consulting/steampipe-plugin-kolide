@@ -75,5 +75,5 @@ from
 where
   device_type = 'Mac'
   and
-  ( hardware_model like '%2015%' or hardware_model like '%2016%' or hardware_model like '%2017%' )
+  ( hardware_model like '%2015%' or hardware_model like '%2016%' or hardware_model like '%2017%' );
 ```

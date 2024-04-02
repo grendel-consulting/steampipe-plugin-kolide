@@ -36,5 +36,5 @@ select
 from
   kolide_k2_package 
 where 
-  id like 'darwin%'
+  id like 'darwin%';
 ```
