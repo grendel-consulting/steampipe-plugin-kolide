@@ -1,6 +1,6 @@
 # Table: kolide_k2_check
 
-Lists the checks that Kolide runs on a device on a regular cadence, which are tests that typically produces a passing or failing result.
+Lists the checks that Kolide runs on a device on a regular cadence, which are tests that typically produce a passing or failing result.
 
 ## Examples
 
