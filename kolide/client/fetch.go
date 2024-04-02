@@ -5,9 +5,9 @@ import (
 	"strconv"
 )
 
-func (c *Client) fetchCollection(path string, cursor string, limit int32, searches []Search, target interface{}) (interface{}, error) {
+func (c *Client) fetchCollection(path string, cursor string, limit int32, searches []Search, target interface{}, friendlies ...map[string]string) (interface{}, error) {
 	params := make(map[string]string)
-	params["query"] = serializeSearches(searches)
+	params["query"] = serializeSearches(searches, friendlies...)
 
 	if cursor != "" {
 		params["per_page"] = strconv.Itoa(int(limit))

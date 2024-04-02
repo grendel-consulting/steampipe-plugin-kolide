@@ -11,7 +11,7 @@ type PackageListResponse struct {
 type Package struct {
 	Id      string    `json:"id"`
 	BuiltAt time.Time `json:"built_at"`
-	URL     string    `json:"url"`
+	Url     string    `json:"url"`
 	Version string    `json:"version"`
 }
 
