@@ -15,7 +15,7 @@ development, however we may recommend updated to the latest pre-v1.0 version.
 ## Reporting a Bug or Vulnerability
 
 We take all security bugs in our projects seriously. Thank you for improving the
-security of them. We appreciate your efforts and responsible disclosure and will
+security of them. We appreciate your efforts and responsible disclosure, and will
 make every effort to acknowledge your contributions. At this time we do not run
 a formal bug bounty programme.
 
@@ -90,7 +90,7 @@ All notable changes to this policy should be noted below. We use
   encryption keys, or a field in security.txt in a backwards-incompatible manner
 - We will increment the MINOR version when we otherwise change this file or the
   security.txt in a backwards-compatible manner
-- We wil increment the PATCH version for minor typos or similar
+- We will increment the PATCH version for minor typos or similar
 
 ### Version History
 
