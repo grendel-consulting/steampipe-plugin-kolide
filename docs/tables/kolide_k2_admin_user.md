@@ -25,5 +25,35 @@ select
 from
   kolide_k2_admin_user
 where
-  access = 'full'
+  access = 'full';
+```
+
+### List all admins external to my company
+
+```sql
+select
+  first_name,
+  last_name,
+  email,
+  access,
+  created_at
+from
+  kolide_k2_admin_user
+where 
+  email not like '%@grendel-consulting.com';
+```
+
+### List all admins created recently
+
+```sql
+select
+  first_name,
+  last_name,
+  email,
+  access,
+  created_at
+from
+  kolide_k2_admin_user
+where 
+  created_at > date_trunc('day', current_date) - interval '1 week';
 ```
