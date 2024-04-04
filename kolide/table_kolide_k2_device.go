@@ -24,7 +24,7 @@ func tableKolideK2Device(_ context.Context) *plugin.Table {
 			{Name: "serial", Description: "Hardware serial for the device.", Type: proto.ColumnType_STRING},
 			{Name: "hardware_uuid", Description: "Hardware UUID for the device.", Type: proto.ColumnType_STRING},
 			{Name: "note", Description: "Notes provided by a Kolide administrator (in Markdown format).", Type: proto.ColumnType_STRING},
-			{Name: "will_block_at", Description: "If the auth status is 'Will Block', this timestampe describes when the device will be blocked by a failing check.", Type: proto.ColumnType_TIMESTAMP},
+			{Name: "will_block_at", Description: "If the auth status is 'Will Block', this timestamp describes when the device will be blocked by a failing check.", Type: proto.ColumnType_TIMESTAMP},
 			{Name: "device_type", Description: "Platform type of the device, one of Mac, Windows, Linux, iOS or Android.", Type: proto.ColumnType_STRING},
 			// Other columns
 			{Name: "registered_owner_identifier", Description: "Canonical identifier for the registered owner of this device.", Type: proto.ColumnType_STRING},
