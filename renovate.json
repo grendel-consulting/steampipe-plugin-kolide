@@ -1,7 +1,7 @@
 {
     "$schema": "https://docs.renovatebot.com/renovate-schema.json",
     "extends": [
-      "config:base", "schedule:nonOfficeHours"
+      "config:base", "schedule:nonOfficeHours", "helpers:pinGitHubActionDigests"
     ],
     "constraints": {
       "go": "1.21"
