@@ -48,3 +48,7 @@ func (c *Client) GetDevices(cursor string, limit int32, searches ...Search) (int
 func (c *Client) GetDeviceById(id string) (interface{}, error) {
 	return c.fetchResource("/devices/", id, new(Device))
 }
+
+func (c *Client) GetIssuesByDevice(id string, cursor string, limit int32, searches ...Search) (interface{}, error) {
+	return c.fetchCollectionWithResourceId("/devices/{resourceId}/open_issues", id, cursor, limit, searches, new(IssueListResponse))
+}

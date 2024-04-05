@@ -32,3 +32,21 @@ func (c *Client) fetchResource(path string, resourceId string, target interface{
 
 	return target, nil
 }
+
+func (c *Client) fetchCollectionWithResourceId(path string, id string, cursor string, limit int32, searches []Search, target interface{}, friendlies ...map[string]string) (interface{}, error) {
+	params := make(map[string]string)
+	params["query"] = serializeSearches(searches, friendlies...)
+
+	if cursor != "" {
+		params["per_page"] = strconv.Itoa(int(limit))
+		params["cursor"] = cursor
+	}
+
+	err := c.c.Get(path).SetPathParam("resourceId", id).SetQueryParams(params).Do().Into(&target)
+
+	if err != nil {
+		return nil, fmt.Errorf("failed to retrieve collection at %s with response: %q", path, err)
+	}
+
+	return target, nil
+}
