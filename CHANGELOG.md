@@ -8,7 +8,6 @@ _What's new?_
   - kolide_k2_device_open_issue
   - kolide_k2_issue
   - kolide_k2_package
-  - kolide_k2_
 
 - Refactored underlying client to support alternate search field names and keyed collections
 - Pre-commit hooks for local development
