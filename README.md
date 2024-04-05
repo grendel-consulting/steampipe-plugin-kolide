@@ -1,4 +1,5 @@
 # Kolide plugin for Steampipe
+[![OpenSSF Best Practices](https://www.bestpractices.dev/projects/8741/badge)](https://www.bestpractices.dev/projects/8741)
 
 Use SQL to query Devices, People, Checks, Issues and more across your [Kolide](https://www.kolide.com/) fleet. Built atop the [Kolide K2 API](https://www.kolide.com/docs/developers/api).
 
