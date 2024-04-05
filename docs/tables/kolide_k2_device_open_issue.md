@@ -1,6 +1,6 @@
 # Table: kolide_k2_device_open_issue
 
-Lists the unresolved and unexempted issues created when a specific device fails a check; some checks, when they fail, will produce multiple Issues, each with a unique primary_key_value.
+Lists the unresolved and unexempted issues created when a specific device fails a check; some checks, when they fail, will produce multiple issues, each with a unique primary_key_value.
 
 You will need to provide a valid `device_id` for all queries to this table.
 
