@@ -1,0 +1,8 @@
+# You should specify the repos maintainers here, per the instructions in:
+#   https://help.github.com/en/github/creating-cloning-and-archiving-repositories/about-code-owners
+#
+# You may choose to include the repo's primary maintainer on every pull request
+
+@ramirezj
+
+# Otherwise use the same syntax as .gitignore to assign per folder, file type or feature below:

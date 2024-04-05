@@ -5,7 +5,7 @@ we wish to avoid leaving the ecosystem worse than we found it.
 
 ## Supported Versions
 
-Any issues with minor versions will be investigated whilst this project is in early 
+Any issues with minor versions will be investigated whilst this project is in early
 development, however we may recommend updated to the latest pre-v1.0 version.
 
 | Version | Supported          |
@@ -62,8 +62,10 @@ in this section together with things to watch out for.
 
 ### Our Security Toolchain
 
-- GitHub [Advisories](https://github.com/grendel-consulting/risen-world/security/advisories)
+- GitHub [Advisories](https://github.com/grendel-consulting/steampipe-plugin-kolide/security/advisories)
 - [Renovate](https://renovate.whitesourcesoftware.com/)
+- [StepSecurity](https://www.stepsecurity.io/)
+- [SocketDev](https://socket.dev/)
 
 ### Our Security Checklist
 
