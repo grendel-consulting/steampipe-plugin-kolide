@@ -11,6 +11,12 @@ Install the plugin with [Steampipe](https://steampipe.io)
 steampipe plugin install grendel-consulting/kolide
 ```
 
+Create your Kolide API token and config your connection in `~/.steampipe/config/kolide.spc`
+
+```zsh
+steampipe query "select name,hardware_model,serial from kolide_k2_device;"
+```
+
 ## Development
 
 Build the plugin and install it in your `.steampipe` directory:
@@ -24,5 +30,3 @@ Copy the default config file:
 ```zsh
 make reconfigure
 ```
-
-Create your Kolide API token and config your connection in `~/.steampipe/config/kolide.spc`
