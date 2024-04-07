@@ -6,6 +6,9 @@
     "constraints": {
       "go": "1.21"
     },
+    "pre-commit": {
+      "enabled": true
+    },
     "timezone": "Europe/London",
     "vulnerabilityAlerts": {
       "labels": ["security"],
