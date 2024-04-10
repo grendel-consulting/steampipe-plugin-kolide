@@ -4,7 +4,7 @@ go 1.21.9
 
 require (
 	github.com/imroc/req/v3 v3.43.2
-	github.com/turbot/steampipe-plugin-sdk/v5 v5.9.0
+	github.com/turbot/steampipe-plugin-sdk/v5 v5.10.0
 )
 
 require (
@@ -58,7 +58,7 @@ require (
 	github.com/hashicorp/go-plugin v1.6.0 // indirect
 	github.com/hashicorp/go-safetemp v1.0.0 // indirect
 	github.com/hashicorp/go-version v1.6.0 // indirect
-	github.com/hashicorp/hcl/v2 v2.20.0 // indirect
+	github.com/hashicorp/hcl/v2 v2.20.1 // indirect
 	github.com/hashicorp/yamux v0.1.1 // indirect
 	github.com/iancoleman/strcase v0.3.0 // indirect
 	github.com/jmespath/go-jmespath v0.4.0 // indirect
@@ -85,7 +85,7 @@ require (
 	github.com/sethvargo/go-retry v0.2.4 // indirect
 	github.com/stevenle/topsort v0.2.0 // indirect
 	github.com/tkrajina/go-reflector v0.5.6 // indirect
-	github.com/turbot/go-kit v0.9.0 // indirect
+	github.com/turbot/go-kit v0.10.0-rc.0 // indirect
 	github.com/ulikunitz/xz v0.5.11 // indirect
 	github.com/zclconf/go-cty v1.14.4 // indirect
 	go.opencensus.io v0.24.0 // indirect
@@ -116,7 +116,7 @@ require (
 	google.golang.org/genproto v0.0.0-20240318140521-94a12d6c2237 // indirect
 	google.golang.org/genproto/googleapis/api v0.0.0-20240318140521-94a12d6c2237 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20240318140521-94a12d6c2237 // indirect
-	google.golang.org/grpc v1.62.1 // indirect
+	google.golang.org/grpc v1.63.0 // indirect
 	google.golang.org/protobuf v1.33.0 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 )
