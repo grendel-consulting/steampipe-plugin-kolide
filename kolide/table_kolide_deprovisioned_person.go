@@ -11,9 +11,9 @@ import (
 
 //// TABLE DEFINITION
 
-func tableKolideK2DeprovisionedPerson(_ context.Context) *plugin.Table {
+func tableKolideDeprovisionedPerson(_ context.Context) *plugin.Table {
 	return &plugin.Table{
-		Name:        "kolide_k2_deprovisioned_person",
+		Name:        "kolide_deprovisioned_person",
 		Description: "Anyone who has been removed from Kolide via SCIM.",
 		Columns: []*plugin.Column{
 			// Filterable "top" columns
@@ -29,7 +29,7 @@ func tableKolideK2DeprovisionedPerson(_ context.Context) *plugin.Table {
 		},
 		List: &plugin.ListConfig{
 			KeyColumns: []*plugin.KeyColumn{
-				// Using Kolide K2 API query feature, can be combined with AND (and OR)
+				// Using Kolide API query feature, can be combined with AND (and OR)
 				{Name: "name", Require: plugin.Optional, Operators: []string{"=", "~~"}},
 				{Name: "email", Require: plugin.Optional, Operators: []string{"=", "~~"}},
 				{Name: "last_authenticated_at", Require: plugin.Optional, Operators: []string{"=", ">", "<"}},
@@ -46,5 +46,5 @@ func listDeprovisionedPeople(ctx context.Context, d *plugin.QueryData, h *plugin
 		return client.GetDeprovisionedPeople(cursor, limit, searches...)
 	}
 
-	return listAnything(ctx, d, h, "kolide_k2_deprovisioned_person.listDeprovisionedPeople", visitor, "DeprovisionedPeople")
+	return listAnything(ctx, d, h, "kolide_deprovisioned_person.listDeprovisionedPeople", visitor, "DeprovisionedPeople")
 }

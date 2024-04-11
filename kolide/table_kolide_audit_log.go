@@ -11,9 +11,9 @@ import (
 
 //// TABLE DEFINITION
 
-func tableKolideK2AuditLog(_ context.Context) *plugin.Table {
+func tableKolideAuditLog(_ context.Context) *plugin.Table {
 	return &plugin.Table{
-		Name:        "kolide_k2_audit_log",
+		Name:        "kolide_audit_log",
 		Description: "Tracked events occurring in the Kolide web console.",
 		Columns: []*plugin.Column{
 			// Filterable "top" columns
@@ -27,7 +27,7 @@ func tableKolideK2AuditLog(_ context.Context) *plugin.Table {
 		},
 		List: &plugin.ListConfig{
 			KeyColumns: []*plugin.KeyColumn{
-				// Using Kolide K2 API query feature, can be combined with AND (and OR)
+				// Using Kolide API query feature, can be combined with AND (and OR)
 				{Name: "timestamp", Require: plugin.Optional, Operators: []string{"=", ">", "<"}},
 				{Name: "actor_name", Require: plugin.Optional, Operators: []string{"=", "~~"}},
 				{Name: "description", Require: plugin.Optional, Operators: []string{"=", "~~"}},
@@ -48,7 +48,7 @@ func listAuditLogs(ctx context.Context, d *plugin.QueryData, h *plugin.HydrateDa
 		return client.GetAuditLogs(cursor, limit, searches...)
 	}
 
-	return listAnything(ctx, d, h, "kolide_k2_audit_log.listAuditLogs", visitor, "AuditLogs")
+	return listAnything(ctx, d, h, "kolide_audit_log.listAuditLogs", visitor, "AuditLogs")
 }
 
 //// GET FUNCTION
@@ -58,5 +58,5 @@ func getAuditLog(ctx context.Context, d *plugin.QueryData, h *plugin.HydrateData
 		return client.GetAuditLogById(id)
 	}
 
-	return getAnything(ctx, d, h, "kolide_k2_audit_log.getAuditLog", "id", visitor)
+	return getAnything(ctx, d, h, "kolide_audit_log.getAuditLog", "id", visitor)
 }

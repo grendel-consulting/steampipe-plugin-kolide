@@ -11,9 +11,9 @@ import (
 
 //// TABLE DEFINITION
 
-func tableKolideK2DeviceOpenIssue(_ context.Context) *plugin.Table {
+func tableKolideDeviceOpenIssue(_ context.Context) *plugin.Table {
 	return &plugin.Table{
-		Name:        "kolide_k2_device_open_issue",
+		Name:        "kolide_device_open_issue",
 		Description: "Unresolved and non-exempt issues created when a specific device fails a check; some checks, when they fail, will produce multiple Issues, each with a unique primary_key_value.",
 		Columns: []*plugin.Column{
 			// Filterable "top" columns
@@ -31,12 +31,12 @@ func tableKolideK2DeviceOpenIssue(_ context.Context) *plugin.Table {
 			// Other columns
 			{Name: "value", Description: "Relevant data that describes why the device failed the check.", Type: proto.ColumnType_JSON},
 			// Steampipe standard columns
-			// - We include "title" above as an expected Kolide K2 API column, and it is sufficient
+			// - We include "title" above as an expected Kolide API column, and it is sufficient
 		},
 		List: &plugin.ListConfig{
 			KeyColumns: []*plugin.KeyColumn{
 				{Name: "device_id", Require: plugin.Required, Operators: []string{"="}},
-				// Using Kolide K2 API query feature, can be combined with AND (and OR)
+				// Using Kolide API query feature, can be combined with AND (and OR)
 				{Name: "issue_key", Require: plugin.Optional, Operators: []string{"=", "~~"}},
 				{Name: "issue_value", Require: plugin.Optional, Operators: []string{"=", "~~"}},
 				{Name: "title", Require: plugin.Optional, Operators: []string{"=", "~~"}},
@@ -59,5 +59,5 @@ func listIssuesByDevice(ctx context.Context, d *plugin.QueryData, h *plugin.Hydr
 		return client.GetIssuesByDevice(id, cursor, limit, searches...)
 	}
 
-	return listAnythingById(ctx, d, h, "kolide_k2_issue.listIssuesByDevice", "device_id", visitor, "Issues")
+	return listAnythingById(ctx, d, h, "kolide_device_open_issue.listIssuesByDevice", "device_id", visitor, "Issues")
 }

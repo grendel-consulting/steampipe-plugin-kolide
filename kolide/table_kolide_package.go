@@ -11,16 +11,16 @@ import (
 
 //// TABLE DEFINITION
 
-func tableKolideK2Package(_ context.Context) *plugin.Table {
+func tableKolidePackage(_ context.Context) *plugin.Table {
 	return &plugin.Table{
-		Name:        "kolide_k2_package",
+		Name:        "kolide_package",
 		Description: "Installation packages for Kolide Launcher agent for each major operating system.",
 		Columns: []*plugin.Column{
 			// Filterable "top" columns
 			{Name: "id", Description: "Unique identifier for this package.", Type: proto.ColumnType_STRING},
 			// Other columns
 			{Name: "built_at", Description: "When this installation package was built.", Type: proto.ColumnType_TIMESTAMP},
-			{Name: "url", Description: "URL that can be used to download this installation package. Requests to this url require the standard Authorization header needed for all Kolide K2 API requests.", Type: proto.ColumnType_STRING},
+			{Name: "url", Description: "URL that can be used to download this installation package. Requests to this url require the standard Authorization header needed for all Kolide API requests.", Type: proto.ColumnType_STRING},
 			{Name: "version", Description: "Version of the Launcher agent that will be installed by this package.", Type: proto.ColumnType_STRING},
 			// Steampipe standard columns
 			{Name: "title", Description: "Display name for this event.", Type: proto.ColumnType_STRING, Transform: transform.FromField("Id")},
@@ -42,7 +42,7 @@ func listPackages(ctx context.Context, d *plugin.QueryData, h *plugin.HydrateDat
 		return client.GetPackages(cursor, limit, searches...)
 	}
 
-	return listAnything(ctx, d, h, "kolide_k2_audit_log.listPackages", visitor, "Packages")
+	return listAnything(ctx, d, h, "kolide_package.listPackages", visitor, "Packages")
 }
 
 //// GET FUNCTION
@@ -52,5 +52,5 @@ func getPackage(ctx context.Context, d *plugin.QueryData, h *plugin.HydrateData)
 		return client.GetPackageById(id)
 	}
 
-	return getAnything(ctx, d, h, "kolide_k2_audit_log.getPackage", "id", visitor)
+	return getAnything(ctx, d, h, "kolide_package.getPackage", "id", visitor)
 }

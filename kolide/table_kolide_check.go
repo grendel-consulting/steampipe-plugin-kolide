@@ -11,9 +11,9 @@ import (
 
 //// TABLE DEFINITION
 
-func tableKolideK2Check(_ context.Context) *plugin.Table {
+func tableKolideCheck(_ context.Context) *plugin.Table {
 	return &plugin.Table{
-		Name:        "kolide_k2_check",
+		Name:        "kolide_check",
 		Description: "Checks that Kolide runs on a device on a regular cadence, which are tests that typically produces a passing or failing result.",
 		Columns: []*plugin.Column{
 			// Filterable "top" columns
@@ -35,7 +35,7 @@ func tableKolideK2Check(_ context.Context) *plugin.Table {
 		},
 		List: &plugin.ListConfig{
 			KeyColumns: []*plugin.KeyColumn{
-				// Using Kolide K2 API query feature, can be combined with AND (and OR)
+				// Using Kolide API query feature, can be combined with AND (and OR)
 				{Name: "name", Require: plugin.Optional, Operators: []string{"=", "~~"}},
 				{Name: "description", Require: plugin.Optional, Operators: []string{"=", "~~"}},
 				{Name: "check_tags", Require: plugin.Optional, Operators: []string{"=", "~~"}},
@@ -56,7 +56,7 @@ func listChecks(ctx context.Context, d *plugin.QueryData, h *plugin.HydrateData)
 		return client.GetChecks(cursor, limit, searches...)
 	}
 
-	return listAnything(ctx, d, h, "kolide_k2_audit_log.listChecks", visitor, "Checks")
+	return listAnything(ctx, d, h, "kolide_check.listChecks", visitor, "Checks")
 }
 
 //// GET FUNCTION
@@ -66,5 +66,5 @@ func getCheck(ctx context.Context, d *plugin.QueryData, h *plugin.HydrateData) (
 		return client.GetCheckById(id)
 	}
 
-	return getAnything(ctx, d, h, "kolide_k2_audit_log.getCheck", "id", visitor)
+	return getAnything(ctx, d, h, "kolide_check.getCheck", "id", visitor)
 }

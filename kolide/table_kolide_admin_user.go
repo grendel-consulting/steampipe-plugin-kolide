@@ -11,9 +11,9 @@ import (
 
 //// TABLE DEFINITION
 
-func tableKolideK2AdminUser(_ context.Context) *plugin.Table {
+func tableKolideAdminUser(_ context.Context) *plugin.Table {
 	return &plugin.Table{
-		Name:        "kolide_k2_admin_user",
+		Name:        "kolide_admin_user",
 		Description: "Users with access to the Kolide dashboard.",
 		Columns: []*plugin.Column{
 			// Filterable "top" columns
@@ -30,7 +30,7 @@ func tableKolideK2AdminUser(_ context.Context) *plugin.Table {
 		},
 		List: &plugin.ListConfig{
 			KeyColumns: []*plugin.KeyColumn{
-				// Using Kolide K2 API query feature, can be combined with AND (and OR)
+				// Using Kolide API query feature, can be combined with AND (and OR)
 				{Name: "first_name", Require: plugin.Optional, Operators: []string{"=", "~~"}},
 				{Name: "last_name", Require: plugin.Optional, Operators: []string{"=", "~~"}},
 				{Name: "email", Require: plugin.Optional, Operators: []string{"=", "~~"}},
@@ -52,7 +52,7 @@ func listAdminUsers(ctx context.Context, d *plugin.QueryData, h *plugin.HydrateD
 		return client.GetAdminUsers(cursor, limit, searches...)
 	}
 
-	return listAnything(ctx, d, h, "kolide_k2_admin_user.listAdminUsers", visitor, "AdminUsers")
+	return listAnything(ctx, d, h, "kolide_admin_user.listAdminUsers", visitor, "AdminUsers")
 }
 
 //// GET FUNCTION
@@ -62,5 +62,5 @@ func getAdminUser(ctx context.Context, d *plugin.QueryData, h *plugin.HydrateDat
 		return client.GetAdminUserById(id)
 	}
 
-	return getAnything(ctx, d, h, "kolide_k2_admin_user.getAdminUser", "id", visitor)
+	return getAnything(ctx, d, h, "kolide_admin_user.getAdminUser", "id", visitor)
 }
