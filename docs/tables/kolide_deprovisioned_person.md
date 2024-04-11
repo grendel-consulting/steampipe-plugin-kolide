@@ -1,4 +1,4 @@
-# Table: kolide_k2_deprovisioned_person
+# Table: kolide_deprovisioned_person
 
 Lists anyone who has been removed from Kolide via SCIM.
 
@@ -11,7 +11,7 @@ select
   name,
   email
 from
-  kolide_k2_deprovisioned_person;
+  kolide_deprovisioned_person;
 ```
 
 ### List all deprovisioned people who still have a device
@@ -22,8 +22,8 @@ select
   email,
   last_authenticated_at
 from
-  kolide_k2_deprovisioned_person
-where 
+  kolide_deprovisioned_person
+where
   has_registered_device = 'true';
 ```
 
@@ -35,8 +35,8 @@ select
   email,
   last_authenticated_at
 from
-  kolide_k2_deprovisioned_person
-where 
+  kolide_deprovisioned_person
+where
   last_authenticated_at > date_trunc('day', current_date) - interval '1 week';
 ```
 
@@ -49,7 +49,7 @@ select
   name,
   email
 from
-  kolide_k2_deprovisioned_person
-where 
+  kolide_deprovisioned_person
+where
   created_at is null;
 ```

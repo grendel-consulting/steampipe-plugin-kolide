@@ -11,9 +11,9 @@ import (
 
 //// TABLE DEFINITION
 
-func tableKolideK2Device(_ context.Context) *plugin.Table {
+func tableKolideDevice(_ context.Context) *plugin.Table {
 	return &plugin.Table{
-		Name:        "kolide_k2_device",
+		Name:        "kolide_device",
 		Description: "Devices enrolled and monitored by Kolide.",
 		Columns: []*plugin.Column{
 			// Filterable "top" columns
@@ -41,7 +41,7 @@ func tableKolideK2Device(_ context.Context) *plugin.Table {
 		},
 		List: &plugin.ListConfig{
 			KeyColumns: []*plugin.KeyColumn{
-				// Using Kolide K2 API query feature, can be combined with AND (and OR)
+				// Using Kolide API query feature, can be combined with AND (and OR)
 				{Name: "name", Require: plugin.Optional, Operators: []string{"=", "~~"}},
 				{Name: "registered_at", Require: plugin.Optional, Operators: []string{"=", ">", "<"}},
 				{Name: "last_authenticated_at", Require: plugin.Optional, Operators: []string{"=", ">", "<"}},
@@ -67,7 +67,7 @@ func listDevices(ctx context.Context, d *plugin.QueryData, h *plugin.HydrateData
 		return client.GetDevices(cursor, limit, searches...)
 	}
 
-	return listAnything(ctx, d, h, "kolide_k2_device.listDevices", visitor, "Devices")
+	return listAnything(ctx, d, h, "kolide_device.listDevices", visitor, "Devices")
 }
 
 //// GET FUNCTION
@@ -77,5 +77,5 @@ func getDevice(ctx context.Context, d *plugin.QueryData, h *plugin.HydrateData) 
 		return client.GetDeviceById(id)
 	}
 
-	return getAnything(ctx, d, h, "kolide_k2_device.getDevice", "id", visitor)
+	return getAnything(ctx, d, h, "kolide_device.getDevice", "id", visitor)
 }

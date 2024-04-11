@@ -1,3 +1,9 @@
+## v0.2.1 [2024-04-11]
+
+_What's new?_
+
+- Renamed tables to omit "k2", i.e. it is now simply `kolide_device`
+
 ## v0.2.0 [2024-04-05]
 
 _What's new?_

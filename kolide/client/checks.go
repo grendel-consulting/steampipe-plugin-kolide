@@ -38,7 +38,7 @@ func (c *Client) GetChecks(cursor string, limit int32, searches ...Search) (inte
 	var friendlies = map[string]string{
 		"description": "check_description",
 		"check_tag":   "check_tag_name",
-		// Kolide K2 supports filtering by check_tag_id and check_tag_description as well
+		// Kolide API supports filtering by check_tag_id and check_tag_description as well
 	}
 
 	return c.fetchCollection("/checks/", cursor, limit, searches, new(CheckListResponse), friendlies)

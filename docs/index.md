@@ -2,7 +2,7 @@
 organization: Grendel Consulting
 category: ["asset management"]
 brand_color: "#7450F6"
-display_name: Kolide K2
+display_name: Kolide
 name: kolide
 description: Kolide gives you accurate, valuable and complete fleet visibility across Mac, Windows and Linux endpoints
 og_description: Query Kolide with SQL! Open source CLI. No DB required.
@@ -16,17 +16,17 @@ icon_url: "/images/plugins/grendel-consulting/kolide.svg"
 
 [Steampipe](https://steampipe.io) is an open-source zero-ETL engine to instantly query cloud APIs using SQL.
 
-This is an unofficial plugin, leveraging the public [Kolide K2 API](https://www.kolide.com/docs/developers/api) through the Steampipe engine. Prospective users are encouraged to undergo their usual due diligence in using third-party software.
+This is an unofficial plugin, leveraging the public [Kolide API](https://www.kolide.com/docs/developers/api) through the Steampipe engine. Prospective users are encouraged to undergo their usual due diligence in using third-party software.
 
 List all devices monitored by Kolide
 
 ```sql
 select
   id,
-  serial, 
+  serial,
   name
 from
-  kolide_k2_device
+  kolide_device
 ```
 ```
 +------+------------+---------+
@@ -69,7 +69,7 @@ Configure your account details in `~/.steampipe/config/kolide.spc`:
 connection "kolide" {
   plugin = "grendel-consulting/kolide"
 
-  # Your Kolide K2 API key. Required.
+  # Your Kolide API key. Required.
   # Get your API key from Kolide, instructions here: https://www.kolide.com/docs/developers/api#creating-an-api-key.
   # Alternately you set with the `KOLIDE_API_TOKEN` environment variable.
   # api_key = "k2sk_v1_thisIsOurExampleKey"
@@ -84,12 +84,12 @@ export KOLIDE_K2_TOKEN=k2sk_v1_thisIsOurExampleKey
 
 ### Rate Limiting
 
-Rate limiting is applied across the Kolide K2 API as a whole, with a **maximum of 270 requests per minute**. Retries and backoffs are handled within the plugin; however, you may want to set a sensible concurrency limit for heavier uses. You can read up in more detail under [Limiters](https://steampipe.io/docs/guides/limiter)
+Rate limiting is applied across the Kolide API as a whole, with a **maximum of 270 requests per minute**. Retries and backoffs are handled within the plugin; however, you may want to set a sensible concurrency limit for heavier uses. You can read up in more detail under [Limiters](https://steampipe.io/docs/guides/limiter)
 
 ```hcl
 plugin "kolide" {
   limiter "kolide_global_rate_limit" {
-    max_concurrency = 30 
+    max_concurrency = 30
   }
 }
 ```

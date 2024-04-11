@@ -1,4 +1,4 @@
-# Table: kolide_k2_issue
+# Table: kolide_issue
 
 Lists the issues created when a device fails a check; some checks, when they fail, will produce multiple Issues, each with a unique primary_key_value.
 
@@ -14,7 +14,7 @@ select
   resolved_at,
   exempted
 from
-  kolide_k2_issue;
+  kolide_issue;
 ```
 
 ### List all unresolved issues
@@ -25,7 +25,7 @@ select
   detected_at,
   value
 from
-  kolide_k2_issue
+  kolide_issue
 where
   resolved_at is null;
 ```
@@ -38,7 +38,7 @@ select
   detected_at,
   value
 from
-  kolide_k2_issue
+  kolide_issue
 where
   blocks_device_at is not null;
 ```
@@ -51,7 +51,7 @@ select
   detected_at,
   value
 from
-  kolide_k2_issue
+  kolide_issue
 where
   exempted = true;
 ```
@@ -63,7 +63,7 @@ select
   device_id,
   count(device_id) as count
 from
-  kolide_k2_issue
+  kolide_issue
 where
   resolved_at is null
 group by

@@ -19,20 +19,20 @@ func Plugin(ctx context.Context) *plugin.Plugin {
 			ShouldIgnoreErrorFunc: shouldIgnoreErrors([]string{"404"}),
 		},
 		DefaultRetryConfig: &plugin.RetryConfig{
-			// Preference would be to respect Retry-After header that Kolide K2 API supports
+			// Preference would be to respect `Retry-After` header that Kolide API supports
 			// For now, default to Fibonacci, ten retries starting at 100ms
 			ShouldRetryErrorFunc: shouldRetryError([]string{"429"}),
 		},
 
 		TableMap: map[string]*plugin.Table{
-			"kolide_k2_admin_user":           tableKolideK2AdminUser(ctx),
-			"kolide_k2_audit_log":            tableKolideK2AuditLog(ctx),
-			"kolide_k2_check":                tableKolideK2Check(ctx),
-			"kolide_k2_deprovisioned_person": tableKolideK2DeprovisionedPerson(ctx),
-			"kolide_k2_device":               tableKolideK2Device(ctx),
-			"kolide_k2_device_open_issue":    tableKolideK2DeviceOpenIssue(ctx),
-			"kolide_k2_issue":                tableKolideK2Issue(ctx),
-			"kolide_k2_package":              tableKolideK2Package(ctx),
+			"kolide_admin_user":           tableKolideAdminUser(ctx),
+			"kolide_audit_log":            tableKolideAuditLog(ctx),
+			"kolide_check":                tableKolideCheck(ctx),
+			"kolide_deprovisioned_person": tableKolideDeprovisionedPerson(ctx),
+			"kolide_device":               tableKolideDevice(ctx),
+			"kolide_device_open_issue":    tableKolideDeviceOpenIssue(ctx),
+			"kolide_issue":                tableKolideIssue(ctx),
+			"kolide_package":              tableKolidePackage(ctx),
 		},
 	}
 	return p

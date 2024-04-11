@@ -1,4 +1,4 @@
-# Table: kolide_k2_admin_user
+# Table: kolide_admin_user
 
 Lists the users with access to the Kolide dashboard. Depending on your organization's restrictions, they are able to view and manage checks, devices, users, and other settings.
 
@@ -14,16 +14,16 @@ select
   access,
   created_at
 from
-  kolide_k2_admin_user;
+  kolide_admin_user;
 ```
 
 ### List all Kolide super admins
 
 ```sql
-select 
+select
   email
 from
-  kolide_k2_admin_user
+  kolide_admin_user
 where
   access = 'full';
 ```
@@ -38,8 +38,8 @@ select
   access,
   created_at
 from
-  kolide_k2_admin_user
-where 
+  kolide_admin_user
+where
   email not like '%@grendel-consulting.com';
 ```
 
@@ -53,7 +53,7 @@ select
   access,
   created_at
 from
-  kolide_k2_admin_user
-where 
+  kolide_admin_user
+where
   created_at > date_trunc('day', current_date) - interval '1 week';
 ```

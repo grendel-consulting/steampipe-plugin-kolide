@@ -11,9 +11,9 @@ import (
 
 //// TABLE DEFINITION
 
-func tableKolideK2Issue(_ context.Context) *plugin.Table {
+func tableKolideIssue(_ context.Context) *plugin.Table {
 	return &plugin.Table{
-		Name:        "kolide_k2_issue",
+		Name:        "kolide_issue",
 		Description: "Issues created when a device fails a check; some checks, when they fail, will produce multiple Issues, each with a unique primary_key_value.",
 		Columns: []*plugin.Column{
 			// Filterable "top" columns
@@ -31,11 +31,11 @@ func tableKolideK2Issue(_ context.Context) *plugin.Table {
 			// Other columns
 			{Name: "value", Description: "Relevant data that describes why the device failed the check.", Type: proto.ColumnType_JSON},
 			// Steampipe standard columns
-			// - We include "title" above as an expected Kolide K2 API column, and it is sufficient
+			// - We include "title" above as an expected Kolide API column, and it is sufficient
 		},
 		List: &plugin.ListConfig{
 			KeyColumns: []*plugin.KeyColumn{
-				// Using Kolide K2 API query feature, can be combined with AND (and OR)
+				// Using Kolide API query feature, can be combined with AND (and OR)
 				{Name: "issue_key", Require: plugin.Optional, Operators: []string{"=", "~~"}},
 				{Name: "issue_value", Require: plugin.Optional, Operators: []string{"=", "~~"}},
 				{Name: "title", Require: plugin.Optional, Operators: []string{"=", "~~"}},
@@ -63,7 +63,7 @@ func listIssues(ctx context.Context, d *plugin.QueryData, h *plugin.HydrateData)
 		return client.GetIssues(cursor, limit, searches...)
 	}
 
-	return listAnything(ctx, d, h, "kolide_k2_issue.listIssues", visitor, "Issues")
+	return listAnything(ctx, d, h, "kolide_issue.listIssues", visitor, "Issues")
 }
 
 //// GET FUNCTION
@@ -73,5 +73,5 @@ func getIssue(ctx context.Context, d *plugin.QueryData, h *plugin.HydrateData) (
 		return client.GetIssueById(id)
 	}
 
-	return getAnything(ctx, d, h, "kolide_k2_issue.getIssue", "id", visitor)
+	return getAnything(ctx, d, h, "kolide_issue.getIssue", "id", visitor)
 }

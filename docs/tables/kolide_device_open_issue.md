@@ -1,4 +1,4 @@
-# Table: kolide_k2_device_open_issue
+# Table: kolide_device_open_issue
 
 Lists the unresolved and unexempted issues created when a specific device fails a check; some checks, when they fail, will produce multiple issues, each with a unique primary_key_value.
 
@@ -16,7 +16,7 @@ select
   resolved_at,
   exempted
 from
-  kolide_k2_device_open_issue
+  kolide_device_open_issue
 where
   device_id = '1553';
 ```
@@ -29,7 +29,7 @@ select
   detected_at,
   value
 from
-  kolide_k2_device_open_issue
+  kolide_device_open_issue
 where
   device_id = '1553'
   and
@@ -49,8 +49,8 @@ select
   o.value->'health' as battery_health,
   o.value->'max_capacity' as battery_max
 from
-  kolide_k2_device_open_issue o,
-  kolide_k2_device d
+  kolide_device_open_issue o,
+  kolide_device d
 where
   o.check_id = '15804'
   and

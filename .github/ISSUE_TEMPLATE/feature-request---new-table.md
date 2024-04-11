@@ -1,7 +1,7 @@
 ---
 name: Feature Request - New Table
 about: Suggest a new table for this plugin
-title: Add table kolide_k2_<resource>
+title: Add table kolide_<resource>
 labels: enhancement
 assignees: ""
 ---

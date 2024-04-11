@@ -25,12 +25,12 @@ type Issue struct {
 }
 
 type DeviceInformation struct {
-	// Whilst the Kolide K2 API readme entry references this as a "string", the returned value encountered in testing is an "int"
+	// Whilst the Kolide API readme entry references this as a "string", the returned value encountered in testing is an "int"
 	Identifier int32 `json:"identifier,omitempty"`
 }
 
 type CheckInformation struct {
-	// Whilst the Kolide K2 API readme entry references this as a "string", the returned value encountered in testing is an "int"
+	// Whilst the Kolide API readme entry references this as a "string", the returned value encountered in testing is an "int"
 	Identifier int32 `json:"identifier,omitempty"`
 }
 

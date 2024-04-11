@@ -27,7 +27,7 @@ func connect(ctx context.Context, d *plugin.QueryData) (*kolide.Client, error) {
 	}
 
 	if api_token == "" {
-		return nil, errors.New("kolide k2 'api_token' must be set in the connection configuration; edit your connection configuration file and then restart")
+		return nil, errors.New("kolide 'api_token' must be set in the connection configuration; edit your connection configuration file and then restart")
 	}
 
 	c := kolide.New(
@@ -214,7 +214,7 @@ func query(ctx context.Context, d *plugin.QueryData) ([]kolide.Search, error) {
 	return searches, nil
 }
 
-// Operators supported by Kolide K2 API are:
+// Operators supported by Kolide API are:
 //
 // - Exact match, ":"
 // - Substring match, "~", treated as Like

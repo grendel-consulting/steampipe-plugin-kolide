@@ -1,4 +1,4 @@
-# Table: kolide_k2_device
+# Table: kolide_device
 
 Lists the devices that have been enrolled in Kolide.
 
@@ -12,7 +12,7 @@ select
   hardware_model,
   serial
 from
-  kolide_k2_device;
+  kolide_device;
 ```
 
 ### List all devices that are in a failed or failing auth state
@@ -23,7 +23,7 @@ select
   registered_owner_identifier,
   will_block_at
 from
-  kolide_k2_device
+  kolide_device
 where
   auth_state != 'Good'
 order by
@@ -37,11 +37,11 @@ select
   name,
   registered_owner_identifier,
   serial
-from 
-  kolide_k2_device 
-where 
-  device_type = 'Mac' 
-  and 
+from
+  kolide_device
+where
+  device_type = 'Mac'
+  and
   operating_system not like '%Sonoma%';
 ```
 
@@ -52,11 +52,11 @@ select
   name,
   registered_owner_identifier,
   serial
-from 
-  kolide_k2_device 
-where 
-  device_type = 'Mac' 
-  and 
+from
+  kolide_device
+where
+  device_type = 'Mac'
+  and
   operating_system not like '%14.4%'
 ```
 
@@ -71,7 +71,7 @@ select
   serial,
   hardware_model
 from
-  kolide_k2_device
+  kolide_device
 where
   device_type = 'Mac'
   and
