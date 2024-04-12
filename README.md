@@ -35,8 +35,8 @@ This plugin is available for the following engines:
 
 Prerequisites:
 
-- [Steampipe](https://steampipe.io/downloads)
-- [Golang](https://golang.org/doc/install)
+* [Steampipe](https://steampipe.io/downloads)
+* [Golang](https://golang.org/doc/install)
 
 Clone:
 
@@ -47,7 +47,7 @@ cd steampipe-plugin-aws
 
 Build, which automatically installs the new version to your `~/.steampipe/plugins` directory:
 
-```
+```zsh
 make install
 ```
 
@@ -67,8 +67,8 @@ steampipe query
 
 Further reading:
 
-- [Writing plugins](https://steampipe.io/docs/develop/writing-plugins)
-- [Writing your first table](https://steampipe.io/docs/develop/writing-your-first-table)
+* [Writing plugins](https://steampipe.io/docs/develop/writing-plugins)
+* [Writing your first table](https://steampipe.io/docs/develop/writing-your-first-table)
 
 ## Open Source & Contributing
 
@@ -80,5 +80,5 @@ This repository is published under the [Apache 2.0](https://www.apache.org/licen
 
 Want to help but don't know where to start? Pick up one of the `help wanted` issues:
 
-- [Kolide Plugin](https://github.com/grendel-consulting/steampipe-plugin-kolide/labels/help%20wanted)
-- [Steampipe](https://github.com/turbot/steampipe/labels/help%20wanted)
+* [Kolide Plugin](https://github.com/grendel-consulting/steampipe-plugin-kolide/labels/help%20wanted)
+* [Steampipe](https://github.com/turbot/steampipe/labels/help%20wanted)
