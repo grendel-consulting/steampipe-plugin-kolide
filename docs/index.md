@@ -79,7 +79,7 @@ connection "kolide" {
 Alternatively, and **only if the `api_token` is omitted** in the connections, you can use the  Kolide environment variable to obtain credentials only if api_token is not specified in the connection:
 
 ```zsh
-export KOLIDE_K2_TOKEN=k2sk_v1_thisIsOurExampleKey
+export KOLIDE_API_TOKEN=k2sk_v1_thisIsOurExampleKey
 ```
 
 ### Rate Limiting
