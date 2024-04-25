@@ -33,6 +33,7 @@ func Plugin(ctx context.Context) *plugin.Plugin {
 			"kolide_device_open_issue":    tableKolideDeviceOpenIssue(ctx),
 			"kolide_issue":                tableKolideIssue(ctx),
 			"kolide_package":              tableKolidePackage(ctx),
+			"kolide_person":               tableKolidePerson(ctx),
 		},
 	}
 	return p
