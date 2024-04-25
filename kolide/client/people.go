@@ -15,7 +15,7 @@ type Person struct {
 	CreatedAt           time.Time `json:"created_at"`
 	LastAuthenticatedAt time.Time `json:"last_authenticated_at"`
 	HasRegisteredDevice bool      `json:"has_registered_device"`
-	Usernames           []int     `json:"uernames"`
+	Usernames           []int     `json:"usernames"`
 }
 
 func (c *Client) GetPeople(cursor string, limit int32, searches ...Search) (interface{}, error) {
