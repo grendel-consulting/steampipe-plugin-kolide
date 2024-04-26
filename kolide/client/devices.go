@@ -36,11 +36,6 @@ type AuthConfiguration struct {
 	PersonGroups       []PersonGroup `json:"person_groups"`
 }
 
-type PersonGroup struct {
-	Id   string `json:"id"`
-	Name string `json:"name"`
-}
-
 func (c *Client) GetDevices(cursor string, limit int32, searches ...Search) (interface{}, error) {
 	return c.fetchCollection("/devices/", cursor, limit, searches, new(DeviceListResponse))
 }
