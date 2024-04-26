@@ -23,8 +23,8 @@ using the interactive API documentation at https://kolideapi.readme.io/reference
 | GET    | /packages/{id}                                             | :white_check_mark: |    ? |    ? |   Ok |
 | GET    | /people/{personId}/registered_devices                      | #23                |    ? |    ? | [^4] |
 | GET    | /people/{personId}/open_issues                             | #91                |    ? |    ? | [^4] |
-| GET    | /people                                                    | #12                |    ? |    ? | [^4] |
-| GET    | /people/{id}                                               | #24                |    ? |    ? |   Ok |
+| GET    | /people                                                    | :white_check_mark: |    ? |    ? | [^4] |
+| GET    | /people/{id}                                               | :white_check_mark: |    ? |    ? |   Ok |
 | GET    | /person_groups                                             | #25                |    ? |    ? | [^1] |
 | GET    | /person_groups/{id}                                        | #26                |    ? |    ? | [^1] |
 | GET    | /auth_logs                                                 | #27                |    ? |    ? |      |
