@@ -1,6 +1,6 @@
 # Coverage and API Behaviour
 
-Documenting the observed behaviour of the Kolide API utilising credentials representng
+Documenting the observed behaviour of the Kolide API utilising credentials representing
 different billing plans, we have seen the following. All tests were manual and performed
 using the interactive API documentation at https://kolideapi.readme.io/reference
 
