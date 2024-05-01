@@ -1,4 +1,4 @@
-# Table: kolide_device_open_issue
+# Table: kolide_person_open_issue
 
 Lists the unresolved and unexempted issues created when a device owned by a specific person fails a check; some checks, when they fail, will produce multiple issues, each with a unique primary_key_value.
 
