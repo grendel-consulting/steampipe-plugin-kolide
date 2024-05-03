@@ -28,7 +28,7 @@ func tableKolideDeviceGroupDevice(_ context.Context) *plugin.Table {
 			{Name: "device_type", Description: "Platform type of the device, one of Mac, Windows, Linux, iOS or Android.", Type: proto.ColumnType_STRING},
 			// Other columns
 			{Name: "id", Description: "Canonical identifier for the device.", Type: proto.ColumnType_STRING},
-			{Name: "registered_owner_identifier", Description: "Canonical identifier for the registered owner of this device.", Type: proto.ColumnType_STRING, Transform: transform.FromField("RegisteredOwner.Identifier")},
+			{Name: "registered_owner_identifier", Description: "Canonical identifier for the registered owner of this device.", Type: proto.ColumnType_STRING, Transform: transform.FromField("RegisteredOwnerInfo.Identifier")},
 			{Name: "operating_system", Description: "Operating system installed on the device.", Type: proto.ColumnType_STRING},
 			{Name: "hardware_model", Description: "Specific hardware model of the device.", Type: proto.ColumnType_STRING},
 			{Name: "auth_state", Description: "Authorisation status of the device, one of Good, Notified, Will Block or Blocked.", Type: proto.ColumnType_STRING},

@@ -27,7 +27,7 @@ func tableKolideDevice(_ context.Context) *plugin.Table {
 			{Name: "will_block_at", Description: "If the auth status is 'Will Block', this timestamp describes when the device will be blocked by a failing check.", Type: proto.ColumnType_TIMESTAMP},
 			{Name: "device_type", Description: "Platform type of the device, one of Mac, Windows, Linux, iOS or Android.", Type: proto.ColumnType_STRING},
 			// Other columns
-			{Name: "registered_owner_identifier", Description: "Canonical identifier for the registered owner of this device.", Type: proto.ColumnType_STRING, Transform: transform.FromField("RegisteredOwner.Identifier")},
+			{Name: "registered_owner_identifier", Description: "Canonical identifier for the registered owner of this device.", Type: proto.ColumnType_STRING, Transform: transform.FromField("RegisteredOwnerInfo.Identifier")},
 			{Name: "operating_system", Description: "Operating system installed on the device.", Type: proto.ColumnType_STRING},
 			{Name: "hardware_model", Description: "Specific hardware model of the device.", Type: proto.ColumnType_STRING},
 			{Name: "auth_state", Description: "Authorisation status of the device, one of Good, Notified, Will Block or Blocked.", Type: proto.ColumnType_STRING},
