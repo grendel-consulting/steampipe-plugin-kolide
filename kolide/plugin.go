@@ -35,6 +35,7 @@ func Plugin(ctx context.Context) *plugin.Plugin {
 			"kolide_package":              tableKolidePackage(ctx),
 			"kolide_person":               tableKolidePerson(ctx),
 			"kolide_person_group":         tableKolidePersonGroup(ctx),
+			"kolide_person_open_issue":    tableKolidePersonOpenIssue(ctx),
 		},
 	}
 	return p

@@ -41,3 +41,7 @@ func (c *Client) GetIssues(cursor string, limit int32, searches ...Search) (inte
 func (c *Client) GetIssueById(id string) (interface{}, error) {
 	return c.fetchResource("/issues/", id, new(Issue))
 }
+
+func (c *Client) GetIssuesByPerson(id string, cursor string, limit int32, searches ...Search) (interface{}, error) {
+	return c.fetchCollectionWithResourceId("/people/{resourceId}/open_issues", id, cursor, limit, searches, new(IssueListResponse))
+}
