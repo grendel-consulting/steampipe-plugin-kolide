@@ -25,12 +25,12 @@ type Issue struct {
 }
 
 type DeviceInformation struct {
-	// Whilst the Kolide API readme entry references this as a "string", the returned value encountered in testing is an "int"
+	// Whilst the Kolide API readme entry references this as a "string", the returned value encountered during implementation is an "int"
 	Identifier int32 `json:"identifier,omitempty"`
 }
 
 type CheckInformation struct {
-	// Whilst the Kolide API readme entry references this as a "string", the returned value encountered in testing is an "int"
+	// Whilst the Kolide API readme entry references this as a "string", the returned value encountered during implementation is an "int"
 	Identifier int32 `json:"identifier,omitempty"`
 }
 
@@ -40,6 +40,10 @@ func (c *Client) GetIssues(cursor string, limit int32, searches ...Search) (inte
 
 func (c *Client) GetIssueById(id string) (interface{}, error) {
 	return c.fetchResource("/issues/", id, new(Issue))
+}
+
+func (c *Client) GetIssuesByDevice(id string, cursor string, limit int32, searches ...Search) (interface{}, error) {
+	return c.fetchCollectionWithResourceId("/devices/{resourceId}/open_issues", id, cursor, limit, searches, new(IssueListResponse))
 }
 
 func (c *Client) GetIssuesByPerson(id string, cursor string, limit int32, searches ...Search) (interface{}, error) {

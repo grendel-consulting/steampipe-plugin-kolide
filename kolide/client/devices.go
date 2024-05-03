@@ -44,6 +44,12 @@ func (c *Client) GetDeviceById(id string) (interface{}, error) {
 	return c.fetchResource("/devices/", id, new(Device))
 }
 
-func (c *Client) GetIssuesByDevice(id string, cursor string, limit int32, searches ...Search) (interface{}, error) {
-	return c.fetchCollectionWithResourceId("/devices/{resourceId}/open_issues", id, cursor, limit, searches, new(IssueListResponse))
+// For /device/{deviceId}/open_issues endpoint, see issues.go
+
+func (c *Client) GetDevicesByDeviceGroup(id string, cursor string, limit int32, searches ...Search) (interface{}, error) {
+	return c.fetchCollectionWithResourceId("/device_groups/{resourceId}/devices", id, cursor, limit, searches, new(DeviceListResponse))
+}
+
+func (c *Client) GetDevicesByPerson(id string, cursor string, limit int32, searches ...Search) (interface{}, error) {
+	return c.fetchCollectionWithResourceId("/people/{resourceId}/registered_devices", id, cursor, limit, searches, new(DeviceListResponse))
 }

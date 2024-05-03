@@ -17,7 +17,7 @@ func tableKolideDeviceGroupDevice(_ context.Context) *plugin.Table {
 		Description: "Member devices within a device group.",
 		Columns: []*plugin.Column{
 			// Filterable "top" columns
-			{Name: "device_group_id", Description: "Canonical identifier for the device.", Type: proto.ColumnType_STRING},
+			{Name: "device_group_id", Description: "Canonical identifier for the device group.", Type: proto.ColumnType_STRING},
 			{Name: "name", Description: "Canonical human name for the device.", Type: proto.ColumnType_STRING},
 			{Name: "registered_at", Description: "When the device was registered to its current owner.", Type: proto.ColumnType_TIMESTAMP},
 			{Name: "last_authenticated_at", Description: "When the device was last authenticated with Kolide.", Type: proto.ColumnType_TIMESTAMP},
@@ -27,6 +27,7 @@ func tableKolideDeviceGroupDevice(_ context.Context) *plugin.Table {
 			{Name: "will_block_at", Description: "If the auth status is 'Will Block', this timestamp describes when the device will be blocked by a failing check.", Type: proto.ColumnType_TIMESTAMP},
 			{Name: "device_type", Description: "Platform type of the device, one of Mac, Windows, Linux, iOS or Android.", Type: proto.ColumnType_STRING},
 			// Other columns
+			{Name: "id", Description: "Canonical identifier for the device.", Type: proto.ColumnType_STRING},
 			{Name: "registered_owner_identifier", Description: "Canonical identifier for the registered owner of this device.", Type: proto.ColumnType_STRING},
 			{Name: "operating_system", Description: "Operating system installed on the device.", Type: proto.ColumnType_STRING},
 			{Name: "hardware_model", Description: "Specific hardware model of the device.", Type: proto.ColumnType_STRING},

@@ -24,6 +24,4 @@ func (c *Client) GetDeviceGroupById(id string) (interface{}, error) {
 	return c.fetchResource("/device_groups/", id, new(DeviceGroup))
 }
 
-func (c *Client) GetDevicesByDeviceGroup(id string, cursor string, limit int32, searches ...Search) (interface{}, error) {
-	return c.fetchCollectionWithResourceId("/device_groups/{resourceId}/devices", id, cursor, limit, searches, new(DeviceListResponse))
-}
+// For /device_groups/{deviceGroupId}/devices endpoint, see devices.go
