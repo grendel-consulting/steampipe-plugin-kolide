@@ -27,14 +27,14 @@ func tableKolideDevice(_ context.Context) *plugin.Table {
 			{Name: "will_block_at", Description: "If the auth status is 'Will Block', this timestamp describes when the device will be blocked by a failing check.", Type: proto.ColumnType_TIMESTAMP},
 			{Name: "device_type", Description: "Platform type of the device, one of Mac, Windows, Linux, iOS or Android.", Type: proto.ColumnType_STRING},
 			// Other columns
-			{Name: "registered_owner_identifier", Description: "Canonical identifier for the registered owner of this device.", Type: proto.ColumnType_STRING},
+			{Name: "registered_owner_identifier", Description: "Canonical identifier for the registered owner of this device.", Type: proto.ColumnType_STRING, Transform: transform.FromField("RegisteredOwnerInfo.Identifier")},
 			{Name: "operating_system", Description: "Operating system installed on the device.", Type: proto.ColumnType_STRING},
 			{Name: "hardware_model", Description: "Specific hardware model of the device.", Type: proto.ColumnType_STRING},
 			{Name: "auth_state", Description: "Authorisation status of the device, one of Good, Notified, Will Block or Blocked.", Type: proto.ColumnType_STRING},
 			{Name: "product_image_url", Description: "URL of the device's product image.", Type: proto.ColumnType_STRING},
-			{Name: "auth_configuration_device_id", Description: "Canonical identifier for this device, empty if it is not registered", Type: proto.ColumnType_STRING},
-			{Name: "auth_configuration_authentication_mode", Description: "Who can be authenticated with this device, one of 'only_registered_owner', 'only_registered_owner_or_group_members' or 'anyone'.", Type: proto.ColumnType_STRING},
-			{Name: "auth_configuration_person_groups", Description: "Description of the groups allowed to authenticate with this device.", Type: proto.ColumnType_JSON},
+			{Name: "auth_configuration_device_id", Description: "Canonical identifier for this device, empty if it is not registered", Type: proto.ColumnType_STRING, Transform: transform.FromField("AuthConfiguration.DeviceId")},
+			{Name: "auth_configuration_authentication_mode", Description: "Who can be authenticated with this device, one of 'only_registered_owner', 'only_registered_owner_or_group_members' or 'anyone'.", Type: proto.ColumnType_STRING, Transform: transform.FromField("AuthConfiguration.AuthenticationMode")},
+			{Name: "auth_configuration_person_groups", Description: "Description of the groups allowed to authenticate with this device.", Type: proto.ColumnType_JSON, Transform: transform.FromField("AuthConfiguration.PersonGroups")},
 			{Name: "form_factor", Description: "Form factor of the device, one of Computer, Tablet or Phone.", Type: proto.ColumnType_STRING},
 			// Steampipe standard columns
 			{Name: "title", Description: "Display name for this resource.", Type: proto.ColumnType_STRING, Transform: transform.FromField("Name")},

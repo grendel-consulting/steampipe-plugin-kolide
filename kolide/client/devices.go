@@ -9,31 +9,33 @@ type DeviceListResponse struct {
 	Pagination Pagination `json:"pagination"`
 }
 type Device struct {
-	Id                  string          `json:"id"`
-	Name                string          `json:"name"`
-	RegisteredAt        time.Time       `json:"registered_at,omitempty"`
-	LastAuthenticatedAt time.Time       `json:"last_authenticated_at,omitempty"`
-	RegisteredOwnerInfo RegisteredOwner `json:"registered_owner_info,omitempty"`
-	OperatingSystem     string          `json:"operating_system"`
-	HardwareModel       string          `json:"hardware_model"`
-	Serial              string          `json:"serial,omitempty"`
-	HardwareUuid        string          `json:"hardware_uuid,omitempty"`
-	Note                string          `json:"note,omitempty"`
-	AuthState           string          `json:"auth_state"`
-	WillBlockAt         time.Time       `json:"will_block_at,omitempty"`
-	ProductImageUrl     string          `json:"product_image_url"`
-	DeviceType          string          `json:"device_type"`
-	FormFactor          string          `json:"form_factor"`
+	Id                  string            `json:"id"`
+	Name                string            `json:"name"`
+	RegisteredAt        time.Time         `json:"registered_at,omitempty"`
+	LastAuthenticatedAt time.Time         `json:"last_authenticated_at,omitempty"`
+	RegisteredOwnerInfo RegisteredOwner   `json:"registered_owner_info,omitempty"`
+	AuthConfiguration   AuthConfiguration `json:"auth_configuration,omitempty"`
+	OperatingSystem     string            `json:"operating_system"`
+	HardwareModel       string            `json:"hardware_model"`
+	Serial              string            `json:"serial,omitempty"`
+	HardwareUuid        string            `json:"hardware_uuid,omitempty"`
+	Note                string            `json:"note,omitempty"`
+	AuthState           string            `json:"auth_state"`
+	WillBlockAt         time.Time         `json:"will_block_at,omitempty"`
+	ProductImageUrl     string            `json:"product_image_url"`
+	DeviceType          string            `json:"device_type"`
+	FormFactor          string            `json:"form_factor"`
 }
 
 type RegisteredOwner struct {
-	Identifier string `json:"identifier,omitempty"`
+	// Whilst the Kolide API readme entry references this as a "string", the returned value encountered during implementation is an "int"
+	Identifier int32 `json:"identifier,omitempty"`
 }
 
 type AuthConfiguration struct {
-	DeviceId           string        `json:"id"`
-	AuthenticationMode string        `json:"authentication_mode"`
-	PersonGroups       []PersonGroup `json:"person_groups"`
+	DeviceId           string        `json:"id,omitempty"`
+	AuthenticationMode string        `json:"authentication_mode,omitempty"`
+	PersonGroups       []PersonGroup `json:"person_groups,omitempty"`
 }
 
 func (c *Client) GetDevices(cursor string, limit int32, searches ...Search) (interface{}, error) {
