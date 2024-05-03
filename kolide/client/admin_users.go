@@ -15,7 +15,7 @@ type AdminUser struct {
 	Email        string    `json:"email"`
 	CreatedAt    time.Time `json:"created_at"`
 	Access       string    `json:"access"`
-	Restrictions []string  `json:"restrictions"`
+	Restrictions []string  `json:"restrictions,omitempty"`
 }
 
 func (c *Client) GetAdminUsers(cursor string, limit int32, searches ...Search) (interface{}, error) {

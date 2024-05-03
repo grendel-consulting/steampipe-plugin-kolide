@@ -45,6 +45,7 @@ func tableKolidePersonOpenIssue(_ context.Context) *plugin.Table {
 				{Name: "resolved_at", Require: plugin.Optional, Operators: []string{"=", ">", "<"}},
 				{Name: "detected_at", Require: plugin.Optional, Operators: []string{"=", ">", "<"}},
 				{Name: "blocks_device_at", Require: plugin.Optional, Operators: []string{"=", ">", "<"}},
+				{Name: "device_id", Require: plugin.Optional, Operators: []string{"=", "~~"}},
 				{Name: "check_id", Require: plugin.Optional, Operators: []string{"=", "~~"}},
 				{Name: "last_rechecked_at", Require: plugin.Optional, Operators: []string{"=", "~~"}},
 			},

@@ -26,6 +26,4 @@ func (c *Client) GetPersonById(id string) (interface{}, error) {
 	return c.fetchResource("/people/", id, new(Person))
 }
 
-func (c *Client) GetDevicesByPerson(id string, cursor string, limit int32, searches ...Search) (interface{}, error) {
-	return c.fetchCollectionWithResourceId("/people/{resourceId}/registered_devices", id, cursor, limit, searches, new(DeviceListResponse))
-}
+// For /people/{personId}/registered_devices endpoint, see devices.go
