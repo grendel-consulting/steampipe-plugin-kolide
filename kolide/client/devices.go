@@ -27,7 +27,8 @@ type Device struct {
 }
 
 type RegisteredOwner struct {
-	Identifier string `json:"identifier,omitempty"`
+	// Whilst the Kolide API readme entry references this as a "string", the returned value encountered during implementation is an "int"
+	Identifier int32 `json:"identifier,omitempty"`
 }
 
 type AuthConfiguration struct {
