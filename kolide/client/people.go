@@ -27,5 +27,5 @@ func (c *Client) GetPersonById(id string) (interface{}, error) {
 }
 
 func (c *Client) GetDevicesByPerson(id string, cursor string, limit int32, searches ...Search) (interface{}, error) {
-	return c.fetchCollectionWithResourceId("/people/{resourceId}/registered_devices", id, cursor, limit, searches, new(IssueListResponse))
+	return c.fetchCollectionWithResourceId("/people/{resourceId}/registered_devices", id, cursor, limit, searches, new(DeviceListResponse))
 }
