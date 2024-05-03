@@ -1,3 +1,20 @@
+## v0.3.0 [2024-05-03]
+
+_What's new?_
+
+- New tables, not fully able to test these on Core and Max plans
+
+  - kolide_device_group
+  - kolide_device_group_device
+  - kolide_person
+  - kolide_person_open_issue
+  - kolide_person_registered_device
+  - kolide_person_group
+
+- Documentation coverage matrix, showing support and behaviour for Core, Max and K2 plans
+- Small fixes on missing columns and filters, better synthetic 'title' columns
+- Dependency updates
+
 ## v0.2.1 [2024-04-11]
 
 _What's new?_

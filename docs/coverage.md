@@ -21,19 +21,19 @@ using the interactive API documentation at https://kolideapi.readme.io/reference
 | GET    | /deprovisioned_people                                      | :white_check_mark: |    ? |    ? | [^3] |
 | GET    | /packages                                                  | :white_check_mark: |    ? |    ? |   Ok |
 | GET    | /packages/{id}                                             | :white_check_mark: |    ? |    ? |   Ok |
-| GET    | /people/{personId}/registered_devices                      | #23                |    ? |    ? | [^4] |
-| GET    | /people/{personId}/open_issues                             | #91                |    ? |    ? | [^4] |
+| GET    | /people/{personId}/registered_devices                      | :white_check_mark: |    ? |    ? | [^4] |
+| GET    | /people/{personId}/open_issues                             | :white_check_mark: |    ? |    ? | [^4] |
 | GET    | /people                                                    | :white_check_mark: |    ? |    ? | [^4] |
 | GET    | /people/{id}                                               | :white_check_mark: |    ? |    ? |   Ok |
-| GET    | /person_groups                                             | #25                |    ? |    ? | [^1] |
-| GET    | /person_groups/{id}                                        | #26                |    ? |    ? | [^1] |
+| GET    | /person_groups                                             | :white_check_mark: |    ? |    ? | [^1] |
+| GET    | /person_groups/{id}                                        | :white_check_mark: |    ? |    ? | [^1] |
 | GET    | /auth_logs                                                 | #27                |    ? |    ? |      |
 | GET    | /auth_logs/{id}                                            | #28                |    ? |    ? |      |
-| GET    | /device_groups/{deviceGroupId}/devices                     | #31                |    ? |    ? | [^1] |
+| GET    | /device_groups/{deviceGroupId}/devices                     | :white_check_mark: |    ? |    ? | [^1] |
 | POST   | /device_groups/{deviceGroupId}/memberships                 | :no_entry_sign:    |      |      |      |
 | DELETE | /device_groups/{deviceGroupId}/memberships/{id}            | :no_entry_sign:    |      |      |      |
-| GET    | /device_groups                                             | #29                |    ? |    ? | [^1] |
-| GET    | /device_groups/{id}                                        | #30                |    ? |    ? | [^1] |
+| GET    | /device_groups                                             | :white_check_mark: |    ? |    ? | [^1] |
+| GET    | /device_groups/{id}                                        | :white_check_mark: |    ? |    ? | [^1] |
 | GET    | /live_query_campaigns/{liveQueryCampaignId}/query_results  | #32                |    ? |    ? | [^1] |
 | GET    | /live_query_campaigns                                      | #33                |    ? |    ? | [^1] |
 | GET    | /live_query_campaigns/{id}                                 | #34                |    ? |    ? | [^1] |
