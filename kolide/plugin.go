@@ -30,6 +30,8 @@ func Plugin(ctx context.Context) *plugin.Plugin {
 			"kolide_check":                tableKolideCheck(ctx),
 			"kolide_deprovisioned_person": tableKolideDeprovisionedPerson(ctx),
 			"kolide_device":               tableKolideDevice(ctx),
+			"kolide_device_group":         tableKolideDeviceGroup(ctx),
+			"kolide_device_group_device":  tableKolideDeviceGroupDevice(ctx),
 			"kolide_device_open_issue":    tableKolideDeviceOpenIssue(ctx),
 			"kolide_issue":                tableKolideIssue(ctx),
 			"kolide_package":              tableKolidePackage(ctx),
