@@ -13,9 +13,9 @@ type Person struct {
 	Name                string    `json:"name"`
 	Email               string    `json:"email"`
 	CreatedAt           time.Time `json:"created_at"`
-	LastAuthenticatedAt time.Time `json:"last_authenticated_at"`
+	LastAuthenticatedAt time.Time `json:"last_authenticated_at,omitempty"`
 	HasRegisteredDevice bool      `json:"has_registered_device"`
-	Usernames           []int     `json:"usernames"`
+	Usernames           []int     `json:"usernames,omitempty"`
 }
 
 func (c *Client) GetPeople(cursor string, limit int32, searches ...Search) (interface{}, error) {
@@ -26,4 +26,5 @@ func (c *Client) GetPersonById(id string) (interface{}, error) {
 	return c.fetchResource("/people/", id, new(Person))
 }
 
+// For /people/{personId}/open_issues endpoint, see issues.go
 // For /people/{personId}/registered_devices endpoint, see devices.go

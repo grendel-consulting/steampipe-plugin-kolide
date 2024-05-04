@@ -44,7 +44,7 @@ func listPersonGroups(ctx context.Context, d *plugin.QueryData, h *plugin.Hydrat
 		return client.GetPersonGroups(cursor, limit, searches...)
 	}
 
-	return listAnything(ctx, d, h, "kolide_person_group.listPersonGroups", visitor, "PersonGroup")
+	return listAnything(ctx, d, h, "kolide_person_group.listPersonGroups", visitor, "PersonGroups")
 }
 
 //// GET FUNCTION

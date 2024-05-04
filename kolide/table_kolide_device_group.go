@@ -49,7 +49,7 @@ func listDeviceGroups(ctx context.Context, d *plugin.QueryData, h *plugin.Hydrat
 		return client.GetDeviceGroups(cursor, limit, searches...)
 	}
 
-	return listAnything(ctx, d, h, "kolide_device_group.listDeviceGroups", visitor, "DeviceGroup")
+	return listAnything(ctx, d, h, "kolide_device_group.listDeviceGroups", visitor, "DeviceGroups")
 }
 
 //// GET FUNCTION
