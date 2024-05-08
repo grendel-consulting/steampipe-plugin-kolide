@@ -17,7 +17,7 @@ func tableKolidePersonOpenIssue(_ context.Context) *plugin.Table {
 		Description: "Unresolved and non-exempt issues created when a device owned by a specific person fails a check; some checks, when they fail, will produce multiple Issues, each with a unique primary_key_value.",
 		Columns: []*plugin.Column{
 			// Filterable "top" columns
-			{Name: "id", Description: "Canonical identifier for this issue.", Type: proto.ColumnType_STRING},
+			{Name: "person_id", Description: "Canonical identifier for the person whose device this issue relates to.", Type: proto.ColumnType_STRING},
 			{Name: "issue_key", Description: "Primary key that distinguishes one issue from another in the context of a single check; only applicable for checks that can produce multiple issues.", Type: proto.ColumnType_STRING},
 			{Name: "issue_value", Description: "Primary identifying value that distinguishes one issue from another in the context of a single check; only applicable for checks that can produce multiple issues.", Type: proto.ColumnType_STRING},
 			{Name: "title", Description: "Descriptive title for this issue.", Type: proto.ColumnType_STRING},
@@ -25,11 +25,11 @@ func tableKolidePersonOpenIssue(_ context.Context) *plugin.Table {
 			{Name: "resolved_at", Description: "When this issue was resolved, or null if still open.", Type: proto.ColumnType_TIMESTAMP},
 			{Name: "detected_at", Description: "When this issue was initially detected.", Type: proto.ColumnType_TIMESTAMP},
 			{Name: "blocks_device_at", Description: "When the device will be blocked from authenticating by this failing issue, or null if the check is not configured to block authentication.", Type: proto.ColumnType_TIMESTAMP},
-			{Name: "person_id", Description: "Canonical identifier for the person whose device this issue relates to.", Type: proto.ColumnType_STRING, Transform: transform.FromQual("person_id")},
 			{Name: "device_id", Description: "Canonical identifier for the device this issue relates to.", Type: proto.ColumnType_STRING, Transform: transform.FromField("DeviceInformation.Identifier")},
 			{Name: "check_id", Description: "Canonical identifier for the check this issue relates to.", Type: proto.ColumnType_STRING, Transform: transform.FromField("CheckInformation.Identifier")},
 			{Name: "last_rechecked_at", Description: "When this issue was last rechecked.", Type: proto.ColumnType_TIMESTAMP},
 			// Other columns
+			{Name: "id", Description: "Canonical identifier for this issue.", Type: proto.ColumnType_STRING},
 			{Name: "value", Description: "Relevant data that describes why the device failed the check.", Type: proto.ColumnType_JSON},
 			// Steampipe standard columns
 			// - We include "title" above as an expected Kolide API column, and it is sufficient

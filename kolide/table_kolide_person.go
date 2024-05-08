@@ -48,10 +48,10 @@ func tableKolidePerson(_ context.Context) *plugin.Table {
 
 func listPeople(ctx context.Context, d *plugin.QueryData, h *plugin.HydrateData) (interface{}, error) {
 	var visitor ListPredicate = func(client *kolide.Client, cursor string, limit int32, searches ...kolide.Search) (interface{}, error) {
-		return client.GetPackages(cursor, limit, searches...)
+		return client.GetPeople(cursor, limit, searches...)
 	}
 
-	return listAnything(ctx, d, h, "kolide_person.listPeople", visitor, "Person")
+	return listAnything(ctx, d, h, "kolide_person.listPeople", visitor, "People")
 }
 
 //// GET FUNCTION
