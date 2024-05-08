@@ -17,7 +17,7 @@ func tableKolidePersonOpenIssue(_ context.Context) *plugin.Table {
 		Description: "Unresolved and non-exempt issues created when a device owned by a specific person fails a check; some checks, when they fail, will produce multiple Issues, each with a unique primary_key_value.",
 		Columns: []*plugin.Column{
 			// Filterable "top" columns
-			{Name: "person_id", Description: "Canonical identifier for the person whose device this issue relates to.", Type: proto.ColumnType_STRING},
+			{Name: "person_id", Description: "Canonical identifier for the person whose device this issue relates to.", Type: proto.ColumnType_STRING, Transform: transform.FromQual("person_id")},
 			{Name: "issue_key", Description: "Primary key that distinguishes one issue from another in the context of a single check; only applicable for checks that can produce multiple issues.", Type: proto.ColumnType_STRING},
 			{Name: "issue_value", Description: "Primary identifying value that distinguishes one issue from another in the context of a single check; only applicable for checks that can produce multiple issues.", Type: proto.ColumnType_STRING},
 			{Name: "title", Description: "Descriptive title for this issue.", Type: proto.ColumnType_STRING},
@@ -61,5 +61,11 @@ func listIssuesByPerson(ctx context.Context, d *plugin.QueryData, h *plugin.Hydr
 		return client.GetIssuesByPerson(id, cursor, limit, searches...)
 	}
 
-	return listAnythingById(ctx, d, h, "kolide_person_open_issue.listIssuesByPerson", "person_id", visitor, "Issues")
+	// Because the Kolide K2 API uses 'person_id' as a path parameter but does not, in this endpoint, return the value
+	// or support it as a searchable field AND because Steampipe requires it be specified as a KeyColumn in order to
+	// require it to be present in the SQL WHERE clause, we need to ensure it is removed from the search terms to be
+	// serialised by the Kolide client; otherwise it returns a 'HTTP 422 Unprocessable Entity'
+	var exclude = "person_id"
+
+	return listAnythingById(ctx, d, h, "kolide_person_open_issue.listIssuesByPerson", "person_id", visitor, "Issues", exclude)
 }
