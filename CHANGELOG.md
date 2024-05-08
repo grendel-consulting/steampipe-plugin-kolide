@@ -1,3 +1,12 @@
+## v0.3.1 [2024-05-08]
+
+_What's new?_
+
+- End-to-end test harness covering basic info queries on all implemented tables
+- Bug fixes on several tables, potentially not fully resolving the issues with `kolide_person*` tables
+- Documentation clarifications on the coverag matrix, reflecting these
+- Dependency updates
+
 ## v0.3.0 [2024-05-03]
 
 _What's new?_

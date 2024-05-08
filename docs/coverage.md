@@ -8,23 +8,23 @@ using the interactive API documentation at https://kolideapi.readme.io/reference
 |--------|------------------------------------------------------------|--------------------|------|------|------|
 | GET    | /audit_logs                                                | :white_check_mark: |    ? |    ? |   Ok |
 | GET    | /audit_logs/{id}                                           | :white_check_mark: |    ? |    ? |   Ok |
-| GET    | /devices/{deviceId}/open_issues                            | :white_check_mark: |    ? |    ? | [^2] |
+| GET    | /devices/{deviceId}/open_issues                            | :question:         |    ? |    ? | [^2] |
 | PATCH  | /devices/{deviceId}/authentication_mode                    | :no_entry_sign:    |      |      |      |
 | PUT    | /devices/{deviceId}/authentication_mode                    | :no_entry_sign:    |      |      |      |
 | DELETE | /devices/{deviceId}/registration                           | :no_entry_sign:    |      |      |      |
 | POST   | /devices/{deviceId}/check_refreshes                        | :no_entry_sign:    |      |      |      |
-| GET    | /devices                                                   | :white_check_mark: |    ? |    ? | [^2] |
-| GET    | /devices/{id}                                              | :white_check_mark: |    ? |    ? | [^2] |
+| GET    | /devices                                                   | :question:         |    ? |    ? | [^2] |
+| GET    | /devices/{id}                                              | :question:         |    ? |    ? | [^2] |
 | DELETE | /devices/{id}                                              | :no_entry_sign:    |      |      |      |
 | GET    | /issues                                                    | :white_check_mark: |    ? |    ? |   Ok |
 | GET    | /issues/{id}                                               | :white_check_mark: |    ? |    ? |   Ok |
-| GET    | /deprovisioned_people                                      | :white_check_mark: |    ? |    ? | [^3] |
+| GET    | /deprovisioned_people                                      | :question:         |    ? |    ? | [^3] |
 | GET    | /packages                                                  | :white_check_mark: |    ? |    ? |   Ok |
 | GET    | /packages/{id}                                             | :white_check_mark: |    ? |    ? |   Ok |
-| GET    | /people/{personId}/registered_devices                      | :white_check_mark: |    ? |    ? | [^4] |
-| GET    | /people/{personId}/open_issues                             | :white_check_mark: |    ? |    ? | [^4] |
-| GET    | /people                                                    | :white_check_mark: |    ? |    ? | [^4] |
-| GET    | /people/{id}                                               | :white_check_mark: |    ? |    ? |   Ok |
+| GET    | /people/{personId}/registered_devices                      | :question:         |    ? |    ? | [^4] |
+| GET    | /people/{personId}/open_issues                             | :exclamation:      |    ? |    ? | [^4] |
+| GET    | /people                                                    | :question:         |    ? |    ? | [^4] |
+| GET    | /people/{id}                                               | :question:         |    ? |    ? |   Ok |
 | GET    | /person_groups                                             | :white_check_mark: |    ? |    ? | [^1] |
 | GET    | /person_groups/{id}                                        | :white_check_mark: |    ? |    ? | [^1] |
 | GET    | /auth_logs                                                 | #27                |    ? |    ? |      |
