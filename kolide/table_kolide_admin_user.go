@@ -2,7 +2,6 @@ package kolide
 
 import (
 	"context"
-	"fmt"
 
 	kolide "github.com/grendel-consulting/steampipe-plugin-kolide/kolide/client"
 	"github.com/turbot/steampipe-plugin-sdk/v5/grpc/proto"
@@ -27,7 +26,7 @@ func tableKolideAdminUser(_ context.Context) *plugin.Table {
 			{Name: "access", Description: "Access level granted to this admin user, one of full, limited or billing.", Type: proto.ColumnType_STRING},
 			{Name: "restrictions", Description: "Feature restrictions applied to this user; this list will be empty unless the user has an access level of 'limited'.", Type: proto.ColumnType_JSON},
 			// Steampipe standard columns
-			{Name: "title", Description: "Display name for this admin user.", Type: proto.ColumnType_STRING, Transform: transform.From(getFullName)},
+			{Name: "title", Description: "Display name for this admin user.", Type: proto.ColumnType_STRING, Transform: transform.FromField("FirstName")},
 		},
 		List: &plugin.ListConfig{
 			KeyColumns: []*plugin.KeyColumn{
@@ -64,14 +63,4 @@ func getAdminUser(ctx context.Context, d *plugin.QueryData, h *plugin.HydrateDat
 	}
 
 	return getAnything(ctx, d, h, "kolide_admin_user.getAdminUser", "id", visitor)
-}
-
-//// TRANSFORM FUNCTIONS
-
-func getFullName(ctx context.Context, d *transform.TransformData) (interface{}, error) {
-	user := d.HydrateItem.(kolide.AdminUser)
-
-	full_name := fmt.Sprintf("%s %s", user.FirstName, user.LastName)
-
-	return full_name, nil
 }

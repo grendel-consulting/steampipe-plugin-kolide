@@ -13,3 +13,6 @@ install:
 
 reconfigure:
 	cp config/kolide.spc $(STEAMPIPE_INSTALL_DIR)/config/kolide.spc
+
+end-to-end:
+	bats test/end-to-end/*.bats

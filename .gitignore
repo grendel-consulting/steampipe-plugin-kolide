@@ -10,8 +10,9 @@ dist/
 *.so
 *.dylib
 
-# Test binary, built with `go test -c`
+# Test binary, built with `go test -c`, and test outputs
 *.test
+test/end-to-end/_output
 
 # Finally, local detritus
 .DS_Store
