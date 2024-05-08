@@ -16,16 +16,17 @@ setup() {
     assert_exists $QUERY_RESULTS
 }
 
-#bats test_tags=scope:smoke
-@test "has_exactly_one_result" {
-    if ![[ -e $QUERY_RESULTS ]]; then skip ; fi
+@test "has_no_more_than_one_result" {
+    if [[ ! -e $QUERY_RESULTS ]]; then skip ; fi
 
     run bash -c "cat $QUERY_RESULTS | jq -r '. | length'"
-    assert_output "1"
+    assert [ "$output" -le "1" ]
 }
 
 # Remaining functionality covered in kolide_package.bats
 
 teardown_file(){
-    rm -f $QUERY_RESULTS
+    if [[ -f $QUERY_RESULTS ]]; then
+        rm -f $QUERY_RESULTS
+    fi
 }

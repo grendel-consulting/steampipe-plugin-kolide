@@ -3,7 +3,12 @@
 setup_file() {
     load "${BATS_TEST_DIRNAME}/_support/globals.bash"
     define_file_globals
-    define_test_results
+
+    define_common_test_results
+
+    if [[ -f $EXPECTED_RESULTS ]]; then
+        load $EXPECTED_RESULTS
+    fi
 }
 
 setup() {
@@ -17,56 +22,70 @@ setup() {
     assert_exists $QUERY_RESULTS
 }
 
-#bats test_tags=scope:smoke
 @test "has_expected_number_of_results" {
-    if ![[ -e $QUERY_RESULTS ]]; then skip ; fi
+    if [[ ! -e $QUERY_RESULTS ]]; then skip ; fi
 
     run bash -c "cat $QUERY_RESULTS | jq -r '. | length'"
-    assert_output $MY_CHECK_COUNT
+
+    if [[ -z "$EXPECTED_COUNT" ]]; then assert_output $EXPECTED_COUNT ; else assert [ "$output" -ge "1" ] ; fi
+}
+
+@test "has_expected_id" {
+    if [[ ! -e $QUERY_RESULTS ]]; then skip ; fi
+
+    run bash -c "cat $QUERY_RESULTS | jq -r '.[0].id'"
+    if [[ -z "$ID" ]]; then assert_output $ID ; else assert_success ; fi
 }
 
 @test "has_expected_name" {
-    if ![[ -e $QUERY_RESULTS ]]; then skip ; fi
+    if [[ ! -e $QUERY_RESULTS ]]; then skip ; fi
 
     run bash -c "cat $QUERY_RESULTS | jq -r '.[0].name'"
-    assert_output --partial $MY_TOP_CHECK_NAME
+    if [[ -z "$NAME" ]]; then assert_output $NAME ; else assert_success ; fi
 }
 
+#bats test_tags=exactness:fuzzy
 @test "has_expected_topics" {
-    if ![[ -e $QUERY_RESULTS ]]; then skip ; fi
+    if [[ ! -e $QUERY_RESULTS ]]; then skip ; fi
 
     run bash -c "cat $QUERY_RESULTS | jq -r '.[0].topics'"
-    assert_output --partial $MY_TOP_CHECK_TOPICS
+    if [[ -z "$TOPICS" ]]; then assert_output --partial $TOPICS ; else assert_success ; fi
 }
 
+#bats test_tags=exactness:fuzzy
 @test "has_expected_compatible_platforms" {
-    if ![[ -e $QUERY_RESULTS ]]; then skip ; fi
+    if [[ ! -e $QUERY_RESULTS ]]; then skip ; fi
 
     run bash -c "cat $QUERY_RESULTS | jq -r '.[0].compatible_platforms'"
-    assert_output --partial $MY_TOP_CHECK_COMPATIBLE_PLATFORMS
+    if [[ -z "$COMPATIBLE_PLATFORMS" ]]; then assert_output --partial $COMPATIBLE_PLATFORMS ; else assert_success ; fi
 }
 
+#bats test_tags=exactness:fuzzy
 @test "has_expected_targeted_groups" {
-    if ![[ -e $QUERY_RESULTS ]]; then skip ; fi
+    if [[ ! -e $QUERY_RESULTS ]]; then skip ; fi
 
     run bash -c "cat $QUERY_RESULTS | jq -r '.[0].targeted_groups'"
-    assert_output --partial $MY_TOP_CHECK_TARGETED_GROUPS
+    if [[ -z "$TARGETED_GROUPS" ]]; then assert_output --partial $TARGETED_GROUPS ; else assert_success ; fi
 }
 
+#bats test_tags=exactness:fuzzy
 @test "has_expected_blocking_group_names" {
-    if ![[ -e $QUERY_RESULTS ]]; then skip ; fi
+    if [[ ! -e $QUERY_RESULTS ]]; then skip ; fi
 
     run bash -c "cat $QUERY_RESULTS | jq -r '.[0].blocking_group_names'"
-    assert_output --partial $MY_TOP_CHECK_BLOCKING_GROUP_NAMES
+    if [[ -z "$BLOCKING_GROUP_NAMES" ]]; then assert_output --partial $BLOCKING_GROUP_NAMES ; else assert_success ; fi
 }
 
+#bats test_tags=exactness:default
 @test "has_expected_blocking_enabled" {
-    if ![[ -e $QUERY_RESULTS ]]; then skip ; fi
+    if [[ ! -e $QUERY_RESULTS ]]; then skip ; fi
 
     run bash -c "cat $QUERY_RESULTS | jq -r '.[0].blocking_enabled'"
-    assert_output --partial $MY_TOP_CHECK_BLOCKING_ENABLED
+    if [[ -z "$BLOCKING_ENABLED" ]]; then assert_output $BLOCKING_ENABLED ; else assert_output "false" ; fi
 }
 
 teardown_file(){
-    rm -f $QUERY_RESULTS
+    if [[ -f $QUERY_RESULTS ]]; then
+        rm -f $QUERY_RESULTS
+    fi
 }

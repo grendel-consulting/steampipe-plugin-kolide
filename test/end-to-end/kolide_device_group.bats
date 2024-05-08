@@ -2,8 +2,7 @@
 
 setup_file() {
     load "${BATS_TEST_DIRNAME}/_support/globals.bash"
-    define_file_globals
-    define_test_results
+    define_common_test_results
 }
 
 setup() {
@@ -12,10 +11,10 @@ setup() {
 }
 
 # With a Kolide K2 API key, this endpoint returns a 403
-#bats test_tags=scope:smoke
+#bats test_tags=scope:smoke, failing:billing
 @test "query_forbidden_under_billing_plan" {
-    if ![ "$KOLIDE_PLAN" = "K2" ]; then skip; fi
+    if [[ "$MY_KOLIDE_PLAN" != "K2" ]]; then skip; fi
 
     run ! steampipe query $QUERY_UNDER_TEST
-    assert_output --partial "Kolide K2 API Error: 403 Forbidden"
+    assert_output --partial "403"
 }

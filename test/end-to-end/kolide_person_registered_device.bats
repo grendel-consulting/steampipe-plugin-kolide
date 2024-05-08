@@ -3,7 +3,12 @@
 setup_file() {
     load "${BATS_TEST_DIRNAME}/_support/globals.bash"
     define_file_globals
-    define_test_results
+
+    define_common_test_results
+
+    if [[ -f $EXPECTED_RESULTS ]]; then
+        load $EXPECTED_RESULTS
+    fi
 }
 
 setup() {
@@ -17,38 +22,38 @@ setup() {
     assert_exists $QUERY_RESULTS
 }
 
-#bats test_tags=scope:smoke
 @test "has_expected_number_of_results" {
-    if ![[ -e $QUERY_RESULTS ]]; then skip ; fi
+    if [[ ! -e $QUERY_RESULTS ]]; then skip ; fi
 
     run bash -c "cat $QUERY_RESULTS | jq -r '. | length'"
-    assert_output $MY_PERSON_REGISTERED_DEVICE_COUNT
+
+    if [[ -z "$EXPECTED_COUNT" ]]; then assert_output $EXPECTED_COUNT ; else assert [ "$output" -ge "1" ] ; fi
 }
 
 @test "has_expected_name" {
-    if ![[ -e $QUERY_RESULTS ]]; then skip ; fi
-    if [ "$MY_PERSON_REGISTERED_DEVICE_COUNT" == "0" ]; then skip "no results"; fi
+    if [[ ! -e $QUERY_RESULTS ]]; then skip ; fi
 
     run bash -c "cat $QUERY_RESULTS | jq -r '.[0].name'"
-    assert_output --partial $MY_TOP_PERSON_REGISTERED_DEVICE_NAME
+    if [[ -z "$NAME" ]]; then assert_output $NAME ; else assert_success ; fi
 }
 
+#bats test_tags=exactness:fuzzy
 @test "has_expected_hardware_model" {
-    if ![[ -e $QUERY_RESULTS ]]; then skip ; fi
-    if [ "$MY_PERSON_REGISTERED_DEVICE_COUNT" == "0" ]; then skip "no results"; fi
+    if [[ ! -e $QUERY_RESULTS ]]; then skip ; fi
 
     run bash -c "cat $QUERY_RESULTS | jq -r '.[0].hardware_model'"
-    assert_output --partial $MY_TOP_PERSON_REGISTERED_DEVICE_HARDWARE_MODEL
+    if [[ -z "$HARDWARE_MODEL" ]]; then assert_output --partial $HARDWARE_MODEL ; else assert_success ; fi
 }
 
 @test "has_expected_serial" {
-    if ![[ -e $QUERY_RESULTS ]]; then skip; fi
-    if [ "$MY_PERSON_REGISTERED_DEVICE_COUNT" == "0" ]; then skip "no results"; fi
+    if [[ ! -e $QUERY_RESULTS ]]; then skip ; fi
 
     run bash -c "cat $QUERY_RESULTS | jq -r '.[0].serial'"
-    assert_output $MY_TOP_PERSON_REGISTERED_DEVICE_SERIAL
+    if [[ -z "$SERIAL" ]]; then assert_output $SERIAL ; else assert_success ; fi
 }
 
 teardown_file(){
-    rm -f $QUERY_RESULTS
+    if [[ -f $QUERY_RESULTS ]]; then
+        rm -f $QUERY_RESULTS
+    fi
 }

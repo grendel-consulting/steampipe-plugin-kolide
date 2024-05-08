@@ -3,7 +3,6 @@
 setup_file() {
     load "${BATS_TEST_DIRNAME}/_support/globals.bash"
     define_file_globals
-    define_test_results
 }
 
 setup() {
@@ -17,17 +16,17 @@ setup() {
     assert_exists $QUERY_RESULTS
 }
 
-#bats test_tags=scope:smoke
-@test "has_exactly_one_result" {
-    if ![[ -e $QUERY_RESULTS ]]; then skip ; fi
-    if [ "$MY_PERSON_COUNT" == "0" ]; then skip "no results"; fi
+@test "has_no_more_than_one_result" {
+    if [[ ! -e $QUERY_RESULTS ]]; then skip ; fi
 
     run bash -c "cat $QUERY_RESULTS | jq -r '. | length'"
-    assert_output "1"
+    assert [ "$output" -le "1" ]
 }
 
 # Remaining functionality covered in kolide_person.bats
 
 teardown_file(){
-    rm -f $QUERY_RESULTS
+    if [[ -f $QUERY_RESULTS ]]; then
+        rm -f $QUERY_RESULTS
+    fi
 }

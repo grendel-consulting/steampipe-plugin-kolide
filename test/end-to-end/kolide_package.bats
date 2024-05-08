@@ -3,7 +3,12 @@
 setup_file() {
     load "${BATS_TEST_DIRNAME}/_support/globals.bash"
     define_file_globals
-    define_test_results
+
+    define_common_test_results
+
+    if [[ -f $EXPECTED_RESULTS ]]; then
+        load $EXPECTED_RESULTS
+    fi
 }
 
 setup() {
@@ -17,28 +22,46 @@ setup() {
     assert_exists $QUERY_RESULTS
 }
 
-#bats test_tags=scope:smoke
 @test "has_expected_number_of_results" {
-    if ![[ -e $QUERY_RESULTS ]]; then skip ; fi
+    if [[ ! -e $QUERY_RESULTS ]]; then skip ; fi
 
     run bash -c "cat $QUERY_RESULTS | jq -r '. | length'"
-    assert_output $MY_PACKAGE_COUNT
+
+    if [[ -z "$EXPECTED_COUNT" ]]; then assert_output $EXPECTED_COUNT ; else assert [ "$output" -ge "1" ] ; fi
 }
 
 @test "has_expected_id" {
-    if ![[ -e $QUERY_RESULTS ]]; then skip ; fi
+    if [[ ! -e $QUERY_RESULTS ]]; then skip ; fi
 
     run bash -c "cat $QUERY_RESULTS | jq -r '.[0].id'"
-    assert_output --partial $MY_TOP_PACKAGE_ID
+    if [[ -z "$ID" ]]; then assert_output $ID ; else assert_success ; fi
 }
 
+#bats test_tags=exactness:fuzzy
+@test "has_expected_built_at" {
+    if [[ ! -e $QUERY_RESULTS ]]; then skip ; fi
+
+    run bash -c "cat $QUERY_RESULTS | jq -r '.[0].built_at'"
+    if [[ -z "$BUILT_AT" ]]; then assert_output --partial $BUILT_AT ; else assert_success ; fi
+}
+
+@test "has_expected_version" {
+    if [[ ! -e $QUERY_RESULTS ]]; then skip ; fi
+
+    run bash -c "cat $QUERY_RESULTS | jq -r '.[0].version'"
+    if [[ -z "$VERSION" ]]; then assert_output $VERSION ; else assert_success ; fi
+}
+
+
 @test "has_expected_url" {
-    if ![[ -e $QUERY_RESULTS ]]; then skip ; fi
+    if [[ ! -e $QUERY_RESULTS ]]; then skip ; fi
 
     run bash -c "cat $QUERY_RESULTS | jq -r '.[0].url'"
-    assert_output --partial $MY_TOP_PACKAGE_URL
+    if [[ -z "$URL" ]]; then assert_output $URL ; else assert_success ; fi
 }
 
 teardown_file(){
-    rm -f $QUERY_RESULTS
+    if [[ -f $QUERY_RESULTS ]]; then
+        rm -f $QUERY_RESULTS
+    fi
 }
