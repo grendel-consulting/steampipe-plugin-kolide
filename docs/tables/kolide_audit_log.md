@@ -1,4 +1,4 @@
-# Table: kolide_audit_logs
+# Table: kolide_audit_log
 
 Lists the tracked events occurring in the Kolide web console.
 
@@ -12,7 +12,7 @@ select
   description,
   actor_name
 from
-  kolide_audit_logs;
+  kolide_audit_log;
 ```
 
 ### List all events from the past day
