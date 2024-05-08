@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"os"
 	"reflect"
+	"slices"
 
 	kolide "github.com/grendel-consulting/steampipe-plugin-kolide/kolide/client"
 	"github.com/turbot/steampipe-plugin-sdk/v5/plugin"
@@ -129,14 +130,15 @@ func getAnything(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData
 
 }
 
-func listAnythingById(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData, callee string, id string, visitor ListByIdPredicate, target string) (interface{}, error) {
+func listAnythingById(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData, callee string, id string, visitor ListByIdPredicate, target string, unfriendlies ...string) (interface{}, error) {
 	// Fail early if unique identifier is not present
 	uid := d.EqualsQualString(id)
+
 	if uid == "" {
 		return nil, nil
 	}
 	// Create a slice to hold search queries
-	searches, err := query(ctx, d)
+	searches, err := query(ctx, d, unfriendlies...)
 	if err != nil {
 		plugin.Logger(ctx).Error(callee, "qualifier_operator_error", err)
 		return nil, err
@@ -196,7 +198,7 @@ func listAnythingById(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydrat
 	return nil, nil
 }
 
-func query(_ context.Context, d *plugin.QueryData) ([]kolide.Search, error) {
+func query(_ context.Context, d *plugin.QueryData, unfriendlies ...string) ([]kolide.Search, error) {
 	// Create a slice to hold search queries
 	searches := make([]kolide.Search, 0)
 
@@ -207,7 +209,12 @@ func query(_ context.Context, d *plugin.QueryData) ([]kolide.Search, error) {
 			if err != nil {
 				return nil, err
 			}
-			searches = append(searches, search)
+
+			// Exclude this item if it is not a searchable field
+			if !slices.Contains(unfriendlies, item.Name) {
+				searches = append(searches, search)
+			}
+
 		}
 	}
 
