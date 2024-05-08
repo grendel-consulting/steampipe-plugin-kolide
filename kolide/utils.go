@@ -12,7 +12,7 @@ import (
 	quals "github.com/turbot/steampipe-plugin-sdk/v5/plugin/quals"
 )
 
-func connect(ctx context.Context, d *plugin.QueryData) (*kolide.Client, error) {
+func connect(_ context.Context, d *plugin.QueryData) (*kolide.Client, error) {
 	cacheKey := "kolide"
 	if cachedData, ok := d.ConnectionManager.Cache.Get(cacheKey); ok {
 		return cachedData.(*kolide.Client), nil
@@ -43,7 +43,7 @@ type ListPredicate func(client *kolide.Client, cursor string, limit int32, searc
 type GetPredicate func(client *kolide.Client, id string) (interface{}, error)
 type ListByIdPredicate func(client *kolide.Client, id string, cursor string, limit int32, searches ...kolide.Search) (interface{}, error)
 
-func listAnything(ctx context.Context, d *plugin.QueryData, h *plugin.HydrateData, callee string, visitor ListPredicate, target string) (interface{}, error) {
+func listAnything(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData, callee string, visitor ListPredicate, target string) (interface{}, error) {
 	// Create a slice to hold search queries
 	searches, err := query(ctx, d)
 	if err != nil {
@@ -105,7 +105,7 @@ func listAnything(ctx context.Context, d *plugin.QueryData, h *plugin.HydrateDat
 	return nil, nil
 }
 
-func getAnything(ctx context.Context, d *plugin.QueryData, h *plugin.HydrateData, callee string, id string, visitor GetPredicate) (interface{}, error) {
+func getAnything(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData, callee string, id string, visitor GetPredicate) (interface{}, error) {
 	// Fail early if unique identifier is not present
 	uid := d.EqualsQualString(id)
 	if uid == "" {
@@ -129,7 +129,7 @@ func getAnything(ctx context.Context, d *plugin.QueryData, h *plugin.HydrateData
 
 }
 
-func listAnythingById(ctx context.Context, d *plugin.QueryData, h *plugin.HydrateData, callee string, id string, visitor ListByIdPredicate, target string) (interface{}, error) {
+func listAnythingById(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData, callee string, id string, visitor ListByIdPredicate, target string) (interface{}, error) {
 	// Fail early if unique identifier is not present
 	uid := d.EqualsQualString(id)
 	if uid == "" {
@@ -196,7 +196,7 @@ func listAnythingById(ctx context.Context, d *plugin.QueryData, h *plugin.Hydrat
 	return nil, nil
 }
 
-func query(ctx context.Context, d *plugin.QueryData) ([]kolide.Search, error) {
+func query(_ context.Context, d *plugin.QueryData) ([]kolide.Search, error) {
 	// Create a slice to hold search queries
 	searches := make([]kolide.Search, 0)
 
