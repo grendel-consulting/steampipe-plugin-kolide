@@ -23,52 +23,38 @@ setup() {
 }
 
 @test "has_expected_number_of_results" {
-    if [[ ! -e $QUERY_RESULTS ]]; then skip ; fi
-
-    run bash -c "cat $QUERY_RESULTS | jq -r '. | length'"
+    run bash -c "cat $QUERY_RESULTS | jq -r '.rows | length'"
 
     if [[ -z "$EXPECTED_COUNT" ]]; then assert_output $EXPECTED_COUNT ; else assert [ "$output" -ge "1" ] ; fi
 }
 
 @test "has_expected_first_name" {
-    if [[ ! -e $QUERY_RESULTS ]]; then skip ; fi
-
-    run bash -c "cat $QUERY_RESULTS | jq -r '.[0].first_name'"
+    run bash -c "cat $QUERY_RESULTS | jq -r '.rows.[0].first_name'"
     if [[ -z "$FIRST_NAME" ]]; then assert_output $FIRST_NAME ; else assert_success ; fi
 }
 
 @test "has_expected_last_name" {
-    if [[ ! -e $QUERY_RESULTS ]]; then skip ; fi
-
-    run bash -c "cat $QUERY_RESULTS | jq -r '.[0].last_name'"
+    run bash -c "cat $QUERY_RESULTS | jq -r '.rows.[0].last_name'"
     if [[ -z "$LAST_NAME" ]]; then assert_output $LAST_NAME ; else assert_success ; fi
 }
 
 #bats test_tags=exactness:fallback
 @test "has_expected_email" {
-    if [[ ! -e $QUERY_RESULTS ]]; then skip ; fi
-
-    run bash -c "cat $QUERY_RESULTS | jq -r '.[0].email'"
+    run bash -c "cat $QUERY_RESULTS | jq -r '.rows.[0].email'"
     if [[ -z "$EMAIL" ]]; then assert_output $EMAIL ; else assert_output --partial $MY_DEFAULT_EMAIL_DOMAIN ; fi
 }
 
 #bats test_tags=exactness:default
 @test "has_expected_access" {
-    if [[ ! -e $QUERY_RESULTS ]]; then skip ; fi
-
-    run bash -c "cat $QUERY_RESULTS | jq -r '.[0].access'"
+    run bash -c "cat $QUERY_RESULTS | jq -r '.rows.[0].access'"
     if [[ -z "$ACCESS" ]]; then assert_output $ACCESS ; else assert_output "full" ; fi
 }
 
 #bats test_tags=exactness:fuzzy
 @test "has_expected_created_at" {
-    if [[ ! -e $QUERY_RESULTS ]]; then skip ; fi
-
-    run bash -c "cat $QUERY_RESULTS | jq -r '.[0].created_at'"
+    run bash -c "cat $QUERY_RESULTS | jq -r '.rows.[0].created_at'"
     if [[ -z "$CREATED_AT" ]]; then assert_output --partial $CREATED_AT ; else assert_success ; fi
 }
-
-
 
 teardown_file(){
     if [[ -f $QUERY_RESULTS ]]; then

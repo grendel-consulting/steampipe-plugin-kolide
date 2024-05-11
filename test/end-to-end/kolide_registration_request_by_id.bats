@@ -1,4 +1,4 @@
-# bats file_tags=table:kolide_device, output:device
+# bats file_tags=table:kolide_registration_request, output:registration_request
 
 setup_file() {
     load "${BATS_TEST_DIRNAME}/_support/globals.bash"
@@ -21,7 +21,7 @@ setup() {
     assert [ "$output" -le "1" ]
 }
 
-# Remaining functionality covered in kolide_device.bats
+# Remaining functionality covered in kolide_registration_request.bats
 
 teardown_file(){
     if [[ -f $QUERY_RESULTS ]]; then

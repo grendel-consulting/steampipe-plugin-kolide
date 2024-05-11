@@ -43,8 +43,8 @@ using the interactive API documentation at https://kolideapi.readme.io/reference
 | GET    | /exemption_requests/{id}                                   | #37                |    ? |    ? |   Ok |
 | PATCH  | /exemption_requests/{id}                                   | :no_entry_sign:    |      |      |      |
 | PUT    | /exemption_requests/{id}                                   | :no_entry_sign:    |      |      |      |
-| GET    | /registration_requests                                     | #38                |    ? |    ? |   Ok |
-| GET    | /registration_requests/{id}                                | #39                |    ? |    ? |   Ok |
+| GET    | /registration_requests                                     | :question:         |    ? |    ? |   Ok |
+| GET    | /registration_requests/{id}                                | :question:         |    ? |    ? |   Ok |
 | PATCH  | /registration_requests/{id}                                | :no_entry_sign:    |      |      |      |
 | PUT    | /registration_requests/{id}                                | :no_entry_sign:    |      |      |      |
 | GET    | /reporting/tables/{tableName}/table_records                | #42                |    ? |    ? | [^1] |

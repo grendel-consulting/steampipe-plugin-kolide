@@ -24,27 +24,21 @@ setup() {
 }
 
 @test "has_expected_number_of_results" {
-    if [[ ! -e $QUERY_RESULTS ]]; then skip ; fi
-
-    run bash -c "cat $QUERY_RESULTS | jq -r '. | length'"
+    run bash -c "cat $QUERY_RESULTS | jq -r '.rows | length'"
 
     if [[ -z "$EXPECTED_COUNT" ]]; then assert_output $EXPECTED_COUNT ; else assert [ "$output" -ge "1" ] ; fi
 }
 
 #bats test_tags=exactness:fuzzy
 @test "has_expected_title" {
-    if [[ ! -e $QUERY_RESULTS ]]; then skip ; fi
-
-    run bash -c "cat $QUERY_RESULTS | jq -r '.[0].title'"
+    run bash -c "cat $QUERY_RESULTS | jq -r '.rows.[0].title'"
     if [[ -z "$TITLE" ]]; then assert_output --partial $TITLE ; else assert_success ; fi
 }
 
 #bats test_tags=exactness:fuzzy
 @test "has_expected_person_id" {
-    if [[ ! -e $QUERY_RESULTS ]]; then skip ; fi
-
-    run bash -c "cat $QUERY_RESULTS | jq -r '.[0].detected_at'"
-    if [[ -z "$DETECTED_AT" ]]; then assert_output --partial $DETECTED_AT ; else assert_success ; fi
+    run bash -c "cat $QUERY_RESULTS | jq -r '.rows.[0].person_id'"
+    if [[ -z "$PERSON_ID" ]]; then assert_output --partial $PERSON_ID ; else assert_success ; fi
 }
 
 teardown_file(){

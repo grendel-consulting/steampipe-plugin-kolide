@@ -23,40 +23,30 @@ setup() {
 }
 
 @test "has_expected_number_of_results" {
-    if [[ ! -e $QUERY_RESULTS ]]; then skip ; fi
-
-    run bash -c "cat $QUERY_RESULTS | jq -r '. | length'"
+    run bash -c "cat $QUERY_RESULTS | jq -r '.rows | length'"
 
     if [[ -z "$EXPECTED_COUNT" ]]; then assert_output $EXPECTED_COUNT ; else assert [ "$output" -ge "1" ] ; fi
 }
 
 @test "has_expected_id" {
-    if [[ ! -e $QUERY_RESULTS ]]; then skip ; fi
-
-    run bash -c "cat $QUERY_RESULTS | jq -r '.[0].id'"
+    run bash -c "cat $QUERY_RESULTS | jq -r '.rows.[0].id'"
     if [[ -z "$ID" ]]; then assert_output $ID ; else assert_success ; fi
 }
 
 #bats test_tags=exactness:fuzzy
 @test "has_expected_built_at" {
-    if [[ ! -e $QUERY_RESULTS ]]; then skip ; fi
-
-    run bash -c "cat $QUERY_RESULTS | jq -r '.[0].built_at'"
+    run bash -c "cat $QUERY_RESULTS | jq -r '.rows.[0].built_at'"
     if [[ -z "$BUILT_AT" ]]; then assert_output --partial $BUILT_AT ; else assert_success ; fi
 }
 
 @test "has_expected_version" {
-    if [[ ! -e $QUERY_RESULTS ]]; then skip ; fi
-
-    run bash -c "cat $QUERY_RESULTS | jq -r '.[0].version'"
+    run bash -c "cat $QUERY_RESULTS | jq -r '.rows.[0].version'"
     if [[ -z "$VERSION" ]]; then assert_output $VERSION ; else assert_success ; fi
 }
 
 
 @test "has_expected_url" {
-    if [[ ! -e $QUERY_RESULTS ]]; then skip ; fi
-
-    run bash -c "cat $QUERY_RESULTS | jq -r '.[0].url'"
+    run bash -c "cat $QUERY_RESULTS | jq -r '.rows.[0].url'"
     if [[ -z "$URL" ]]; then assert_output $URL ; else assert_success ; fi
 }
 
