@@ -23,7 +23,7 @@ setup() {
 }
 
 @test "has_expected_number_of_results" {
-    run bash -c "cat $QUERY_RESULTS | jq -r '.rowss | length'"
+    run bash -c "cat $QUERY_RESULTS | jq -r '.rows | length'"
 
     if [[ -z "$EXPECTED_COUNT" ]]; then assert_output $EXPECTED_COUNT ; else assert [ "$output" -ge "1" ] ; fi
 }

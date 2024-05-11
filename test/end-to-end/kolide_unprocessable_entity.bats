@@ -37,8 +37,8 @@ setup() {
 
 #bats test_tags=exactness:fuzzy
 @test "has_expected_person_id" {
-    run bash -c "cat $QUERY_RESULTS | jq -r '.rows.[0].detected_at'"
-    if [[ -z "$DETECTED_AT" ]]; then assert_output --partial $DETECTED_AT ; else assert_success ; fi
+    run bash -c "cat $QUERY_RESULTS | jq -r '.rows.[0].person_id'"
+    if [[ -z "$PERSON_ID" ]]; then assert_output --partial $PERSON_ID ; else assert_success ; fi
 }
 
 teardown_file(){
