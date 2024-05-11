@@ -23,34 +23,26 @@ setup() {
 }
 
 @test "has_expected_number_of_results" {
-    if [[ ! -e $QUERY_RESULTS ]]; then skip ; fi
-
-    run bash -c "cat $QUERY_RESULTS | jq -r '. | length'"
+    run bash -c "cat $QUERY_RESULTS | jq -r '.rows | length'"
 
     if [[ -z "$EXPECTED_COUNT" ]]; then assert_output $EXPECTED_COUNT ; else assert [ "$output" -ge "1" ] ; fi
 }
 
 #bats test_tags=exactness:fuzzy
 @test "has_expected_timestamp" {
-    if [[ ! -e $QUERY_RESULTS ]]; then skip ; fi
-
-    run bash -c "cat $QUERY_RESULTS | jq -r '.[0].timestamp'"
+    run bash -c "cat $QUERY_RESULTS | jq -r '.rows.[0].timestamp'"
     if [[ -z "$TIMESTAMP" ]]; then assert_output --partial $TIMESTAMP ; else assert_success ; fi
 }
 
 #bats test_tags=exactness:fuzzy
 @test "has_expected_description" {
-    if [[ ! -e $QUERY_RESULTS ]]; then skip ; fi
-
-    run bash -c "cat $QUERY_RESULTS | jq -r '.[0].description'"
+    run bash -c "cat $QUERY_RESULTS | jq -r '.rows.[0].description'"
     if [[ -z "$DESCRIPTION" ]]; then assert_output --partial $DESCRIPTION ; else assert_success ; fi
 }
 
 #bats test_tags=exactness:fuzzy
 @test "has_expected_actor_name" {
-    if [[ ! -e $QUERY_RESULTS ]]; then skip ; fi
-
-    run bash -c "cat $QUERY_RESULTS | jq -r '.[0].actor_name'"
+    run bash -c "cat $QUERY_RESULTS | jq -r '.rows.[0].actor_name'"
     if [[ -z "$ACTOR_NAME" ]]; then assert_output --partial $ACTOR_NAME ; else assert_success ; fi
 }
 

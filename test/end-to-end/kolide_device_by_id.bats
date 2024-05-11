@@ -17,9 +17,7 @@ setup() {
 }
 
 @test "has_no_more_than_one_result" {
-    if [[ ! -e $QUERY_RESULTS ]]; then skip ; fi
-
-    run bash -c "cat $QUERY_RESULTS | jq -r '. | length'"
+    run bash -c "cat $QUERY_RESULTS | jq -r '.rows | length'"
     assert [ "$output" -le "1" ]
 }
 
