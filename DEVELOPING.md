@@ -13,7 +13,7 @@ Ensure the following are installed in your workspace at the [supported version](
 
 ## End-to-End Tests
 
-### Prerequisites:
+### Prerequisites
 
 Ensure the following are installed in your workspace to run tests
 
@@ -32,7 +32,7 @@ For example, running the basic info query for the `kolide_{table}` table is acco
 * `test/end-to-end/_query/kolide_{table}.sql`
 * `test/end-to-end/_results/kolide_{table}.bash`
 
-Each test typically ensures we can run the query, it contains the expected number of results, and that each of the field returned are in line with expectations. Given these are live queries against a dynamic fleet of workstations, tests should minimise fragility and be written with that volatility in mind. Clearly some tables will be more volatile than others, and existing tests consider that.
+Each test typically ensures we can run the query, it contains the expected number of results, and that each of the fields returned are in line with expectations. Given these are live queries against a dynamic fleet of workstations, tests should minimise fragility and be written with that volatility in mind. By their nature, some tables will be more volatile than others.
 
 ### Running Tests
 
@@ -40,29 +40,29 @@ Running these tests locally will require your own Kolide API key and hence requi
 
 To run the whole test suite, from the repo root
 
-```
+```bash
 bats test/end-to-end/kolide_*.bats
 ```
 
 To run a subset of smoke tests, which will hit every API endpoint available under your billing plan:
 
-```
+```bash
 bats test/end-to-end/kolide_*.bats --filter-tags scope:smoke
 ```
 
 To run tests for a specific table:
 
-```
+```bash
 bats test/end-to-end/kolide_*.bats --filter-tags table:kolide_device
 ```
 
 To run tests for a specific return type:
 
-```
+```bash
 bats test/end-to-end/kolide_*.bats --filter-tags output:device
 ```
 
-### Writing Tests:
+### Writing Tests
 
 Writing tests against this plugin follows three broad patterns:
 
@@ -72,4 +72,4 @@ Writing tests against this plugin follows three broad patterns:
 
 With our test structure, there is a reasonable degree of boilerplate in `setup_file`, `setup` and `teardown_file` functions. These can be borrowed from other tests of the same pattern
 
-Each table typically had a `can_execute_query_via_steampipe` smoke test, a count based test and then tests for the main fields being returned. We rely on structured idempotent queries that return consistent results, and a results file that articulates these.
+Each table typically had a `can_execute_query_via_steampipe` smoke test, a count-based test and then tests for the main fields being returned. We rely on structured idempotent queries that return consistent results, and a results file that articulates these.
