@@ -18,8 +18,7 @@ type RegistrationRequest struct {
 }
 
 type RequesterInformation struct {
-	// Whilst the Kolide API readme entry references this as a "string", the returned value encountered during implementation MAY BE an "int"
-	Identifier int32 `json:"identifier,omitempty"`
+	Identifier string `json:"identifier,omitempty"`
 }
 
 func (c *Client) GetRegistrationRequests(cursor string, limit int32, searches ...Search) (interface{}, error) {
