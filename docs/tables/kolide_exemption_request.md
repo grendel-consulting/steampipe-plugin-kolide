@@ -1,6 +1,6 @@
 # Table: kolide_exemption_request
 
-Lists the exemption requests made when when a user desires to permanently ignore a specific issue or set of issues on a single device. These can be approved or denied by admins.
+Lists the exemption requests made when a user desires to permanently ignore a specific issue or set of issues on a single device. These can be approved or denied by admins.
 
 ## Examples
 
