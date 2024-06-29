@@ -39,8 +39,8 @@ using the interactive API documentation at https://kolideapi.readme.io/reference
 | GET    | /live_query_campaigns/{id}                                 | #34                |    ? |    ? | [^1] |
 | GET    | /checks                                                    | :white_check_mark: |    ? |    ? |   Ok |
 | GET    | /checks/{id}                                               | :white_check_mark: |    ? |    ? |   Ok |
-| GET    | /exemption_requests                                        | #36                |    ? |    ? |   Ok |
-| GET    | /exemption_requests/{id}                                   | #37                |    ? |    ? |   Ok |
+| GET    | /exemption_requests                                        | :question:         |    ? |    ? |   Ok |
+| GET    | /exemption_requests/{id}                                   | :question:         |    ? |    ? |   Ok |
 | PATCH  | /exemption_requests/{id}                                   | :no_entry_sign:    |      |      |      |
 | PUT    | /exemption_requests/{id}                                   | :no_entry_sign:    |      |      |      |
 | GET    | /registration_requests                                     | :question:         |    ? |    ? |   Ok |
