@@ -22,9 +22,9 @@ type RequesterInformation struct {
 }
 
 func (c *Client) GetRegistrationRequests(cursor string, limit int32, searches ...Search) (interface{}, error) {
-	return c.fetchCollection("/registration_request/", cursor, limit, searches, new(RegistrationRequestListResponse))
+	return c.fetchCollection("/registration_requests/", cursor, limit, searches, new(RegistrationRequestListResponse))
 }
 
 func (c *Client) GetRegistrationRequestById(id string) (interface{}, error) {
-	return c.fetchResource("/registration_request/", id, new(RegistrationRequest))
+	return c.fetchResource("/registration_requests/", id, new(RegistrationRequest))
 }
