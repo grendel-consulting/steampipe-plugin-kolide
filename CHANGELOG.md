@@ -1,10 +1,27 @@
+## v0.4.0 [2024-08-05]
+
+_What's new?_
+
+- New tables, not fully able to test these on Core and Max plans
+
+  - kolide_auth_log
+  - kolide_exemption_request
+  - kolide_registration_request
+
+- Bug fixes for unprocessable entity error introduced in v0.3.1, #129
+- Support for fixes in the Kolide API, where documentation and observed values were mismatched, #160
+- Support for the revised JSON output format used in Steampipe v0.23
+- Documentation to support local development and testing
+- Dependency updates
+
+
 ## v0.3.1 [2024-05-08]
 
 _What's new?_
 
 - End-to-end test harness covering basic info queries on all implemented tables
 - Bug fixes on several tables, potentially not fully resolving the issues with `kolide_person*` tables
-- Documentation clarifications on the coverag matrix, reflecting these
+- Documentation clarifications on the coverage matrix, reflecting these
 - Dependency updates
 
 ## v0.3.0 [2024-05-03]
