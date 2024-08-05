@@ -8,8 +8,8 @@ _What's new?_
   - kolide_exemption_request
   - kolide_registration_request
 
-- Bug fix for unprocessable entity error introduced in v0.3.1, #129
-- Support for fixes in the Kolide API, where documentation and observed values were mismatched
+- Bug fixes for unprocessable entity error introduced in v0.3.1, #129
+- Support for fixes in the Kolide API, where documentation and observed values were mismatched, #160
 - Support for the revised JSON output format used in Steampipe v0.23
 - Documentation to support local development and testing
 - Dependency updates
