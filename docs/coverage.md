@@ -27,8 +27,8 @@ using the interactive API documentation at https://kolideapi.readme.io/reference
 | GET    | /people/{id}                                               | :question:         |    ? |    ? |   Ok |
 | GET    | /person_groups                                             | :white_check_mark: |    ? |    ? | [^1] |
 | GET    | /person_groups/{id}                                        | :white_check_mark: |    ? |    ? | [^1] |
-| GET    | /auth_logs                                                 | #27                |    ? |    ? |      |
-| GET    | /auth_logs/{id}                                            | #28                |    ? |    ? |      |
+| GET    | /auth_logs                                                 | :question:         |    ? |    ? |      |
+| GET    | /auth_logs/{id}                                            | :question:         |    ? |    ? |      |
 | GET    | /device_groups/{deviceGroupId}/devices                     | :white_check_mark: |    ? |    ? | [^1] |
 | POST   | /device_groups/{deviceGroupId}/memberships                 | :no_entry_sign:    |      |      |      |
 | DELETE | /device_groups/{deviceGroupId}/memberships/{id}            | :no_entry_sign:    |      |      |      |
