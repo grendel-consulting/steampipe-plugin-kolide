@@ -1,10 +1,10 @@
 module github.com/grendel-consulting/steampipe-plugin-kolide
 
-go 1.21.9
+go 1.22.6
 
 require (
 	github.com/imroc/req/v3 v3.43.7
-	github.com/turbot/steampipe-plugin-sdk/v5 v5.10.2
+	github.com/turbot/steampipe-plugin-sdk/v5 v5.10.3
 )
 
 require (
