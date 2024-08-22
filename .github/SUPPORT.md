@@ -16,5 +16,5 @@ We support this plugin in versions of Steampipe >= 0.21, which was current when 
 
 ## Golang Version
 
-We support this plugin with Golang == v1.21, as required by Steampipe's
+We support this plugin with Golang == v1.22, as required by Steampipe's
 [Plugin Development Guidelines](https://steampipe.io/docs/develop/plugin-release-checklist)
