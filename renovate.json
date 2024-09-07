@@ -1,6 +1,6 @@
 {
     "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-    "extends": ["config:best-practises", "schedule:nonOfficeHours", ":gitSignOff"],
+    "extends": ["config:best-practices", "schedule:nonOfficeHours", ":gitSignOff"],
     "constraints": {
       "go": "1.22"
     },
