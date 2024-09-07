@@ -1,10 +1,8 @@
 {
     "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-    "extends": [
-      "config:base", "schedule:nonOfficeHours", "helpers:pinGitHubActionDigests", ":gitSignOff"
-    ],
+    "extends": ["config:best-practises", "schedule:nonOfficeHours", ":gitSignOff"],
     "constraints": {
-      "go": "1.21"
+      "go": "1.22"
     },
     "pre-commit": {
       "enabled": true
