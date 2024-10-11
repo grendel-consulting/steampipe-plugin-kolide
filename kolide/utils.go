@@ -21,18 +21,18 @@ func connect(_ context.Context, d *plugin.QueryData) (*kolide.Client, error) {
 
 	kolideConfig := GetConfig(d.Connection)
 
-	api_token := os.Getenv("KOLIDE_API_TOKEN")
+	apiToken := os.Getenv("KOLIDE_API_TOKEN")
 
 	if kolideConfig.APIToken != nil {
-		api_token = *kolideConfig.APIToken
+		apiToken = *kolideConfig.APIToken
 	}
 
-	if api_token == "" {
-		return nil, errors.New("kolide 'api_token' must be set in the connection configuration; edit your connection configuration file and then restart")
+	if apiToken == "" {
+		return nil, errors.New("kolide 'apiToken' must be set in the connection configuration; edit your connection configuration file and then restart")
 	}
 
 	c := kolide.New(
-		kolide.WithAuth(api_token),
+		kolide.WithAuth(apiToken),
 	)
 
 	d.ConnectionManager.Cache.Set(cacheKey, c)
