@@ -2,9 +2,7 @@ package kolide_client
 
 import (
 	"encoding/json"
-	"net/http"
 
-	"github.com/jarcoal/httpmock"
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 	. "github.com/onsi/gomega/gstruct"
@@ -16,21 +14,15 @@ var _ = Describe("Devices", Label("endpoint:devices"), func() {
 	var result = Device{}
 
 	JustBeforeEach(func() {
-		f, _ := json.Marshal(fixture)
-
-		httpmock.RegisterResponder("GET", target, func(request *http.Request) (*http.Response, error) {
-			resp := httpmock.NewStringResponse(http.StatusOK, string(f))
-			resp.Header.Set("Content-Type", "application/json")
-			return resp, nil
-		})
+		setupHTTPMock(target, fixture)
 
 		res, err := kolide.GetDeviceById(fixture.Id)
-		Ω(err).ShouldNot(HaveOccurred())
+		Expect(err).ShouldNot(HaveOccurred())
 
 		b, _ := json.Marshal(res)
 
 		err = json.Unmarshal(b, &result)
-		Ω(err).ShouldNot(HaveOccurred())
+		Expect(err).ShouldNot(HaveOccurred())
 
 	})
 
@@ -45,7 +37,7 @@ var _ = Describe("Devices", Label("endpoint:devices"), func() {
 		})
 
 		It("retrieves the specified Device", func() {
-			Ω(result).To(MatchFields(IgnoreExtras, Fields{
+			Expect(result).To(MatchFields(IgnoreExtras, Fields{
 				"Id":   Equal(fixture.Id),
 				"Name": Equal(fixture.Name),
 			}))

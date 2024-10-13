@@ -2,6 +2,7 @@ package kolide_client
 
 import (
 	"fmt"
+	"os"
 
 	"github.com/imroc/req/v3"
 )
@@ -17,14 +18,21 @@ type ApiError struct {
 }
 
 func (e *ApiError) Error() string {
-	return fmt.Sprintf("Kolide K2 API Error: %s", e.Message)
+	return fmt.Sprintf("Kolide API Error: %s", e.Message)
 }
 
 func New(options ...ClientOption) *Client {
 	c := &Client{
 		c: req.C(),
 	}
-	c.c.SetBaseURL("https://api.kolide.com/").
+
+	var baseUrl string = os.Getenv("KOLIDE_API_URL")
+
+	if baseUrl == "" {
+		baseUrl = "https://api.kolide.com"
+	}
+
+	c.c.SetBaseURL(baseUrl).
 		SetCommonHeader("accept", "application/json").
 		SetCommonErrorResult(&ApiError{}).
 		EnableDumpEachRequest().

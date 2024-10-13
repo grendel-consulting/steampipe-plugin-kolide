@@ -1,6 +1,9 @@
-package kolide_client // needs to be inside kolide_client package to intercept HTTP communications
+package kolide_client // test suit needs to be inside the kolide_client package to intercept HTTP communications
 
 import (
+	"encoding/json"
+	"net/http"
+	"os"
 	"testing"
 
 	"github.com/jarcoal/httpmock"
@@ -14,7 +17,13 @@ func TestClient(t *testing.T) {
 }
 
 var kolide *Client
-var baseUrl string = "https://api.kolide.com"
+var baseUrl string = os.Getenv("KOLIDE_API_URL")
+
+func init() {
+	if baseUrl == "" {
+		baseUrl = "https://api.kolide.com"
+	}
+}
 
 var _ = BeforeSuite(func() {
 	kolide = New()
@@ -23,7 +32,7 @@ var _ = BeforeSuite(func() {
 })
 
 var _ = BeforeEach(func() {
-	// Remove any mock responders
+	// Remove any mock responders so each test has a clean slate
 	httpmock.Reset()
 })
 
@@ -31,3 +40,12 @@ var _ = AfterSuite(func() {
 	// Unblock our HTTP requests
 	httpmock.DeactivateAndReset()
 })
+
+func setupHTTPMock(target string, fixture interface{}) {
+	f, _ := json.Marshal(fixture)
+	httpmock.RegisterResponder("GET", target, func(request *http.Request) (*http.Response, error) {
+		resp := httpmock.NewStringResponse(http.StatusOK, string(f))
+		resp.Header.Set("Content-Type", "application/json")
+		return resp, nil
+	})
+}
