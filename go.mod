@@ -4,7 +4,7 @@ go 1.22.6
 
 require (
 	github.com/imroc/req/v3 v3.48.0
-	github.com/onsi/gomega v1.34.1
+	github.com/onsi/gomega v1.34.2
 	github.com/turbot/steampipe-plugin-sdk/v5 v5.10.4
 )
 
