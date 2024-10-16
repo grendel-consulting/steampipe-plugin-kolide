@@ -66,6 +66,7 @@ in this section together with things to watch out for.
 - [Renovate](https://renovate.whitesourcesoftware.com/)
 - [StepSecurity](https://www.stepsecurity.io/)
 - [SocketDev](https://socket.dev/)
+- [AikidoSecurity](https://www.aikido.dev/)
 
 ### Our Security Checklist
 
@@ -96,6 +97,7 @@ All notable changes to this policy should be noted below. We use
 
 ### Version History
 
+- 1.1.0 (2024-10-16) - Inclusion of Aikido Security in Security Toolchain
 - 1.0.0 (2024-04-03) - Initial policy and procedures
 
 ## Attribution
