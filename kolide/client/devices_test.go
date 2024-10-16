@@ -19,11 +19,10 @@ var _ = Describe("Devices", Label("endpoint:devices"), func() {
 		res, err := kolide.GetDeviceById(fixture.Id)
 		Expect(err).ShouldNot(HaveOccurred())
 
+		// Jumping through hoops to cast from `interface{}` to `Device`
 		b, _ := json.Marshal(res)
-
 		err = json.Unmarshal(b, &result)
 		Expect(err).ShouldNot(HaveOccurred())
-
 	})
 
 	Context("GetDeviceById", func() {
@@ -36,7 +35,7 @@ var _ = Describe("Devices", Label("endpoint:devices"), func() {
 
 		})
 
-		It("retrieves the specified Device", func() {
+		It("retrieves the specified Device", Label("plan:k2"), func() {
 			Expect(result).To(MatchFields(IgnoreExtras, Fields{
 				"Id":   Equal(fixture.Id),
 				"Name": Equal(fixture.Name),

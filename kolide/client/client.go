@@ -2,6 +2,7 @@ package kolide_client
 
 import (
 	"fmt"
+	"net/url"
 	"os"
 
 	"github.com/imroc/req/v3"
@@ -28,7 +29,10 @@ func New(options ...ClientOption) *Client {
 
 	var baseUrl string = os.Getenv("KOLIDE_API_URL")
 
-	if baseUrl == "" {
+	_, err := url.Parse(baseUrl)
+	if err != nil || baseUrl == "" {
+		// Log the error but and use the default URL
+		fmt.Printf("Invalid or empty KOLIDE_API_URL provided: %v. Using default URL.\n", err)
 		baseUrl = "https://api.kolide.com"
 	}
 

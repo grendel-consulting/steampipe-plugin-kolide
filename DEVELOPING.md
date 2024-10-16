@@ -11,6 +11,48 @@ Ensure the following are installed in your workspace at the [supported version](
 
 ## Testing
 
+## Unit Tests
+
+### Prerequisties
+
+Ensure the following are installedd in your workspace to run tests
+
+* [Ginkgo](https://onsi.github.io/ginkgo/)
+
+Dependencies on other testing tools, such as Gomega, are present in `go.mod` whilst tests need to exist in the `kolide_client` package
+
+### Approach and Structure
+
+Found in `kolide/client/*_test.go` files, and are written using Ginkgo and Gomega, popular Go testing frameworks.
+
+We separate tests by endpoint, which is how the client SDK is structured, with hard-coded fixtures that we use with HttpMock to provide a mock for the Kolide API. Given isolation from the real Kolide API, they are structured to allow us to mimic various fleets, pricing plans and so forth. 
+
+Each test set should ensure we can run query the endpoint, it contains the expected number of results, and that each of the fields returned are in line with expectations for both happy path and unhappy path scenarios. 
+
+### Running Tests
+
+To run the whole test suite, from the repo root. You may omit the `-v` flag for less verbose output.
+
+```bash
+ginkgo -v kolide/client
+```
+
+To run tests for a specific endpoint:
+
+```bash
+ginkgo --label-filter="endpoint:devices" kolide/client
+```
+
+To run tests for a specific pricing plan:
+
+```bash
+ginkgo --label-filter="plan:k2" kolide/client
+```
+
+### Writing Tests
+
+We encourage tests to be written using the [Arrange-Act-Assert](https://softwarepatternslexicon.com/patterns-go/testing/arrange-act-assert/) pattern, using `BeforeEach` where it simplifies or makes test code more readable
+
 ## End-to-End Tests
 
 ### Prerequisites

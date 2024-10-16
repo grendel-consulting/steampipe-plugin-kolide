@@ -20,28 +20,26 @@ var _ = Describe("AdminUser", Label("endpoint:admin_users"), func() {
 		res, err := kolide.GetAdminUserById(fixture.Id)
 		Expect(err).ShouldNot(HaveOccurred())
 
+		// Jumping through hoops to cast from `interface{}` to `AdminUser`
 		b, _ := json.Marshal(res)
-
 		err = json.Unmarshal(b, &result)
 		Expect(err).ShouldNot(HaveOccurred())
-
 	})
 
 	Context("GetAdminUserById", func() {
 		BeforeEach(func() {
 			fixture = &AdminUser{
 				Id:        "1",
-				FirstName: "Bob",
-				LastName:  "Bobson",
-				Email:     "b@b.com",
+				FirstName: "Bonnie",
+				LastName:  "Parker",
+				Email:     "bonnie@example.com",
 				CreatedAt: time.Now(),
 				Access:    "full",
 			}
 			target = baseUrl + "/admin_users/" + fixture.Id
-
 		})
 
-		It("retrieves the specified Admin User", func() {
+		It("retrieves the specified Admin User", Label("plan:k2"), func() {
 			Expect(result).To(MatchFields(IgnoreExtras, Fields{
 				"Id":        Equal(fixture.Id),
 				"FirstName": Equal(fixture.FirstName),
