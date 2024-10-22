@@ -25,9 +25,9 @@ Dependencies on other testing tools, such as Gomega, are present in `go.mod` whi
 
 Found in `kolide/client/*_test.go` files, and are written using Ginkgo and Gomega, popular Go testing frameworks.
 
-We separate tests by endpoint, which is how the client SDK is structured, with hard-coded fixtures that we use with HttpMock to provide a mock for the Kolide API. Given isolation from the real Kolide API, they are structured to allow us to mimic various fleets, pricing plans and so forth. 
+We separate tests by endpoint, which is how the client SDK is structured, with hard-coded fixtures that we use with HttpMock to provide a mock for the Kolide API. Given isolation from the real Kolide API, they are structured to allow us to mimic various fleets, pricing plans and so forth.
 
-Each test set should ensure we can run query the endpoint, it contains the expected number of results, and that each of the fields returned are in line with expectations for both happy path and unhappy path scenarios. 
+Each test set should ensure we can run query the endpoint, it contains the expected number of results, and that each of the fields returned are in line with expectations for both happy path and unhappy path scenarios.
 
 ### Running Tests
 

@@ -1,3 +1,5 @@
+.PHONY: install reconfigure end-to-end unit
+
 STEAMPIPE_INSTALL_DIR ?= ~/.steampipe
 
 # Determine the OS
@@ -16,3 +18,6 @@ reconfigure:
 
 end-to-end:
 	bats test/end-to-end/*.bats
+
+unit:
+	ginkgo -v kolide/client
