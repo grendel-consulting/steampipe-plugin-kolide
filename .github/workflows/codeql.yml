@@ -10,8 +10,7 @@ on:
   schedule:
     - cron: '32 07 * * 3'
 
-permissions:
-  contents: read
+permissions: {}
 
 jobs:
   analyze:
@@ -19,6 +18,7 @@ jobs:
     timeout-minutes: 360
 
     permissions:
+      contents: read
       security-events: write
 
     strategy:
@@ -32,10 +32,18 @@ jobs:
     - name: Harden Runner
       uses: step-security/harden-runner@91182cccc01eb5e619899d80e4e971d6181294a7 # v2.10.1
       with:
-        egress-policy: audit
+        disable-sudo: true
+        egress-policy: block
+        allowed-endpoints: >
+          api.github.com:443
+          github.com:443
+          objects.githubusercontent.com:443
+          uploads.github.com:443
 
     - name: Checkout Repo
       uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      with:
+        persist-credentials: false
 
     - name: Initialize CodeQL
       uses: github/codeql-action/init@662472033e021d55d94146f66f6058822b0b39fd # v3.27.0
