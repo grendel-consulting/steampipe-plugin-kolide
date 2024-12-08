@@ -36,13 +36,13 @@ func Plugin(ctx context.Context) *plugin.Plugin {
 			"kolide_device_open_issue":        tableKolideDeviceOpenIssue(ctx),
 			"kolide_exemption_request":        tableKolideExemptionRequest(ctx),
 			"kolide_issue":                    tableKolideIssue(ctx),
+			"kolide_live_query_campaign":      tableKolideLiveQueryCampaign(ctx),
 			"kolide_package":                  tableKolidePackage(ctx),
 			"kolide_person":                   tableKolidePerson(ctx),
 			"kolide_person_group":             tableKolidePersonGroup(ctx),
 			"kolide_person_open_issue":        tableKolidePersonOpenIssue(ctx),
 			"kolide_person_registered_device": tableKolidePersonRegisteredDevice(ctx),
 			"kolide_registration_request":     tableKolideRegistrationRequest(ctx),
-			"kolide_live_query_campaign":      tableKolideLiveQueryCampaign(ctx),
 		},
 	}
 	return p
