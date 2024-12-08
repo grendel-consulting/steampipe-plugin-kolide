@@ -35,8 +35,8 @@ using the interactive API documentation at https://kolideapi.readme.io/reference
 | GET    | /device_groups                                             | :white_check_mark: |    ? |    ? | [^1] |
 | GET    | /device_groups/{id}                                        | :white_check_mark: |    ? |    ? | [^1] |
 | GET    | /live_query_campaigns/{liveQueryCampaignId}/query_results  | #32                |    ? |    ? | [^1] |
-| GET    | /live_query_campaigns                                      | #33                |    ? |    ? | [^1] |
-| GET    | /live_query_campaigns/{id}                                 | #34                |    ? |    ? | [^1] |
+| GET    | /live_query_campaigns                                      | :question:         |    ? |    ? | [^1] |
+| GET    | /live_query_campaigns/{id}                                 | :question:         |    ? |    ? | [^1] |
 | GET    | /checks                                                    | :white_check_mark: |    ? |    ? |   Ok |
 | GET    | /checks/{id}                                               | :white_check_mark: |    ? |    ? |   Ok |
 | GET    | /exemption_requests                                        | :question:         |    ? |    ? |   Ok |
