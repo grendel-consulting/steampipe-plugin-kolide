@@ -42,6 +42,7 @@ func Plugin(ctx context.Context) *plugin.Plugin {
 			"kolide_person_open_issue":        tableKolidePersonOpenIssue(ctx),
 			"kolide_person_registered_device": tableKolidePersonRegisteredDevice(ctx),
 			"kolide_registration_request":     tableKolideRegistrationRequest(ctx),
+			"kolide_live_query_campaign":      tableKolideLiveQueryCampaign(ctx),
 		},
 	}
 	return p
