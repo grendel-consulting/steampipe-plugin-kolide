@@ -43,7 +43,7 @@ var _ = Describe("LiveQueryCampaign", Label("endpoint:live_query_campaign"), fun
 			target = baseUrl + "/live_query_campaigns/" + fixture.Id
 		})
 
-		It("retrieves the specified Admin User", Label("plan:core"), func() {
+		It("retrieves the specified Live Query Campaign", Label("plan:core"), func() {
 			Expect(result).To(MatchFields(IgnoreExtras, Fields{
 				"Id":                     Equal(fixture.Id),
 				"Name":                   Equal(fixture.Name),
