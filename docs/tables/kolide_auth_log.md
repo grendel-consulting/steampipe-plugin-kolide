@@ -1,6 +1,6 @@
 # Table: kolide_auth_log
 
-Lists the authentication attempts occurring when a user tries to sign into an App protected by Kolide Device Trust.
+Lists the authentication attempts occurring when a user tries to sign in to an App protected by Kolide Device Trust.
 
 ## Examples
 
