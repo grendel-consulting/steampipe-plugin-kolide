@@ -58,8 +58,8 @@ setup() {
     if [[ -z "$EXEMPTED" ]]; then assert_output $EXEMPTED ; else assert_output "false" ; fi
 }
 
-# teardown_file(){
-#     if [[ -f $QUERY_RESULTS ]]; then
-#         rm -f $QUERY_RESULTS
-#     fi
-# }
+teardown_file(){
+    if [[ -f $QUERY_RESULTS ]]; then
+        rm -f $QUERY_RESULTS
+    fi
+}
