@@ -1,3 +1,7 @@
 [[IgnoredVulns]]
 id = "GO-2022-0646"
 reason = "No AWS operations performed by this plugin."
+
+[[IgnoredVulns]]
+id = "GO-2022-0635"
+reason = "No AWS operations performed by this plugin."
