@@ -4,6 +4,7 @@
     "constraints": {
       "go": "1.22"
     },
+    "postUpdateOptions": ["gomodTidy"],
     "pre-commit": {
       "enabled": true
     },
