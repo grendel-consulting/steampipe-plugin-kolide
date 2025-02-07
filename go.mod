@@ -2,12 +2,12 @@ module github.com/grendel-consulting/steampipe-plugin-kolide
 
 go 1.22.7
 
-toolchain go1.23.5
+toolchain go1.23.6
 
 require (
 	github.com/imroc/req/v3 v3.49.1
 	github.com/onsi/gomega v1.36.2
-	github.com/turbot/steampipe-plugin-sdk/v5 v5.11.1
+	github.com/turbot/steampipe-plugin-sdk/v5 v5.11.2
 )
 
 require (
@@ -59,7 +59,7 @@ require (
 	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/tklauser/go-sysconf v0.3.14 // indirect
 	github.com/tklauser/numcpus v0.9.0 // indirect
-	github.com/turbot/pipe-fittings v1.6.6 // indirect
+	github.com/turbot/pipe-fittings v1.6.8 // indirect
 	github.com/turbot/terraform-components v0.0.0-20240625130359-b27cc5473956 // indirect
 	github.com/yusufpapurcu/wmi v1.2.4 // indirect
 	go.opentelemetry.io/contrib/detectors/gcp v1.32.0 // indirect
