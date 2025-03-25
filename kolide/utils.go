@@ -60,7 +60,7 @@ func listAnything(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateDat
 	}
 
 	// Iterate through pagination cursors, with smallest number of pages
-	var maxLimit int32 = kolide.MaxPaging
+	var maxLimit = kolide.MaxPaging
 	if d.QueryContext.Limit != nil {
 		limit := int32(*d.QueryContext.Limit)
 		if limit < maxLimit {
@@ -152,7 +152,7 @@ func listAnythingById(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydrat
 	}
 
 	// Iterate through pagination cursors, with smallest number of pages
-	var maxLimit int32 = kolide.MaxPaging
+	var maxLimit = kolide.MaxPaging
 	if d.QueryContext.Limit != nil {
 		limit := int32(*d.QueryContext.Limit)
 		if limit < maxLimit {
