@@ -28,7 +28,7 @@ func New(options ...ClientOption) *Client {
 		c: req.C(),
 	}
 
-	var baseUrl string = os.Getenv("KOLIDE_API_URL")
+	var baseUrl = os.Getenv("KOLIDE_API_URL")
 
 	_, err := url.Parse(baseUrl)
 	if err != nil || baseUrl == "" {
