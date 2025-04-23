@@ -1,7 +1,6 @@
 module github.com/grendel-consulting/steampipe-plugin-kolide
 
 go 1.23.1
-
 toolchain go1.24.2
 
 require (
@@ -104,7 +103,7 @@ require (
 	github.com/prometheus/procfs v0.15.1 // indirect
 	github.com/quic-go/qpack v0.5.1 // indirect
 	github.com/quic-go/quic-go v0.48.2 // indirect
-	github.com/refraction-networking/utls v1.6.7 // indirect
+	github.com/refraction-networking/utls v1.7.0 // indirect
 	github.com/rivo/uniseg v0.4.7 // indirect
 	github.com/sethvargo/go-retry v0.3.0 // indirect
 	github.com/stevenle/topsort v0.2.0 // indirect
