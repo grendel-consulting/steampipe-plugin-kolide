@@ -1,3 +1,15 @@
+## v0.4.1 [2025-04-28]
+
+_What's new?_
+
+- New tables, not fully able to test these on Core and Max plans
+
+  - kolide_live_query_campaign
+
+- Unit test harness, with partial coverage
+- Documentation to support local development and testing
+- Dependency updates
+
 ## v0.4.0 [2024-08-05]
 
 _What's new?_
@@ -13,7 +25,6 @@ _What's new?_
 - Support for the revised JSON output format used in Steampipe v0.23
 - Documentation to support local development and testing
 - Dependency updates
-
 
 ## v0.3.1 [2024-05-08]
 
