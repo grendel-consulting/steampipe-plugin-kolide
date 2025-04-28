@@ -1,3 +1,6 @@
+# yaml-language-server: $schema=https://goreleaser.com/static/schema.json
+version: 2
+
 before:
   hooks:
     - go mod tidy
@@ -29,7 +32,7 @@ builds:
       - -tags=netgo
 
 archives:
-  - format: gz
+  - formats: ['gz']
     name_template: "{{ .ProjectName }}_{{ .Os }}_{{ .Arch }}"
     files:
       - none*
