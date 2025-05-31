@@ -5,9 +5,9 @@ go 1.24
 toolchain go1.24.2
 
 require (
-	github.com/imroc/req/v3 v3.51.0
+	github.com/imroc/req/v3 v3.52.2
 	github.com/onsi/gomega v1.37.0
-	github.com/turbot/steampipe-plugin-sdk/v5 v5.11.5
+	github.com/turbot/steampipe-plugin-sdk/v5 v5.11.6
 )
 
 require (
@@ -23,6 +23,7 @@ require (
 	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc // indirect
 	github.com/envoyproxy/go-control-plane v0.13.1 // indirect
 	github.com/envoyproxy/protoc-gen-validate v1.1.0 // indirect
+	github.com/icholy/digest v1.1.0 // indirect
 	github.com/munnerz/goautoneg v0.0.0-20191010083416-a7dc8b61c822 // indirect
 	github.com/planetscale/vtprotobuf v0.6.1-0.20240319094008-0393e58bdf10 // indirect
 	github.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2 // indirect
