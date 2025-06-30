@@ -5,7 +5,7 @@ go 1.24
 toolchain go1.24.4
 
 require (
-	github.com/imroc/req/v3 v3.53.0
+	github.com/imroc/req/v3 v3.54.0
 	github.com/onsi/gomega v1.37.0
 	github.com/turbot/steampipe-plugin-sdk/v5 v5.12.0
 )
@@ -41,7 +41,7 @@ require (
 	github.com/acarl005/stripansi v0.0.0-20180116102854-5a71ef0e047d // indirect
 	github.com/agext/levenshtein v1.2.3 // indirect
 	github.com/allegro/bigcache/v3 v3.1.0 // indirect
-	github.com/andybalholm/brotli v1.1.1 // indirect
+	github.com/andybalholm/brotli v1.2.0 // indirect
 	github.com/apparentlymart/go-textseg/v15 v15.0.0 // indirect
 	github.com/aws/aws-sdk-go v1.55.5 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
@@ -104,7 +104,7 @@ require (
 	github.com/prometheus/common v0.61.0 // indirect
 	github.com/prometheus/procfs v0.15.1 // indirect
 	github.com/quic-go/qpack v0.5.1 // indirect
-	github.com/quic-go/quic-go v0.52.0 // indirect
+	github.com/quic-go/quic-go v0.53.0 // indirect
 	github.com/refraction-networking/utls v1.7.3 // indirect
 	github.com/rivo/uniseg v0.4.7 // indirect
 	github.com/sethvargo/go-retry v0.3.0 // indirect
