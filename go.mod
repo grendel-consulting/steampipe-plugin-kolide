@@ -2,7 +2,7 @@ module github.com/grendel-consulting/steampipe-plugin-kolide
 
 go 1.24
 
-toolchain go1.24.6
+toolchain go1.25.0
 
 require (
 	github.com/imroc/req/v3 v3.54.0
