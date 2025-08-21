@@ -1,4 +1,4 @@
-.PHONY: install reconfigure end-to-end unit
+.PHONY: install reconfigure end-to-end unit test
 
 STEAMPIPE_INSTALL_DIR ?= ~/.steampipe
 
@@ -16,8 +16,10 @@ install:
 reconfigure:
 	cp config/kolide.spc $(STEAMPIPE_INSTALL_DIR)/config/kolide.spc
 
-end-to-end:
+test: unit end-to-end
+
+end-to-end: install
 	bats test/end-to-end/*.bats
 
-unit:
+unit: install
 	ginkgo -v kolide/client
