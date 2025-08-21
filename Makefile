@@ -1,4 +1,4 @@
-.PHONY: install reconfigure end-to-end unit
+.PHONY: install reconfigure end-to-end unit test
 
 STEAMPIPE_INSTALL_DIR ?= ~/.steampipe
 
