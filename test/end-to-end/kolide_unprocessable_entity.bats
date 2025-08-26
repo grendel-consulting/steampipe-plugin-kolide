@@ -1,4 +1,4 @@
-# bats file_tags=table:kolide_package, output:package
+# bats file_tags=table:kolide_person_open_issue, output:issue
 
 setup_file() {
     load "${BATS_TEST_DIRNAME}/_support/globals.bash"
@@ -16,7 +16,8 @@ setup() {
     load_helpers
 }
 
-#bats test_tags=scope:smoke
+# Regression test for https://github.com/grendel-consulting/steampipe-plugin-kolide/issues/129
+#bats test_tags=scope:regression
 @test "can_execute_query_via_steampipe" {
     steampipe query $QUERY_UNDER_TEST --output json > $QUERY_RESULTS 3>&-
     assert_exists $QUERY_RESULTS
@@ -28,26 +29,16 @@ setup() {
     if [[ -z "$EXPECTED_COUNT" ]]; then assert_output $EXPECTED_COUNT ; else assert [ "$output" -ge "1" ] ; fi
 }
 
-@test "has_expected_id" {
-    run bash -c "cat $QUERY_RESULTS | jq -r '.rows.[0].id'"
-    if [[ -z "$ID" ]]; then assert_output $ID ; else assert_success ; fi
+#bats test_tags=exactness:fuzzy
+@test "has_expected_title" {
+    run bash -c "cat $QUERY_RESULTS | jq -r '.rows.[0].title'"
+    if [[ -z "$TITLE" ]]; then assert_output --partial $TITLE ; else assert_success ; fi
 }
 
 #bats test_tags=exactness:fuzzy
-@test "has_expected_built_at" {
-    run bash -c "cat $QUERY_RESULTS | jq -r '.rows.[0].built_at'"
-    if [[ -z "$BUILT_AT" ]]; then assert_output --partial $BUILT_AT ; else assert_success ; fi
-}
-
-@test "has_expected_version" {
-    run bash -c "cat $QUERY_RESULTS | jq -r '.rows.[0].version'"
-    if [[ -z "$VERSION" ]]; then assert_output $VERSION ; else assert_success ; fi
-}
-
-
-@test "has_expected_url" {
-    run bash -c "cat $QUERY_RESULTS | jq -r '.rows.[0].url'"
-    if [[ -z "$URL" ]]; then assert_output $URL ; else assert_success ; fi
+@test "has_expected_person_id" {
+    run bash -c "cat $QUERY_RESULTS | jq -r '.rows.[0].person_id'"
+    if [[ -z "$PERSON_ID" ]]; then assert_output --partial $PERSON_ID ; else assert_success ; fi
 }
 
 teardown_file(){

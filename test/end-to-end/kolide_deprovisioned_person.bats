@@ -18,7 +18,7 @@ setup() {
 
 #bats test_tags=scope:smoke
 @test "can_execute_query_via_steampipe" {
-    steampipe query $QUERY_UNDER_TEST --output json > $QUERY_RESULTS
+    steampipe query $QUERY_UNDER_TEST --output json > $QUERY_RESULTS 3>&-
     assert_exists $QUERY_RESULTS
 }
 
