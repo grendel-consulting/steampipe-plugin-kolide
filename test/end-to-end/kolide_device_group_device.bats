@@ -15,6 +15,6 @@ setup() {
 @test "query_forbidden_under_billing_plan" {
     if [[ "$MY_KOLIDE_PLAN" != "K2" ]]; then skip; fi
 
-    run ! steampipe query $QUERY_UNDER_TEST
+    run ! steampipe query $QUERY_UNDER_TEST 3>&-
     assert_output --partial "403"
 }
