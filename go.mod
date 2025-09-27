@@ -7,7 +7,7 @@ toolchain go1.25.1
 require (
 	github.com/imroc/req/v3 v3.55.0
 	github.com/onsi/gomega v1.38.2
-	github.com/turbot/steampipe-plugin-sdk/v5 v5.13.0
+	github.com/turbot/steampipe-plugin-sdk/v5 v5.13.1
 )
 
 require go.yaml.in/yaml/v3 v3.0.4 // indirect
