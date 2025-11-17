@@ -2,10 +2,10 @@ module github.com/grendel-consulting/steampipe-plugin-kolide
 
 go 1.24.0
 
-toolchain go1.25.3
+toolchain go1.25.4
 
 require (
-	github.com/imroc/req/v3 v3.55.0
+	github.com/imroc/req/v3 v3.56.0
 	github.com/onsi/gomega v1.38.2
 	github.com/turbot/steampipe-plugin-sdk/v5 v5.13.1
 )
@@ -32,7 +32,6 @@ require (
 	github.com/planetscale/vtprotobuf v0.6.1-0.20240319094008-0393e58bdf10 // indirect
 	github.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2 // indirect
 	go.opentelemetry.io/contrib/detectors/gcp v1.32.0 // indirect
-	go.uber.org/automaxprocs v1.6.0 // indirect
 	google.golang.org/grpc/stats/opentelemetry v0.0.0-20241028142157-ada6787961b3 // indirect
 )
 
@@ -52,7 +51,6 @@ require (
 	github.com/btubbs/datetime v0.1.1 // indirect
 	github.com/cenkalti/backoff/v4 v4.3.0 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
-	github.com/cloudflare/circl v1.6.1 // indirect
 	github.com/danwakefield/fnmatch v0.0.0-20160403171240-cbb64ac3d964 // indirect
 	github.com/dgraph-io/ristretto v0.2.0 // indirect
 	github.com/dustin/go-humanize v1.0.1 // indirect
@@ -88,7 +86,7 @@ require (
 	github.com/iancoleman/strcase v0.3.0 // indirect
 	github.com/jarcoal/httpmock v1.4.1
 	github.com/jmespath/go-jmespath v0.4.0 // indirect
-	github.com/klauspost/compress v1.18.0 // indirect
+	github.com/klauspost/compress v1.18.1 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/mattn/go-runewidth v0.0.16 // indirect
@@ -104,8 +102,8 @@ require (
 	github.com/prometheus/common v0.61.0 // indirect
 	github.com/prometheus/procfs v0.15.1 // indirect
 	github.com/quic-go/qpack v0.5.1 // indirect
-	github.com/quic-go/quic-go v0.54.1 // indirect
-	github.com/refraction-networking/utls v1.7.3 // indirect
+	github.com/quic-go/quic-go v0.56.0 // indirect
+	github.com/refraction-networking/utls v1.8.1 // indirect
 	github.com/rivo/uniseg v0.4.7 // indirect
 	github.com/sethvargo/go-retry v0.3.0 // indirect
 	github.com/stevenle/topsort v0.2.0 // indirect
@@ -125,17 +123,16 @@ require (
 	go.opentelemetry.io/otel/sdk/metric v1.32.0 // indirect
 	go.opentelemetry.io/otel/trace v1.32.0 // indirect
 	go.opentelemetry.io/proto/otlp v1.4.0 // indirect
-	go.uber.org/mock v0.5.2 // indirect
-	golang.org/x/crypto v0.41.0 // indirect
+	golang.org/x/crypto v0.44.0 // indirect
 	golang.org/x/exp v0.0.0-20241215155358-4a5509556b9e // indirect
-	golang.org/x/mod v0.27.0 // indirect
-	golang.org/x/net v0.43.0 // indirect
+	golang.org/x/mod v0.29.0 // indirect
+	golang.org/x/net v0.47.0 // indirect
 	golang.org/x/oauth2 v0.27.0 // indirect
-	golang.org/x/sync v0.16.0 // indirect
-	golang.org/x/sys v0.35.0 // indirect
-	golang.org/x/text v0.28.0 // indirect
-	golang.org/x/time v0.8.0 // indirect
-	golang.org/x/tools v0.36.0 // indirect
+	golang.org/x/sync v0.18.0 // indirect
+	golang.org/x/sys v0.38.0 // indirect
+	golang.org/x/text v0.31.0 // indirect
+	golang.org/x/time v0.12.0 // indirect
+	golang.org/x/tools v0.38.0 // indirect
 	google.golang.org/api v0.211.0 // indirect
 	google.golang.org/genproto v0.0.0-20241209162323-e6fa225c2576 // indirect
 	google.golang.org/genproto/googleapis/api v0.0.0-20241209162323-e6fa225c2576 // indirect
