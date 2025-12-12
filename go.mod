@@ -6,7 +6,7 @@ toolchain go1.25.4
 
 require (
 	github.com/imroc/req/v3 v3.56.0
-	github.com/onsi/gomega v1.38.2
+	github.com/onsi/gomega v1.38.3
 	github.com/turbot/steampipe-plugin-sdk/v5 v5.13.1
 )
 
