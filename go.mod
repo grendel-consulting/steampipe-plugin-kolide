@@ -31,6 +31,7 @@ require (
 	github.com/munnerz/goautoneg v0.0.0-20191010083416-a7dc8b61c822 // indirect
 	github.com/planetscale/vtprotobuf v0.6.1-0.20240319094008-0393e58bdf10 // indirect
 	github.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2 // indirect
+	go.opentelemetry.io/auto/sdk v1.2.1 // indirect
 	go.opentelemetry.io/contrib/detectors/gcp v1.32.0 // indirect
 	google.golang.org/grpc/stats/opentelemetry v0.0.0-20241028142157-ada6787961b3 // indirect
 )
@@ -114,14 +115,14 @@ require (
 	go.opencensus.io v0.24.0 // indirect
 	go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc v0.57.0 // indirect
 	go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp v0.57.0 // indirect
-	go.opentelemetry.io/otel v1.32.0 // indirect
+	go.opentelemetry.io/otel v1.40.0 // indirect
 	go.opentelemetry.io/otel/exporters/otlp/otlpmetric/otlpmetricgrpc v1.32.0 // indirect
 	go.opentelemetry.io/otel/exporters/otlp/otlptrace v1.32.0 // indirect
 	go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracegrpc v1.32.0 // indirect
-	go.opentelemetry.io/otel/metric v1.32.0 // indirect
-	go.opentelemetry.io/otel/sdk v1.32.0 // indirect
-	go.opentelemetry.io/otel/sdk/metric v1.32.0 // indirect
-	go.opentelemetry.io/otel/trace v1.32.0 // indirect
+	go.opentelemetry.io/otel/metric v1.40.0 // indirect
+	go.opentelemetry.io/otel/sdk v1.40.0 // indirect
+	go.opentelemetry.io/otel/sdk/metric v1.40.0 // indirect
+	go.opentelemetry.io/otel/trace v1.40.0 // indirect
 	go.opentelemetry.io/proto/otlp v1.4.0 // indirect
 	golang.org/x/crypto v0.45.0 // indirect
 	golang.org/x/exp v0.0.0-20241215155358-4a5509556b9e // indirect
@@ -129,7 +130,7 @@ require (
 	golang.org/x/net v0.47.0 // indirect
 	golang.org/x/oauth2 v0.27.0 // indirect
 	golang.org/x/sync v0.18.0 // indirect
-	golang.org/x/sys v0.38.0 // indirect
+	golang.org/x/sys v0.40.0 // indirect
 	golang.org/x/text v0.31.0 // indirect
 	golang.org/x/time v0.12.0 // indirect
 	golang.org/x/tools v0.38.0 // indirect
