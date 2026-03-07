@@ -1,13 +1,11 @@
 module github.com/grendel-consulting/steampipe-plugin-kolide
 
-go 1.24.0
-
-toolchain go1.25.4
+go 1.26.0
 
 require (
 	github.com/imroc/req/v3 v3.56.0
 	github.com/onsi/gomega v1.38.2
-	github.com/turbot/steampipe-plugin-sdk/v5 v5.13.1
+	github.com/turbot/steampipe-plugin-sdk/v5 v5.14.0
 )
 
 require go.yaml.in/yaml/v3 v3.0.4 // indirect
